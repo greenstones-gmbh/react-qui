@@ -31,7 +31,7 @@ export const AtButton = ({
       className={`clickapp-qui-color1`}
       onClick={isDisabled ? onClick : undefined}
     >
-      {label}
+      {label} {variant}
     </button>
   );
 };
