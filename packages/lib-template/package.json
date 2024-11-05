@@ -1,16 +1,16 @@
 {
-  "name": "@clickapp/qui-core",
+  "name": "@clickapp/lib-template",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.1",
   "type": "module",
-  "main": "./dist/qui-core.umd.cjs",
-  "module": "./dist/qui-core.js",
+  "main": "./dist/lib-template.umd.cjs",
+  "module": "./dist/lib-template.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/qui-core.js",
-      "require": "./dist/qui-core.umd.cjs"
+      "import": "./dist/lib-template.js",
+      "require": "./dist/lib-template.umd.cjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
