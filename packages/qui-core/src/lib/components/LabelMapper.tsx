@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export default function LabelMapper<Value extends string | number>({
+export function LabelMapper<Value extends string | number>({
   value,
   mapper,
   values,

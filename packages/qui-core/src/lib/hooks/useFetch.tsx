@@ -29,7 +29,7 @@ export async function fetchJson<Result = any>(
     ? { Authorization: `Bearer ${token}` }
     : undefined;
 
-  const res = await fetch(`${BASE_URL}${url}`, {
+  const res = await fetch(`${url}`, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",

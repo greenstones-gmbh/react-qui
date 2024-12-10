@@ -1,12 +1,13 @@
 {
   "name": "clickapp",
+  "version": "0.0.5",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "pub-core": "npm unpublish @clickapp/qui-core@0.0.7 --force --registry http://localhost:4873 && npm run build -w @clickapp/qui-core && npm publish -w @clickapp/qui-core --registry http://localhost:4873",
+    "pub-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.6  --registry http://localhost:4873 && npm run build -w @clickapp/qui-bootstrap && npm publish -w @clickapp/qui-bootstrap --registry http://localhost:4873"
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {

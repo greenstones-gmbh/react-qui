@@ -1,4 +1,4 @@
-import { Field, FieldOptions, Fields } from "../Fields";
+import { Field, FieldOptions, Fields } from "../fields/Fields";
 
 export class DetailModelBuilder<Type> {
   blocks: DetaiModelBlock<Type>[] = [];

@@ -1,7 +1,7 @@
 {
   "name": "@clickapp/qui-core",
-  "private": true,
-  "version": "0.0.2",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/qui-core.umd.cjs",
   "module": "./dist/qui-core.js",
@@ -21,7 +21,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "show-bundle": "npx vite-bundle-visualizer"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -44,5 +45,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

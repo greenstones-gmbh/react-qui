@@ -1,0 +1,7 @@
+.ca-sidebar[data-bs-theme="dark"] .nav-link {
+  --bs-nav-link-color: var(--bs-white);
+}
+
+.ca-sidebar[data-bs-theme="light"] .nav-link {
+  --bs-nav-link-color: var(--bs-black);
+}

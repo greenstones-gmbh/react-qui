@@ -1,0 +1,23 @@
+.modal-backdrop.show.backdrop-level-1 {
+  z-index: 1140;
+}
+
+.modal.show.modal-level-1 {
+  z-index: 1160;
+}
+
+.modal-backdrop.show.backdrop-level-2 {
+  z-index: 1240;
+}
+
+.modal.show.modal-level-2 {
+  z-index: 1260;
+}
+
+.modal-backdrop.show.backdrop-level-3 {
+  z-index: 1340;
+}
+
+.modal.show.modal-level-3 {
+  z-index: 1360;
+}

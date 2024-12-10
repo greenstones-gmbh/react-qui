@@ -13,9 +13,10 @@ export default defineConfig({
   },
 
   build: {
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, "src/lib/index.ts"),
-      name: "QuiCore",
+      name: "LibTemplate",
       //fileName: "qui-core",
       //formats: ["es", "umd"],
       //formats: ["es", "umd"],
@@ -23,7 +24,17 @@ export default defineConfig({
     },
 
     rollupOptions: {
-      external: ["react", "react/jsx-runtime", "react-dom"],
+      external: [
+        "react",
+        "react/jsx-runtime",
+        "react-dom",
+        "react-bootstrap",
+        "react-router-dom",
+        "classnames",
+        "@clickapp/qui-core",
+        /node_modules/,
+      ],
+
       output: {
         globals: {
           react: "React",

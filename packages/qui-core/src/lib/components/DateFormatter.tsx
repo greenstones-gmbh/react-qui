@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 
-export default function DateFormatter({
+export function DateFormatter({
   isoString,
   formatStr,
   type = "datetime",

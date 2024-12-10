@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useAsyncMemo } from "./useAsyncMemo";
+import { AsyncMemoResult, useAsyncMemo } from "./useAsyncMemo";
 
 export interface Sort {
   id: string;
@@ -97,6 +97,11 @@ export interface ListData<Type, Query> {
   paging?: ListPaging;
   query?: ListQuery<Query>;
   sorting?: ListSorting;
+
+  sourceData: AsyncMemoResult<{
+    items: Type[];
+    meta: PageMeta;
+  }>;
 }
 
 function useListState<Query>(ops?: {
@@ -194,7 +199,10 @@ export function useList<Type, Query>(
   ops?: ListOptions<Query>
 ): ListData<Type, Query> {
   const { state, helpers } = useListState(ops);
-  const { data, error } = useAsyncMemo(() => source(state), [source, state]);
+
+  const sourceData = useAsyncMemo(() => source(state), [source, state]);
+
+  const { data } = sourceData;
 
   // filtering
   const { query, filtering, sorting, sort } = state;
@@ -344,6 +352,7 @@ export function useList<Type, Query>(
     query: listQuery,
     sorting: listSorting,
     totalItems: paging ? paging.totalItems : data?.items.length,
+    sourceData,
   };
 }
 
