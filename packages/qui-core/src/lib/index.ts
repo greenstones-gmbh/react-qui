@@ -6,6 +6,7 @@ export * from "./hooks";
 export * from "./models";
 export * from "./utils";
 export * from "./modals";
+export * from "./entity";
 
 export * from "./Test";
 export { default as ReactFromModule } from "react";

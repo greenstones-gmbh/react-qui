@@ -4,19 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ActionButton } from "../buttons/ActionButton";
 import { useModals } from "../modals/Modals";
 import { ModalFormProps } from "../modals/ModalForm";
-import { useModalContext } from "@clickapp/qui-core";
-
-export interface EntityHandlers<
-  EntityKey,
-  Entity extends EntityKey & EntityFields,
-  EntityFields extends Record<string, any>
-> {
-  insert: (fields: EntityFields) => Promise<Entity>;
-  update: (entityKey: EntityKey, fields: EntityFields) => Promise<Entity>;
-  remove: (entityKey: EntityKey) => Promise<void>;
-  findById: (entityKey: EntityKey) => Promise<Entity>;
-  copyFields: (entityKey: EntityKey) => Promise<EntityFields>;
-}
+import { EntityHandlers, useModalContext } from "@clickapp/qui-core";
 
 export function useEntityActions<
   EntityKey,
