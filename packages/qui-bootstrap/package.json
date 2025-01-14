@@ -40,17 +40,20 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "peerDependencies": {
+    "@clickapp/qui-core": "*",
+    "bootstrap": "^5.3.3",
+    "classnames": "^2.5.1",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
     "react-icons": "^5.3.0",
-    "react-router-dom": "^6.27.0",
-    "bootstrap": "^5.3.3",
-    "@clickapp/qui-core": "*",
-    "classnames": "^2.5.1",
-    "react-bootstrap": "^2.10.5"
+    "react-router-dom": "^6.27.0"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@hookform/error-message": "^2.0.1"
+  }
 }

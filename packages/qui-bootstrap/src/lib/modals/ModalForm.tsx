@@ -1,83 +1,87 @@
-import { PropsWithChildren } from "react";
-import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { ReactNode } from "react";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import {
+  DefaultValues,
+  FieldValues,
+  FormProvider,
+  useForm,
+  UseFormReturn,
+} from "react-hook-form";
+import { useModals } from "./Modals";
 
-type Inputs = {
-  email: string;
-  password: string;
-};
+export interface ModalFormProps<Type extends FieldValues> {
+  handleClose: any;
+  defaultValues?: DefaultValues<Type> | ((payload?: unknown) => Promise<Type>);
+  onSubmit: (v: Type) => Promise<any>;
+  submitButtonLabel?: string;
+  cancelButtonLabel?: string;
+  title: string;
+  size?: "sm" | "lg" | "xl";
+  children?: ReactNode | ((props: UseFormReturn<Type>) => ReactNode);
+  transformOnSubmit?: (v: Type) => Promise<Type>;
+  context?: any;
+}
 
-export function ModalForm({
+export function ModalForm<Type extends FieldValues>({
   handleClose,
+  defaultValues,
+  onSubmit,
+  title,
+  submitButtonLabel = "Save",
+  cancelButtonLabel = "Cancel",
   children,
-}: PropsWithChildren<{ handleClose: any }>) {
+  size = "lg",
+  transformOnSubmit,
+}: ModalFormProps<Type>) {
+  const methods = useForm<Type>({
+    defaultValues,
+  });
+
   const {
-    register,
     handleSubmit,
-    formState: { errors, isSubmitted },
-  } = useForm<{
-    email: string;
-    password: string;
-    bts: string;
-  }>();
 
-  const params = useParams();
+    formState: { isSubmitting, errors },
+  } = methods;
 
-  console.log("ModalForm.params", params);
+  const { showErrorMessage } = useModals();
 
-  //const onSubmit: SubmitHandler<Inputs> = async (data) => {};
-  const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+  const _onSubmit = handleSubmit(async (data) => {
+    const v = transformOnSubmit ? await transformOnSubmit(data) : data;
+    try {
+      await onSubmit(v);
+    } catch (error) {
+      showErrorMessage({ error });
+    }
   });
 
   return (
-    <Modal show={true} onHide={handleClose} backdrop="static" keyboard={true}>
-      <Form noValidate onSubmit={onSubmit} validated={isSubmitted}>
-        <Modal.Header closeButton>
-          <Modal.Title as="h5">Form</Modal.Title>
-        </Modal.Header>
+    <FormProvider {...methods}>
+      <Modal
+        show={true}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={true}
+        size={size}
+      >
+        <Form noValidate onSubmit={_onSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title as="h5">{title}</Modal.Title>
+          </Modal.Header>
 
-        <Modal.Body>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="text"
-              isInvalid={!!errors.email}
-              placeholder="Enter email or username"
-              {...register("email", {
-                required: "Username is required",
-                minLength: { value: 3, message: "min length 3" },
-              })}
-            />
-            {errors.email && (
-              <Form.Control.Feedback type="invalid">
-                {errors.email.message}
-              </Form.Control.Feedback>
-            )}
-          </Form.Group>
-
-          {children}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            // disabled={isSubmitting || !isValid}
-            // disabled={
-            //   isSubmitting || !successButtonEnabled
-            //   //||(successButtonEnabledOnlyOnValid && !isValid)
-            // }
-          >
-            {/* {isSubmitting && <Spinner animation="border" size="sm" />}{" "}
-            {successButtonLabel} */}
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Form>
-    </Modal>
+          <Modal.Body>
+            {typeof children === "function" ? children(methods) : children}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              {cancelButtonLabel}
+            </Button>
+            <Button variant="primary" type="submit">
+              {isSubmitting && <Spinner animation="border" size="sm" />}{" "}
+              {submitButtonLabel}
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </FormProvider>
   );
 }

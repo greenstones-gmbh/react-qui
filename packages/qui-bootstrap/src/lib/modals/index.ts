@@ -1,4 +1,7 @@
 export * from "./ModalForm";
 export * from "./Modals";
-export * from "./OpenModalButton";
 export * from "./PickerModal";
+
+export * from "./MessageModal";
+export * from "./ConfirmModal";
+export * from "./ErrorModal";

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Form } from "react-bootstrap";
 import {
   FieldValues,
@@ -6,17 +7,21 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-export interface InputFieldProps<Type extends FieldValues> {
+export interface SelectFieldProps<Type extends FieldValues> {
   name: Path<Type>;
-  label: string;
+  label?: string;
+  children?: ReactNode;
   ops?: RegisterOptions;
+  multiple?: boolean;
 }
 
-export function InputField<Type extends FieldValues>({
+export function SelectField<Type extends FieldValues>({
   name,
   label,
+  children,
   ops = {},
-}: InputFieldProps<Type>) {
+  multiple,
+}: SelectFieldProps<Type>) {
   const {
     register,
     formState: { errors },
@@ -24,15 +29,16 @@ export function InputField<Type extends FieldValues>({
 
   const fieldErrors = (errors as any)[name];
   return (
-    <Form.Group className="mb-3">
-      <Form.Label>{label}</Form.Label>
+    <Form.Group className="mb-3" controlId={name}>
+      <Form.Label>{label || name}</Form.Label>
 
-      <Form.Control
-        isInvalid={!!fieldErrors}
-        type="text"
-        placeholder=""
+      <Form.Select
         {...register(name, ops as any)}
-      />
+        isInvalid={!!fieldErrors}
+        multiple={multiple}
+      >
+        {children}
+      </Form.Select>
 
       {fieldErrors && (
         <Form.Control.Feedback type="invalid" style={{ display: "block" }}>

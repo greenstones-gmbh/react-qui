@@ -35,6 +35,7 @@ export default defineConfig({
         "react-hook-form",
         "react-icons/bs",
         "react-icons/tb",
+        "@hookform/error-message",
         /node_modules/,
       ],
 
@@ -52,6 +53,7 @@ export default defineConfig({
           "object-assign": "Object.assign",
           "react-icons/bs": "BsIcons",
           "react-icons/tb": "TbIcons",
+          "@hookform/error-message": "ErrorMessage",
         },
       },
     },

@@ -6,8 +6,8 @@
     "apps/*"
   ],
   "scripts": {
-    "pub-core": "npm unpublish @clickapp/qui-core@0.0.7 --force --registry http://localhost:4873 && npm run build -w @clickapp/qui-core && npm publish -w @clickapp/qui-core --registry http://localhost:4873",
-    "pub-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.6  --registry http://localhost:4873 && npm run build -w @clickapp/qui-bootstrap && npm publish -w @clickapp/qui-bootstrap --registry http://localhost:4873"
+    "pub-core": "npm unpublish @clickapp/qui-core@0.0.2 --force --registry http://localhost:4873 && npm run build -w @clickapp/qui-core && npm publish -w @clickapp/qui-core --registry http://localhost:4873",
+    "pub-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.2  --registry http://localhost:4873 && npm run build -w @clickapp/qui-bootstrap && npm publish -w @clickapp/qui-bootstrap --registry http://localhost:4873"
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {

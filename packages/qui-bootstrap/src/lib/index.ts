@@ -3,7 +3,7 @@ export * from "./app";
 export * from "./auth";
 export * from "./buttons";
 export * from "./details";
-export * from "./form";
+export * from "./forms";
 export * from "./modals";
 
 export * from "./nav";
@@ -14,5 +14,6 @@ export * from "./pages";
 export * from "./tables";
 export * from "./tabs";
 
-export const AAAAAA = "111111";
+export * from "./entity";
+
 export { default as ReactFromModule } from "react";
