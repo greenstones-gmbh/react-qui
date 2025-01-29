@@ -4,3 +4,5 @@ export * from "./LayoutContext";
 export * from "./Sidebar";
 export * from "./SidebarLayout";
 export * from "./TopNavLayout";
+
+export * from "./BootstrapApp";

@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import FileSaver from "file-saver";
-import { Column } from "../fields/Fields";
+import { Column } from "../fields/Columns";
 import { renderToString } from "react-dom/server";
 
 export function convertToCsv<Type, Context>(

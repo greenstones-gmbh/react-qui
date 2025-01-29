@@ -13,9 +13,10 @@ import { BrandSidebar, BrandSidebarLayout } from "./BrandSidebarLayout";
 import { Sidebar } from "./Sidebar";
 import { SidebarLayout } from "./SidebarLayout";
 import { TopNavLayout } from "./TopNavLayout";
+import { IoSettingsSharp } from "react-icons/io5";
 
-interface LayoutOptions {
-  layout: "topnav" | "topnav-fluid" | "sidebar" | "brand-sidebar";
+export interface LayoutOptions {
+  layout?: "topnav" | "topnav-fluid" | "sidebar" | "brand-sidebar";
   width?: number;
   sidebarClassName?: string;
   sidebarTheme?: string;
@@ -24,7 +25,7 @@ interface LayoutOptions {
 }
 
 export function AppLayout({
-  layout,
+  layout = "topnav",
   brand,
   topnav,
   sidenav,
@@ -180,11 +181,15 @@ export const LayoutOptionsContext = createContext<LayoutOptionsContextType>(
   {} as LayoutOptionsContextType
 );
 
-export function LayoutSwitcherDropdown() {
+export function LayoutSwitcherDropdown({
+  className = "ms-auto",
+}: {
+  className?: string;
+}) {
   const ctx = useContext(LayoutOptionsContext);
   const { layoutOptions } = ctx || {};
   return (
-    <Nav className="">
+    <Nav className={className}>
       <Dropdown
         as={NavItem}
         onSelect={(e) => {
@@ -266,7 +271,7 @@ export function LayoutSwitcherDropdown() {
         }}
       >
         <Dropdown.Toggle size="sm" variant="light">
-          <BsGrid1X2 />
+          <IoSettingsSharp color="#777" />
         </Dropdown.Toggle>
         <Dropdown.Menu align={"end"}>
           <Dropdown.Header>Layout</Dropdown.Header>

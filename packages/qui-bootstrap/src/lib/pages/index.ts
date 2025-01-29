@@ -3,3 +3,4 @@ export * from "./ErrorPage";
 export * from "./LoadingPage";
 export * from "./MessagePage";
 export * from "./Page";
+export * from "./ListPage";

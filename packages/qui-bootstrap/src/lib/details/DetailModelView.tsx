@@ -11,13 +11,15 @@ export function DetailModelView<Type, Context = any>({
   model,
   value,
   context,
+  className,
 }: {
   model: DetailModel<Type>;
   value: Type;
   context?: Context;
+  className?: string;
 }) {
   return (
-    <DetailView>
+    <DetailView className={className}>
       {model.blocks.map((block, blockIndex) => (
         <>
           {blockIndex !== 0 && <DetailBlockSeparator />}

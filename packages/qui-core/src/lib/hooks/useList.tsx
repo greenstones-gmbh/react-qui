@@ -200,7 +200,9 @@ export function useList<Type, Query>(
 ): ListData<Type, Query> {
   const { state, helpers } = useListState(ops);
 
-  const sourceData = useAsyncMemo(() => source(state), [source, state]);
+  const sourceData = useAsyncMemo(() => {
+    return source(state);
+  }, [source, state]);
 
   const { data } = sourceData;
 

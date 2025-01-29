@@ -2,6 +2,20 @@ import { PropsWithChildren, ReactNode, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useModals } from "../modals/Modals";
 
+export interface ActionButtonProps extends ActionButtonDisplayProps {
+  disabled?: boolean;
+  onClick: (event: any) => Promise<void> | void;
+  errorTitle?: string;
+  errorBody?: (error: unknown) => ReactNode;
+}
+
+export interface ActionButtonDisplayProps extends PropsWithChildren {
+  hideLabelOnRunning?: boolean;
+  variant?: string;
+  className?: string;
+  size?: "sm" | "lg";
+}
+
 export const ActionButton = ({
   onClick,
   children,
@@ -13,16 +27,7 @@ export const ActionButton = ({
   errorTitle = "Action Failed",
   errorBody,
   ...props
-}: PropsWithChildren<{
-  disabled?: boolean;
-  hideLabelOnRunning?: boolean;
-  onClick: (event: any) => Promise<void> | void;
-  variant?: string;
-  className?: string;
-  size?: "sm" | "lg";
-  errorTitle?: string;
-  errorBody?: (error: unknown) => ReactNode;
-}>) => {
+}: ActionButtonProps) => {
   const [running, setRunning] = useState(false);
   const { showErrorMessage } = useModals();
 

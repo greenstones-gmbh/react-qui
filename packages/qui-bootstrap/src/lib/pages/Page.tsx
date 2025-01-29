@@ -38,8 +38,6 @@ export function Page({
 }>) {
   var h = undefined;
 
-  console.log("Page", { loading, error });
-
   if (loading) return <LoadingPage />;
 
   if (error) return <GenericErrorPage error={error} />;
@@ -79,8 +77,6 @@ export function PageHeader({
   children,
   addon,
 }: { addon?: ReactNode | undefined } & PropsWithChildren) {
-  console.log("PageHeader");
-
   return (
     <div className="d-flex align-items-center mb-3 gap-3">
       <div>

@@ -18,12 +18,17 @@ export function AppRoutes({
   return (
     <Routes>
       <Route path="/">
-        {/* public */}
         <Route path={loginPath} element={login} />
-        <Route element={layout}>{publicRoutes}</Route>
 
         {/* private */}
         <Route element={<Guard>{layout}</Guard>}>{protectedRoutes}</Route>
+
+        {/* public */}
+        <Route element={layout}>
+          {publicRoutes}
+          <Route index element={<div />} />
+          <Route path="*" element={<div />} />
+        </Route>
       </Route>
     </Routes>
   );

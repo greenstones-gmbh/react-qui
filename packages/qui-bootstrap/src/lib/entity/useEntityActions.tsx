@@ -25,8 +25,9 @@ export function useEntityActions<
   linkToList,
   modalSize,
   handlers,
+  defaultValuesOnCreate,
 }: {
-  reload?: () => {};
+  reload?: () => void;
   modal: FC<ModalFormProps<EntityFields>>;
   createModalTitle?: string;
   editModalTitle?: string;
@@ -40,6 +41,7 @@ export function useEntityActions<
   linkToList?: string;
   modalSize?: "sm" | "lg" | "xl";
   handlers: EntityHandlers<EntityKey, EntityWithId, EntityFields>;
+  defaultValuesOnCreate?: () => any;
 }) {
   const { openModal, closeModal } = useModalContext();
   const { openConfirmModal } = useModals();
@@ -55,6 +57,7 @@ export function useEntityActions<
     linkToEntity,
     modalSize,
     insert: handlers.insert,
+    defaultValues: defaultValuesOnCreate,
   });
   // const create = (defaultValues: any) => {
   //   openModal(
@@ -153,8 +156,9 @@ export function useCreateEntityAction<
   linkToEntity,
   modalSize,
   insert,
+  defaultValues,
 }: {
-  reload?: () => {};
+  reload?: () => void;
   modal: FC<ModalFormProps<EntityFields>>;
   modalTitle?: string;
   createButtonLabel?: string;
@@ -162,11 +166,12 @@ export function useCreateEntityAction<
   linkToEntity?: (entity: EntityWithId) => string;
   modalSize?: "sm" | "lg" | "xl";
   insert: (fields: EntityFields) => Promise<EntityWithId>;
+  defaultValues?: () => any;
 }) {
   const { openModal, closeModal } = useModalContext();
   const navigate = useNavigate();
 
-  const create = (defaultValues: any) => {
+  const create = (values?: any) => {
     openModal(
       <Modal
         title={modalTitle}
@@ -174,7 +179,7 @@ export function useCreateEntityAction<
         handleClose={closeModal}
         submitButtonLabel={createButtonLabel}
         cancelButtonLabel={cancelButtonLabel}
-        defaultValues={defaultValues}
+        defaultValues={values || defaultValues?.()}
         onSubmit={async (data) => {
           const v = await insert(data);
           reload?.();
@@ -199,7 +204,7 @@ export function EntityActionButtons<EntityWithId>({
   className,
   labelEdit = "Edit",
   labelDelete = "Delete",
-  labelCopy = "Kopieren",
+  labelCopy = "Copy",
   hideCopy = false,
   disabled,
 }: {

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Field, FieldOptions, Fields } from "../fields/Fields";
 
 export class DetailModelBuilder<Type> {
@@ -36,6 +37,19 @@ export class DetailModelBuilder<Type> {
     return this;
   }
 
+  fromObject(obj?: Type, cols = 2): DetaiModelBlock<Type> {
+    if (obj) {
+      const bp = Math.ceil(Object.keys(obj).length / cols);
+      Object.keys(obj).forEach((k, i) => {
+        if (i !== 0 && i % bp === 0) {
+          this.block();
+        }
+        this.addLine(Fields.byProp(k as any));
+      });
+    }
+    return this;
+  }
+
   build(): DetailModel<Type> {
     return {
       blocks: this.blocks,
@@ -55,4 +69,22 @@ export function createDetails<Type = any>(
   const tb = new DetailModelBuilder<Type>();
   configurer?.(tb);
   return tb.build();
+}
+
+export function useDetaiModelBuilder<Type>(
+  configurer?: (builder: DetailModelBuilder<Type>) => void
+) {
+  return useMemo(() => {
+    return createDetails<Type>(configurer);
+  }, []);
+}
+
+export function useDetaiModelGenerator<Type>(v?: Type) {
+  return useMemo(() => {
+    return createDetails<Type>((builder) => {
+      if (v) {
+        builder.fromObject(v);
+      }
+    });
+  }, [v]);
 }

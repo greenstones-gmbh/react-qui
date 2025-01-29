@@ -282,28 +282,41 @@ export function Paging({
   );
 }
 
+export interface QuickTableDisplayProps<Type> {
+  className?: string;
+  stripped?: boolean;
+  hover?: boolean;
+  size?: string;
+  rowClassName?: string | ((v: Type) => string | undefined);
+}
+
 export function QuickTable<Type = any, Context = any>({
   items,
   sorting,
   columns,
   context,
   selection,
+  className,
+  stripped,
+  hover,
+  size,
+  rowClassName,
 }: {
   items?: Type[];
   sorting: ListSorting | undefined;
   columns: Column<Type, Context>[];
   context?: Context;
   selection?: Selection<Type>;
-}) {
+} & QuickTableDisplayProps<Type>) {
   return (
-    <Table>
+    <Table className={className} striped={stripped} hover={hover} size={size}>
       <thead>
         <tr>
           {columns.map((col, colIndex) => (
             <th
               key={colIndex}
               style={col.width ? { width: col.width } : {}}
-              className={col.className}
+              className={col.headerClassName}
             >
               <SortingColumnHeader
                 header={col.header || "?"}
@@ -323,12 +336,12 @@ export function QuickTable<Type = any, Context = any>({
 
               selection?.onItemClick(d, e);
             }}
-            className={classNames({
+            className={classNames(getClassName(d, rowClassName), {
               "table-active": selection?.isSelected(d),
             })}
           >
             {columns.map((col, colIndex) => (
-              <td key={colIndex} className={col.className}>
+              <td key={colIndex} className={getClassName(d, col.className)}>
                 {col.render(d, context)}
               </td>
             ))}
@@ -337,4 +350,15 @@ export function QuickTable<Type = any, Context = any>({
       </tbody>
     </Table>
   );
+}
+
+function isFunction(v: any): v is Function {
+  return typeof v === "function";
+}
+
+function getClassName<Type>(
+  v: Type,
+  fn: string | ((v: Type) => string | undefined) | undefined
+): string | undefined {
+  return isFunction(fn) ? fn(v) : fn;
 }

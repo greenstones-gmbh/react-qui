@@ -4,14 +4,19 @@ import { useAuth } from "@clickapp/qui-core";
 
 export function NavbarAuthButtons({
   variant = "outline-primary",
+  className = "ms-auto",
 }: {
   variant?: string;
+  className?: string;
 }) {
-  const { logout, login, isAuthenticated, userDisplayName } = useAuth();
+  const auth = useAuth();
+
+  if (Object.keys(auth).length === 0) return undefined;
+  const { logout, login, isAuthenticated, userDisplayName } = auth;
   return (
     <>
       {!isAuthenticated && (
-        <Nav className="ms-auto">
+        <Nav className={className}>
           <Button
             variant={variant}
             size="sm"
@@ -26,7 +31,7 @@ export function NavbarAuthButtons({
       )}
 
       {isAuthenticated && (
-        <Navbar.Text className="ms-auto">{userDisplayName}</Navbar.Text>
+        <Navbar.Text className={className}>{userDisplayName}</Navbar.Text>
       )}
       {isAuthenticated && (
         <Nav>
