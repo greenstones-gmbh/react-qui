@@ -3,54 +3,53 @@ import { DateFormatter } from "../components/DateFormatter";
 
 // Fields
 
-export interface Field<EntityType, Context = any> {
+export interface Field<EntityType> {
   label: string;
-  render(value: EntityType, context?: Context): JSX.Element;
-  renderString(value: EntityType, context?: Context): string | undefined;
+  render(value: EntityType): JSX.Element;
+  renderString(value: EntityType): string | undefined;
 }
 
 // Fields builder
 
-export interface RenderFieldFunction<EntityType, FieldType, Context> {
-  (field: FieldType, entity: EntityType, context?: Context): JSX.Element;
+export interface RenderFieldFunction<EntityType, FieldType> {
+  (field: FieldType, entity: EntityType): JSX.Element;
 }
 
-export interface FieldConstructionOptions<EntityType, FieldType, Context> {
-  getter?: (value: EntityType, context?: Context) => FieldType | undefined;
+export interface FieldConstructionOptions<EntityType, FieldType> {
+  getter?: (value: EntityType) => FieldType | undefined;
 }
 
-export interface FieldRenderOptions<EntityType, FieldType, Context> {
+export interface FieldRenderOptions<EntityType, FieldType> {
   label?: string;
-  renderField?: RenderFieldFunction<EntityType, FieldType, Context>;
+  renderField?: RenderFieldFunction<EntityType, FieldType>;
   //renderToString?: (value: EntityType, context?: Context) => string | undefined;
-  linkTo?: (value: FieldType, entity: EntityType, context?: Context) => string;
+  linkTo?: (entity: EntityType) => string;
 }
 
-export interface FieldOptions<EntityType, FieldType, Context>
-  extends FieldRenderOptions<EntityType, FieldType, Context>,
-    FieldConstructionOptions<EntityType, FieldType, Context> {}
+export interface FieldOptions<EntityType, FieldType>
+  extends FieldRenderOptions<EntityType, FieldType>,
+    FieldConstructionOptions<EntityType, FieldType> {}
 
-export function createField<EntityType, PropType, Context>(
-  options?: FieldOptions<EntityType, PropType, Context>
-): Field<EntityType, Context> {
-  const render: (value: EntityType, context?: Context) => JSX.Element = (
-    v,
-    context
-  ) => <FieldValue v={v} options={options} context={context} />;
+export function createField<EntityType, PropType>(
+  options?: FieldOptions<EntityType, PropType>
+): Field<EntityType> {
+  const render: (value: EntityType) => JSX.Element = (v) => (
+    <FieldValue v={v} options={options} />
+  );
   return {
     label: options?.label || "-",
     render,
-    renderString: (value, context) => {
-      const v = options?.getter ? options?.getter(value, context) : value;
+    renderString: (value) => {
+      const v = options?.getter ? options?.getter(value) : value;
       return toString(v);
     },
   };
 }
 
-export function createFieldByNestedProp<EntityType, PropType, Context>(
+export function createFieldByNestedProp<EntityType, PropType>(
   prop: string,
-  options?: FieldRenderOptions<EntityType, PropType, Context>
-): Field<EntityType, Context> {
+  options?: FieldRenderOptions<EntityType, PropType>
+): Field<EntityType> {
   return createField({
     ...options,
     getter: (v) => getValue(v, prop),
@@ -58,10 +57,10 @@ export function createFieldByNestedProp<EntityType, PropType, Context>(
   });
 }
 
-export function createFieldByProp<EntityType, PropType, Context>(
+export function createFieldByProp<EntityType, PropType>(
   prop: keyof EntityType,
-  options?: FieldRenderOptions<EntityType, PropType, Context>
-): Field<EntityType, Context> {
+  options?: FieldRenderOptions<EntityType, PropType>
+): Field<EntityType> {
   return createField({
     label: `${String(prop)}`,
     ...options,
@@ -72,7 +71,7 @@ export function createFieldByProp<EntityType, PropType, Context>(
 const getValue = (v: any, prop: string | null = null) => {
   if (prop) {
     const parts = prop.split(".");
-    var obj = v;
+    let obj = v;
     parts.forEach((prop) => {
       if (obj) {
         obj = obj[prop] || null;
@@ -89,13 +88,11 @@ export const Fields = {
   byNestedProp: createFieldByNestedProp,
 };
 
-// Entity
-
 export const FieldRenderers = {
   asIsoDate:
     (
       type: "date" | "time" | "datetime" = "date"
-    ): RenderFieldFunction<any, string, any> =>
+    ): RenderFieldFunction<any, string> =>
     (v) =>
       <DateFormatter isoString={v} type={type} />,
 };
@@ -120,25 +117,23 @@ function toString(value: any) {
   return value;
 }
 
-function FieldValue<Type, FieldType, Context>({
+function FieldValue<Type, FieldType>({
   v,
-  context,
   options = {},
 }: {
   v: Type;
-  context?: Context;
-  options?: FieldOptions<Type, FieldType, Context>;
+  options?: FieldOptions<Type, FieldType>;
 }) {
   if (!options.getter) return <Value value={v} />;
 
-  const prop = options.getter(v, context);
+  const prop = options.getter(v);
   if (prop == null) return null;
 
   if (options.linkTo) {
     return (
-      <Link to={options.linkTo(prop, v, context)}>
+      <Link to={options.linkTo(v)}>
         {options.renderField ? (
-          options.renderField(prop, v, context)
+          options.renderField(prop, v)
         ) : (
           <Value value={prop} />
         )}
@@ -146,7 +141,7 @@ function FieldValue<Type, FieldType, Context>({
     );
   }
 
-  if (options.renderField) return options.renderField(prop, v, context);
+  if (options.renderField) return options.renderField(prop, v);
 
   return <Value value={prop} />;
 }

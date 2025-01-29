@@ -109,8 +109,8 @@ export function QueryInput<Query>({
   placeholder?: string;
   className?: string;
 }) {
-  var v = value;
-  var chg = onChange;
+  let v = value;
+  let chg = onChange;
 
   if (!v || !chg) {
     const f = field ? query?.field(field) : query?.bind();
@@ -164,7 +164,7 @@ export function QueryDropdown<Query>({
       id="dropdown-basic-button"
       title={`${label}${v ? ": " + findLabel(v) : ""}`}
       onSelect={(e) => {
-        var v = undefined;
+        let v = undefined;
         if (e) {
           v = values[parseInt(e)];
         }
@@ -290,11 +290,11 @@ export interface QuickTableDisplayProps<Type> {
   rowClassName?: string | ((v: Type) => string | undefined);
 }
 
-export function QuickTable<Type = any, Context = any>({
+export function QuickTable<Type = any>({
   items,
   sorting,
   columns,
-  context,
+
   selection,
   className,
   stripped,
@@ -304,8 +304,8 @@ export function QuickTable<Type = any, Context = any>({
 }: {
   items?: Type[];
   sorting: ListSorting | undefined;
-  columns: Column<Type, Context>[];
-  context?: Context;
+  columns: Column<Type>[];
+
   selection?: Selection<Type>;
 } & QuickTableDisplayProps<Type>) {
   return (
@@ -342,7 +342,7 @@ export function QuickTable<Type = any, Context = any>({
           >
             {columns.map((col, colIndex) => (
               <td key={colIndex} className={getClassName(d, col.className)}>
-                {col.render(d, context)}
+                {col.render(d)}
               </td>
             ))}
           </tr>

@@ -20,13 +20,15 @@ import {
 import { Badge } from "react-bootstrap";
 import { Database, Tables } from "./database.types";
 
+export type Todo = Tables<"todos">;
+
 export const TodoFields = {
   date: Fields.byProp("inserted_at", {
     renderField: FieldRenderers.asIsoDate("date"),
     label: "Date",
   }),
 
-  doneBadge: Fields.byProp<any, any, any>("is_complete", {
+  doneBadge: Fields.byProp<any, any>("is_complete", {
     label: "Done",
     renderField: (v) => (v ? <Badge bg="success">Done</Badge> : <></>),
   }),
@@ -47,14 +49,6 @@ export const TodoColumns = {
 export interface TodoQuery {
   filter?: string;
   hideCompleted?: boolean;
-}
-
-export interface Todo {
-  id: number;
-  task: string;
-  inserted_at: string;
-  user_id: string;
-  is_complete?: boolean;
 }
 
 export function useTodoList() {

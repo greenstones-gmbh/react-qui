@@ -16,7 +16,7 @@ export class DetailModelBuilder<Type> {
   //   return this.addLine({ label, render });
   // }
 
-  line(op: FieldOptions<Type, any, any>): DetailModelBuilder<Type> {
+  line(op: FieldOptions<Type, any>): DetailModelBuilder<Type> {
     const field = Fields.create(op);
     return this.addLine(field);
   }

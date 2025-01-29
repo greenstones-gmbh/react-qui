@@ -19,6 +19,7 @@ import { Breadcrumb, ButtonToolbar } from "react-bootstrap";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 
 import {
+  Todo,
   TodoColumns,
   TodoFields,
   TodoQuery,
@@ -27,9 +28,6 @@ import {
 } from "./Todos";
 
 import { MdOutlineCheckCircle } from "react-icons/md";
-import { Tables } from "./database.types";
-
-type Todo = Tables<"todos">;
 
 // MasterDetail
 
@@ -48,7 +46,7 @@ export function TodoMasterDetailListPage() {
     list.sourceData.reload,
     "/todos"
   );
-  const columns = useColumnBuilder<Todo, TodoQuery>(
+  const columns = useColumnBuilder<Todo>(
     (builder) => {
       builder
         .column("id", {
@@ -60,7 +58,7 @@ export function TodoMasterDetailListPage() {
         .add(TodoColumns.date)
         .column("task", {
           header: "Task",
-          linkTo: (value, entity) => `/todos/${entity.id}`,
+          linkTo: (entity) => `/todos/${entity.id}`,
           className: (entity) =>
             entity.is_complete ? "text-decoration-line-through " : undefined,
         })

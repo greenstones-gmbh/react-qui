@@ -7,16 +7,6 @@ import {
   createField,
 } from "./Fields";
 
-export interface Column<EntityType, Context = any> {
-  width?: number | string;
-  sortKey?: string;
-  render: (entity: EntityType, context?: Context) => JSX.Element;
-  renderString(value: EntityType, context?: Context): string | undefined;
-  header?: string;
-  className?: string | ((entity: EntityType) => string | undefined);
-  headerClassName?: string;
-}
-
 export interface ColumnOptions<EntityType> {
   header?: string;
   width?: number | string;
@@ -25,106 +15,103 @@ export interface ColumnOptions<EntityType> {
   headerClassName?: string;
 }
 
-export function createColumn<EntityType, Context>(
-  field: Field<EntityType, Context>,
+export interface Column<EntityType> extends ColumnOptions<EntityType> {
+  render: (entity: EntityType) => JSX.Element;
+  renderString(value: EntityType): string | undefined;
+}
+
+export function createColumn<EntityType>(
+  field: Field<EntityType>,
   options: ColumnOptions<EntityType> = {}
-): Column<EntityType, Context> {
+): Column<EntityType> {
   return {
-    width: options.width,
-    sortKey: options.sortKey,
+    ...options,
     render: field.render,
     renderString: field.renderString,
     header: options.header || field.label,
-    className: options.className,
-    headerClassName: options.headerClassName,
   };
 }
 
-export function createColumnForProp<EntityType, PropType, Context>(
+export function createColumnForProp<EntityType, PropType>(
   prop: string,
   options: ColumnOptions<EntityType> &
-    FieldRenderOptions<EntityType, PropType, Context> = {}
-): Column<EntityType, Context> {
+    FieldRenderOptions<EntityType, PropType> = {}
+): Column<EntityType> {
   const field = Fields.byNestedProp(prop, options);
   return createColumn(field, { sortKey: prop, ...options });
 }
 
-export class ColumnBuilder<Type, Context> {
-  columns: Column<Type, Context>[] = [];
+export class ColumnBuilder<Type> {
+  columns: Column<Type>[] = [];
 
   column<PropType = string>(
-    prop: string,
-    options: ColumnOptions<Type> &
-      FieldRenderOptions<Type, PropType, Context> = {}
-  ): ColumnBuilder<Type, Context> {
+    prop: Extract<keyof Type, string>,
+    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {}
+  ): ColumnBuilder<Type> {
     return this.prop(prop, options);
   }
 
   prop<PropType = string>(
     prop: string,
-    options: ColumnOptions<Type> &
-      FieldRenderOptions<Type, PropType, Context> = {}
-  ): ColumnBuilder<Type, Context> {
+    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {}
+  ): ColumnBuilder<Type> {
     const field = Fields.byNestedProp(prop, options);
-    return this.addField(field, { sortKey: prop, ...options });
+    return this.field(field, { sortKey: prop, ...options });
   }
 
-  col<PropType = string>(
+  label<PropType = string>(
     label: string,
-    options: ColumnOptions<Type> & FieldOptions<Type, PropType, Context> = {}
-  ): ColumnBuilder<Type, Context> {
+    options: ColumnOptions<Type> & FieldOptions<Type, PropType> = {}
+  ): ColumnBuilder<Type> {
     const field = createField({ label, ...options });
-    return this.addField(field, options);
+    return this.field(field, options);
   }
 
-  addField(
-    field: Field<Type, Context>,
-    options: ColumnOptions<Type>
-  ): ColumnBuilder<Type, Context> {
+  field(field: Field<Type>, options: ColumnOptions<Type>): ColumnBuilder<Type> {
     const col = createColumn(field, options);
     return this.add(col);
   }
 
-  add(column: Column<Type, Context>): ColumnBuilder<Type, Context> {
+  add(column: Column<Type>): ColumnBuilder<Type> {
     this.columns.push(column);
     return this;
   }
 }
 
-export function createColumns<Type = any, Context = any>(
-  configurer?: (builder: ColumnBuilder<Type, Context>) => void
+export function createColumns<Type = any>(
+  configurer?: (builder: ColumnBuilder<Type>) => void
 ) {
-  const tb = new ColumnBuilder<Type, Context>();
+  const tb = new ColumnBuilder<Type>();
   configurer?.(tb);
   return tb.columns;
 }
 
-export function filterColumns<Type = any, Context = any>(
-  columns: Column<Type, Context>[],
+export function filterColumns<Type = any>(
+  columns: Column<Type>[],
   excludeHeaders: string[]
 ) {
   return columns.filter((c) => excludeHeaders.indexOf(c.header ?? "-") === -1);
 }
 
-export function useColumnGenerator<Type, Context>(
+export function useColumnGenerator<Type>(
   items: Type[] | undefined
-): Column<Type, Context>[] {
-  return useMemo<Column<Type, Context>[]>(() => {
+): Column<Type>[] {
+  return useMemo<Column<Type>[]>(() => {
     return createColumns<Type>((b) => {
       if (items && items.length > 0) {
         const t = items[0] as any;
-        Object.keys(t).map((f) => b.col(f));
+        Object.keys(t).map((f) => b.prop(f));
       }
     });
   }, [items]);
 }
 
-export function useColumnBuilder<Type, Context>(
-  configurer: (builder: ColumnBuilder<Type, Context>) => void,
+export function useColumnBuilder<Type>(
+  configurer: (builder: ColumnBuilder<Type>) => void,
   deps: DependencyList = []
 ) {
   const cols = useMemo(() => {
-    return createColumns<Type, Context>(configurer);
+    return createColumns<Type>(configurer);
   }, deps);
   return cols;
 }

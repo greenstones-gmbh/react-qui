@@ -15,7 +15,7 @@ export function TodoList() {
   const list = useTodoList();
   const actions = useTodoActions(list.sourceData.reload);
 
-  const columns = useColumnBuilder<Todo, unknown>(
+  const columns = useColumnBuilder<Todo>(
     (builder) => {
       builder
         .add(TodoColumns.date)

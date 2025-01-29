@@ -7,15 +7,14 @@ import {
 } from "./DetailView";
 import { DetailModel } from "@clickapp/qui-core";
 
-export function DetailModelView<Type, Context = any>({
+export function DetailModelView<Type>({
   model,
   value,
-  context,
   className,
 }: {
   model: DetailModel<Type>;
   value: Type;
-  context?: Context;
+
   className?: string;
 }) {
   return (
@@ -28,7 +27,7 @@ export function DetailModelView<Type, Context = any>({
               <>
                 {line && (
                   <DetailItem label={line.label}>
-                    {line.render(value, context)}
+                    {line.render(value)}
                   </DetailItem>
                 )}
                 {!line && <DetailItemSeparator />}

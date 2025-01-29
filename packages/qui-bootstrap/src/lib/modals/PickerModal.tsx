@@ -6,9 +6,9 @@ import { useSelection } from "@clickapp/qui-core";
 import { Paging, QueryInput, QuickTable } from "../tables/Tables";
 import { ActionButton } from "../buttons/ActionButton";
 
-export function PickerModal<Type, Query, Context>({
+export function PickerModal<Type, Query>({
   handleClose,
-  context,
+
   columns,
   size,
   listData,
@@ -16,8 +16,7 @@ export function PickerModal<Type, Query, Context>({
   onSelect,
 }: PropsWithChildren<{
   handleClose: any;
-  context: Context;
-  columns: Column<Type, Context>[];
+  columns: Column<Type>[];
   size?: "sm" | "lg" | "xl";
   listData: ListData<Type, Query>;
   title?: ReactNode;
@@ -51,11 +50,10 @@ export function PickerModal<Type, Query, Context>({
           style={{ height: 600 }}
           className="flex-fill d-flex flex-column overflow-auto mt-2 mb-4"
         >
-          <QuickTable<Type, Context>
+          <QuickTable<Type>
             items={items}
             sorting={sorting}
             columns={columns}
-            context={context}
             selection={selection}
           />
         </div>

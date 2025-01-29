@@ -3,16 +3,12 @@ import FileSaver from "file-saver";
 import { Column } from "../fields/Columns";
 import { renderToString } from "react-dom/server";
 
-export function convertToCsv<Type, Context>(
-  columns: Column<Type, Context>[],
-  data: Type[],
-  context: Context
-) {
-  console.log("convertToCsv", columns, context);
+export function convertToCsv<Type>(columns: Column<Type>[], data: Type[]) {
+  console.log("convertToCsv", columns);
   const separator = ";";
   const lines = [];
   const header = columns
-    .map((c: Column<Type, Context>) => sanitize(c.header))
+    .map((c: Column<Type>) => sanitize(c.header))
     .join(separator);
   lines.push(header);
 
@@ -20,9 +16,9 @@ export function convertToCsv<Type, Context>(
     const props = columns
       .map((c) => {
         try {
-          return renderToString(c.render(d, context));
+          return renderToString(c.render(d));
         } catch (error) {
-          return c.renderString(d, context);
+          return c.renderString(d);
         }
       })
       .map((c) => (c != null ? c : ""))
@@ -46,13 +42,12 @@ export function writeCsv(fileName: string, csv: any) {
   );
 }
 
-export function exportToCsv<Type, Context>(
-  columns: Column<Type, Context>[],
+export function exportToCsv<Type>(
+  columns: Column<Type>[],
   data: Type[],
-  fileName: string,
-  context: Context
+  fileName: string
 ) {
-  const csv = convertToCsv(columns, data, context);
+  const csv = convertToCsv(columns, data);
   writeCsv(fileName, csv);
 }
 
