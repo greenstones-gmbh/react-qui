@@ -49,9 +49,8 @@ export function ConfirmButton({
               await onClick();
               close();
             }}
-          >
-            {confirmBody}
-          </ConfirmModal>
+            message={confirmBody}
+          ></ConfirmModal>
         );
       }}
     />

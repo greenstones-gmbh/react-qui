@@ -14,6 +14,7 @@ export interface ActionButtonDisplayProps extends PropsWithChildren {
   variant?: string;
   className?: string;
   size?: "sm" | "lg";
+  label?: string;
 }
 
 export const ActionButton = ({
@@ -26,6 +27,7 @@ export const ActionButton = ({
   className,
   errorTitle = "Action Failed",
   errorBody,
+  label,
   ...props
 }: ActionButtonProps) => {
   const [running, setRunning] = useState(false);
@@ -61,7 +63,7 @@ export const ActionButton = ({
       }}
     >
       {running && <Spinner size="sm" animation="border" />}{" "}
-      {(!running || (running && !hideLabelOnRunning)) && children}
+      {(!running || (running && !hideLabelOnRunning)) && (label || children)}
     </Button>
   );
 };

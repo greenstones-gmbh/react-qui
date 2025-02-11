@@ -18,16 +18,10 @@ import { useSupabaseQuery } from "@clickapp/qui-supabase";
 import { Breadcrumb, ButtonToolbar } from "react-bootstrap";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 
-import {
-  Todo,
-  TodoColumns,
-  TodoFields,
-  TodoQuery,
-  useTodoActionsWithCustomForm,
-  useTodoList,
-} from "./Todos";
+import { Todo, TodoColumns, TodoFields, TodoQuery, useTodoList } from "./Todos";
 
 import { MdOutlineCheckCircle } from "react-icons/md";
+import { useTodoActions } from "./useTodoActions";
 
 // MasterDetail
 
@@ -42,10 +36,19 @@ export function TodoMasterDetailListPage() {
     list: ListData<Todo, TodoQuery>;
   }>();
 
-  const actions = useTodoActionsWithCustomForm(
-    list.sourceData.reload,
-    "/todos"
-  );
+  // const actions = useTodoActionsWithCustomForm(
+  //   list.sourceData.reload,
+  //   "/todos"
+  // );
+
+  const actions = useTodoActions({
+    reloadList: list.sourceData.reload,
+    navigationProps: {
+      path: (v) => `/todos/${v.id}`,
+      listPath: "/todos",
+    },
+  });
+
   const columns = useColumnBuilder<Todo>(
     (builder) => {
       builder
@@ -77,7 +80,7 @@ export function TodoMasterDetailListPage() {
             </ActionButton>
           ))
         )
-        .add(ListActionsColumns.editDeleteButtons(actions as any));
+        .add(ListActionsColumns.editDeleteButtons(actions));
     },
     [actions]
   );
@@ -99,12 +102,15 @@ export function TodoMasterDetailListPage() {
             query={list.query}
             field="hideCompleted"
             label="Hide completed"
+            className="ms-2"
           />
           <ActionButton
             className="ms-4"
             size="sm"
             variant="outline-primary"
-            onClick={list.sourceData.reload}
+            onClick={() => {
+              //actions?.reload();
+            }}
           >
             Reload
           </ActionButton>
@@ -120,15 +126,19 @@ export function TodoMasterDetailPage() {
     list: ListData<any, any>;
   }>();
 
-  const actions = useTodoActionsWithCustomForm(() => {
-    list.sourceData.reload();
-    result.reload();
-  }, "/todos");
-
   const result = useSupabaseQuery(
     (supabase, id) => supabase.from("todos").select("*").eq("id", id).single(),
     id
   );
+
+  const actions = useTodoActions({
+    reloadList: list.sourceData.reload,
+    reloadItem: result.reload,
+    navigationProps: {
+      path: (v) => `/todos/${v.id}`,
+      listPath: "/todos",
+    },
+  });
 
   // const model = useDetaiModelGenerator(result?.data);
   const model = useDetaiModelBuilder<Todo>((b) => {

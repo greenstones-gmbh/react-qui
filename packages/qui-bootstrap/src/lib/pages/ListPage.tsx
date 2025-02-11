@@ -3,7 +3,7 @@ import { PropsWithChildren, ReactNode } from "react";
 
 import { ButtonToolbar } from "react-bootstrap";
 import { ActionButton, ActionButtonDisplayProps } from "../buttons";
-import { BaseListActions } from "../entity";
+
 import {
   Paging,
   QueryInput,
@@ -11,6 +11,7 @@ import {
   QuickTableDisplayProps,
 } from "../tables";
 import { Page } from "./Page";
+import { BaseListActions } from "../actions";
 
 interface ListPageProps<Type, Query> {
   header?: ReactNode;
@@ -65,7 +66,7 @@ export function ListPageToolbar<Query>(props: ListPageToolbarProps<Query>) {
     variant: "primary",
     size: "sm",
     className: "ms-auto",
-    children: "Add",
+    label: "Add",
     ...props.createButtonProps,
   } as ActionButtonDisplayProps;
   return (

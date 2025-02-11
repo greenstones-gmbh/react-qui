@@ -7,17 +7,22 @@ import {
   QueryDropdown,
 } from "@clickapp/qui-bootstrap";
 
-import { Todo, TodoColumns, useTodoActions, useTodoList } from "./Todos";
+import { Todo, TodoColumns, useTodoList } from "./Todos";
+import { useTodoActions } from "./useTodoActions";
 
 // ListPage
 
 export function TodoList() {
   const list = useTodoList();
-  const actions = useTodoActions(list.sourceData.reload);
+
+  const actions = useTodoActions({
+    reloadList: list.sourceData.reload,
+  });
 
   const columns = useColumnBuilder<Todo>(
     (builder) => {
       builder
+        .column("id")
         .add(TodoColumns.date)
         .column("task", {
           header: "Task",
@@ -48,6 +53,7 @@ export function TodoList() {
       columns={columns}
       list={list}
       actions={actions}
+      createButtonProps={{ label: "Add Todo" }}
       filterField="filter"
       toolbarContent={
         <>

@@ -9,17 +9,20 @@ import {
 } from "react-hook-form";
 import { useModals } from "./Modals";
 
-export interface ModalFormProps<Type extends FieldValues> {
-  handleClose: any;
-  defaultValues?: DefaultValues<Type> | ((payload?: unknown) => Promise<Type>);
-  onSubmit: (v: Type) => Promise<any>;
+export interface ModalFormDisplayProps {
   submitButtonLabel?: string;
   cancelButtonLabel?: string;
   title: string;
   size?: "sm" | "lg" | "xl";
+}
+
+export interface ModalFormProps<Type extends FieldValues>
+  extends ModalFormDisplayProps {
+  handleClose: any;
+  defaultValues?: DefaultValues<Type> | ((payload?: unknown) => Promise<Type>);
+  onSubmit: (v: Type) => Promise<any>;
   children?: ReactNode | ((props: UseFormReturn<Type>) => ReactNode);
   transformOnSubmit?: (v: Type) => Promise<Type>;
-  context?: any;
 }
 
 export function ModalForm<Type extends FieldValues>({
@@ -27,8 +30,8 @@ export function ModalForm<Type extends FieldValues>({
   defaultValues,
   onSubmit,
   title,
-  submitButtonLabel = "Save",
-  cancelButtonLabel = "Cancel",
+  submitButtonLabel,
+  cancelButtonLabel,
   children,
   size = "lg",
   transformOnSubmit,
@@ -39,8 +42,7 @@ export function ModalForm<Type extends FieldValues>({
 
   const {
     handleSubmit,
-
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = methods;
 
   const { showErrorMessage } = useModals();
@@ -73,11 +75,11 @@ export function ModalForm<Type extends FieldValues>({
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              {cancelButtonLabel}
+              {cancelButtonLabel || "Cancel"}
             </Button>
             <Button variant="primary" type="submit">
               {isSubmitting && <Spinner animation="border" size="sm" />}{" "}
-              {submitButtonLabel}
+              {submitButtonLabel || "Submit"}
             </Button>
           </Modal.Footer>
         </Form>

@@ -6,7 +6,7 @@ import { OpenModalButton } from "./OpenModalButton";
 export function OpenModalFormButton<Type extends FieldValues>({
   defaultValues,
   onSubmit,
-  context,
+
   modal: Modal,
   modalTitle = "Edit Entity",
   modalCancelButtonLabel,
@@ -22,7 +22,6 @@ export function OpenModalFormButton<Type extends FieldValues>({
 
   defaultValues?: DefaultValues<Type> | ((payload?: unknown) => Promise<Type>);
   onSubmit: (data: Type) => Promise<void>;
-  context?: any;
 
   label?: string;
   size?: "sm" | "lg";
@@ -49,7 +48,7 @@ export function OpenModalFormButton<Type extends FieldValues>({
             submitButtonLabel={modalSubmitButtonLabel}
             handleClose={close}
             defaultValues={defaultValues}
-            context={context}
+            //context={context}
             onSubmit={async (data: Type) => {
               await onSubmit(data);
               close();

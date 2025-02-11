@@ -1,0 +1,308 @@
+import { Column, DataRepository } from "@clickapp/qui-core";
+import { ModalFormControllerProps, NavigationProps } from "./utils";
+import { useCreateAction } from "./useCreateAction";
+import { useNavigate } from "react-router-dom";
+import { useListItemActions } from "./useListItemActions";
+import { ReactNode } from "react";
+import { ModalFormProps } from "../modals";
+import { ButtonGroup } from "react-bootstrap";
+import { ActionButton } from "../buttons";
+
+export function useListActions<
+  RepositoryType extends Record<string, any>,
+  Identifiable extends Record<string, any>
+>({
+  modal,
+
+  createTitle = "Create Item",
+  createButtonLabel = "Create",
+
+  createFormValues,
+
+  repository,
+
+  reloadList,
+  reloadItem,
+  navigationProps,
+
+  modalFormSize = "lg",
+  deleteModalSize = "lg",
+
+  editTitle = "Edit Item",
+  editButtonLabel = "Save",
+  copyTitle = "Copy Item",
+  copyButtonLabel = "Copy",
+  cancelButtonLabel = "Cancel",
+  deleteTitle = "Confirm Deletion",
+  deleteMessage = () => <>Are you sure you want to delete this item?</>,
+  deleteButtonLabel = "Delete",
+  unsetKeysOnCopy = ["id"],
+}: {
+  repository: DataRepository<
+    RepositoryType,
+    Identifiable,
+    Partial<RepositoryType>,
+    Partial<RepositoryType>
+  >;
+
+  modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
+  createTitle?: string;
+  createButtonLabel?: string;
+  cancelButtonLabel?: string;
+  modalFormSize?: "sm" | "lg" | "xl";
+  createFormValues?: () => Partial<RepositoryType>;
+
+  editTitle?: string;
+  editButtonLabel?: string;
+  copyTitle?: string;
+  copyButtonLabel?: string;
+  deleteTitle?: string;
+  deleteMessage?: (v: Identifiable) => ReactNode;
+  deleteButtonLabel?: string;
+
+  deleteModalSize?: "sm" | "lg" | "xl";
+  unsetKeysOnCopy?: (keyof RepositoryType)[];
+
+  reloadList?: () => void;
+  reloadItem?: () => void;
+
+  navigationProps?: NavigationProps<RepositoryType>;
+}) {
+  const listActions = useBaseListActions({
+    repository,
+    modal,
+    createTitle,
+    createButtonLabel,
+    cancelButtonLabel,
+    modalFormSize,
+    createFormValues,
+    navigationProps,
+    reload: reloadList,
+  });
+
+  const itemActions = useListItemActions({
+    repository,
+    reloadList,
+    reloadItem,
+    navigationProps,
+    modal,
+
+    modalFormSize,
+    deleteModalSize,
+
+    editTitle,
+    editButtonLabel,
+    copyTitle,
+    copyButtonLabel,
+    cancelButtonLabel,
+    deleteTitle,
+    deleteMessage,
+    deleteButtonLabel,
+    unsetKeysOnCopy,
+  });
+
+  return { ...listActions, ...itemActions };
+}
+
+export function useBaseListActions<
+  RepositoryType extends Record<string, any>,
+  Identifiable extends Record<string, any>
+>({
+  repository,
+  reload,
+  modal,
+  modalFormSize = "lg",
+  createTitle = "Create Item",
+  createButtonLabel = "Create",
+  cancelButtonLabel = "Cancel",
+  createFormValues,
+  navigationProps,
+}: {
+  repository: DataRepository<
+    RepositoryType,
+    Identifiable,
+    Partial<RepositoryType>,
+    Partial<RepositoryType>
+  >;
+  reload?: () => void;
+  modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
+  createTitle?: string;
+  createButtonLabel?: string;
+  cancelButtonLabel?: string;
+  modalFormSize?: "sm" | "lg" | "xl";
+  createFormValues?: () => Partial<RepositoryType>;
+  navigationProps?: NavigationProps<RepositoryType>;
+}): BaseListActions {
+  const navigate = useNavigate();
+
+  const onCreate = (v: RepositoryType) => {
+    reload?.();
+    if (navigationProps) {
+      if (navigationProps.navigateAfterCreate) {
+        navigate(navigationProps.path(v));
+      }
+    }
+  };
+
+  const create = useCreateAction({
+    repository,
+    modal: (props: ModalFormControllerProps<Partial<RepositoryType>>) =>
+      modal({
+        ...props,
+        onSubmit: props.handleSubmit,
+        defaultValues: async () => props.defaultValues,
+        title: createTitle,
+        submitButtonLabel: createButtonLabel,
+        cancelButtonLabel,
+        size: modalFormSize,
+      }),
+    onSuccess: onCreate,
+    defaultFormValues: createFormValues,
+  });
+
+  const reloadList = () => reload?.();
+
+  return { create, reloadList };
+}
+
+export interface BaseListActions {
+  create?: () => void;
+  reloadList?: () => void;
+}
+
+export interface ListItemActions<
+  T extends Identifiable,
+  Identifiable extends Record<string, any>
+> {
+  edit?: (entity: T) => Promise<void>;
+  remove?: (entity: T) => Promise<void>;
+  copy?: (entity: T) => Promise<void>;
+}
+
+export function ListItemButtons<
+  T extends Identifiable,
+  Identifiable extends Record<string, any>
+>({
+  entity,
+  actions,
+  size = "sm",
+  variant = "outline-primary",
+  className,
+  labelEdit = "Edit",
+  labelDelete = "Delete",
+  labelCopy = "Copy",
+  hideCopy = false,
+  disabled,
+  before,
+  after,
+}: {
+  entity: T;
+  actions: ListItemActions<T, Identifiable>;
+  size?: "sm" | "lg";
+  variant?: string;
+  className?: string;
+  labelEdit?: string;
+  labelDelete?: string;
+  labelCopy?: string;
+  hideCopy?: boolean;
+  disabled?: boolean;
+
+  before?: (v: T) => ReactNode;
+  after?: (v: T) => ReactNode;
+}) {
+  return (
+    <ButtonGroup className={className}>
+      {before?.(entity)}
+      {actions.edit && (
+        <ActionButton
+          size={size}
+          variant={variant}
+          disabled={disabled}
+          onClick={async (e) => actions?.edit?.(entity)}
+        >
+          {labelEdit}
+        </ActionButton>
+      )}
+      {actions.copy && !hideCopy && (
+        <ActionButton
+          size={size}
+          variant={variant}
+          disabled={disabled}
+          onClick={async (e) => actions.copy && actions?.copy(entity)}
+        >
+          {labelCopy}
+        </ActionButton>
+      )}
+      {actions.remove && (
+        <ActionButton
+          variant={variant}
+          size={size}
+          disabled={disabled}
+          onClick={async (e) => actions.remove && actions?.remove(entity)}
+        >
+          {labelDelete}
+        </ActionButton>
+      )}
+      {after?.(entity)}
+    </ButtonGroup>
+  );
+}
+
+function column<
+  T extends Identifiable,
+  Identifiable extends Record<string, any>
+>(fn: (v: T) => ReactNode) {
+  return {
+    render: (v) => fn(v),
+    header: " ",
+    width: "6em",
+    className: "text-end",
+    renderString: () => "",
+  } as Column<T>;
+}
+
+export const ListActionsColumns = {
+  column,
+  editDeleteButtons<
+    T extends Identifiable,
+    Identifiable extends Record<string, any>
+  >(
+    actions: ListItemActions<T, Identifiable>,
+    ops: {
+      before?: (v: T) => ReactNode;
+      after?: (v: T) => ReactNode;
+    } = {}
+  ) {
+    return column<T, Identifiable>((v) => (
+      <ListItemButtons
+        entity={v}
+        actions={actions}
+        size="sm"
+        variant="light"
+        hideCopy={true}
+        {...ops}
+      />
+    ));
+  },
+
+  editDeleteCopyButtons<
+    T extends Identifiable,
+    Identifiable extends Record<string, any>
+  >(
+    actions: ListItemActions<T, Identifiable>,
+    ops: {
+      before?: (v: T) => ReactNode;
+      after?: (v: T) => ReactNode;
+    } = {}
+  ) {
+    return column<T, Identifiable>((v) => (
+      <ListItemButtons
+        entity={v}
+        actions={actions}
+        size="sm"
+        variant="light"
+        {...ops}
+      />
+    ));
+  },
+};

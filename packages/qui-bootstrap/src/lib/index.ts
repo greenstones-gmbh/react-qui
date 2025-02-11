@@ -14,6 +14,7 @@ export * from "./pages";
 export * from "./tables";
 export * from "./tabs";
 
-export * from "./entity";
+export * from "./actions";
+export * from "./labels";
 
 export { default as ReactFromModule } from "react";

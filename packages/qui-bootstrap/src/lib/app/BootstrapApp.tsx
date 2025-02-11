@@ -1,12 +1,13 @@
-import { AppRoutes, ModalContextProvider, useAuth } from "@clickapp/qui-core";
+import { AppRoutes, ModalContextProvider } from "@clickapp/qui-core";
 import { PropsWithChildren, ReactNode } from "react";
-import { AppLayout, LayoutOptions, LayoutSwitcherDropdown } from "./AppLayout";
-import { NavbarAuthButtons } from "../navbar";
-import { NavbarBrand } from "./BrandSidebarLayout";
 import { SignInPage } from "../auth";
+import { NavbarAuthButtons } from "../navbar";
+import { AppLayout, LayoutOptions, LayoutSwitcherDropdown } from "./AppLayout";
+import { NavbarBrand } from "./BrandSidebarLayout";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav } from "react-bootstrap";
+import { I18nContextProvider } from "../labels/Labels";
 
 export interface BootstrapAppProps {
   topnav?: ReactNode;
@@ -21,40 +22,45 @@ export interface BootstrapAppProps {
 
 export function BootstrapApp(props: PropsWithChildren<BootstrapAppProps>) {
   return (
-    <ModalContextProvider>
-      <AppRoutes
-        layout={
-          <>
-            <AppLayout
-              {...props.layoutProps}
-              topnav={
-                <>
-                  {props.topnav}
+    <I18nContextProvider>
+      <ModalContextProvider>
+        <AppRoutes
+          layout={
+            <>
+              <AppLayout
+                {...props.layoutProps}
+                topnav={
+                  <>
+                    {props.topnav}
 
-                  <Nav className="ms-auto" />
-                  {!props.hideLayoutSwitcher && (
-                    <LayoutSwitcherDropdown className="me-1" />
-                  )}
-                  <NavbarAuthButtons className="ms-1" />
-                </>
-              }
-              sidenav={props.sidenav}
-              brand={
-                <NavbarBrand
-                  name={props.projectName}
-                  icon={props.icon}
-                  className="ms-0"
-                />
-              }
+                    <Nav className="ms-auto" />
+                    {!props.hideLayoutSwitcher && (
+                      <LayoutSwitcherDropdown className="me-1" />
+                    )}
+                    <NavbarAuthButtons className="ms-1" />
+                  </>
+                }
+                sidenav={props.sidenav}
+                brand={
+                  <NavbarBrand
+                    name={props.projectName}
+                    icon={props.icon}
+                    className="ms-0"
+                  />
+                }
+              />
+            </>
+          }
+          login={
+            <SignInPage
+              title={props.projectName}
+              enableSignWithPassword={true}
             />
-          </>
-        }
-        login={
-          <SignInPage title={props.projectName} enableSignWithPassword={true} />
-        }
-        public={props.publicRoutes}
-        protected={props.protectedRoutes}
-      />
-    </ModalContextProvider>
+          }
+          public={props.publicRoutes}
+          protected={props.protectedRoutes}
+        />
+      </ModalContextProvider>
+    </I18nContextProvider>
   );
 }
