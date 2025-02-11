@@ -1,5 +1,6 @@
-import { DataRepository, useModalContext } from "@clickapp/qui-core";
+import { DataRepository } from "@clickapp/qui-core";
 import { ModalFormActionOptions } from "./utils";
+import { useBaseCreateAction } from "./useBaseCreateAction";
 
 interface RepositoryOptions<
   Identifiable extends Record<string, any>,
@@ -22,7 +23,7 @@ interface CreateFormTransformOptions<
   toUpdateValues: (v: FormFields) => RepositoryUpdateType;
 }
 
-interface BaseCreateActionOptions<
+interface RepositoryCreateActionOptions<
   Identifiable extends Record<string, any>,
   RepositoryType extends Record<string, any>,
   RepositoryUpdateType extends Record<string, any>,
@@ -31,7 +32,7 @@ interface BaseCreateActionOptions<
     CreateFormTransformOptions<RepositoryUpdateType, FormFields>,
     RepositoryOptions<Identifiable, RepositoryType, RepositoryUpdateType> {}
 
-export function useBaseCreateAction<
+export function useRepositoryCreateAction<
   Identifiable extends Record<string, any>,
   RepositoryType extends Record<string, any>,
   RepositoryUpdateType extends Record<string, any>,
@@ -42,37 +43,24 @@ export function useBaseCreateAction<
   modal,
   defaultFormValues,
   toUpdateValues,
-}: BaseCreateActionOptions<
+}: RepositoryCreateActionOptions<
   Identifiable,
   RepositoryType,
   RepositoryUpdateType,
   FormValues
 >) {
-  const { openModal, closeModal } = useModalContext();
-
-  return async (df?: Partial<FormValues> | undefined) => {
-    const formValues: FormValues = {
-      ...defaultFormValues(),
-      ...df,
-    } as FormValues;
-
-    const handleSubmit = async (formValues: FormValues) => {
-      console.log("handleSubmit", formValues);
-      const updateValues = toUpdateValues(formValues);
-      const v = await repository.create(updateValues);
-      closeModal();
-
-      onSuccess?.(v);
-    };
-
-    openModal(
-      modal({
-        defaultValues: formValues,
-        handleSubmit,
-        handleClose: closeModal,
-      })
-    );
+  const create = async (formValues: FormValues) => {
+    const updateValues = toUpdateValues(formValues);
+    const v = await repository.create(updateValues);
+    return v;
   };
+
+  return useBaseCreateAction<RepositoryType, FormValues>({
+    create,
+    modal,
+    onSuccess,
+    defaultFormValues,
+  });
 }
 
 export function useCreateAction<
@@ -90,7 +78,12 @@ export function useCreateAction<
   repository: DataRepository<Type, Identifiable, unknown, Partial<Type>>;
 } & ModalFormActionOptions<Type, Partial<Type>> &
   Partial<CreateFormTransformOptions<Partial<Type>, Partial<Type>>>) {
-  return useBaseCreateAction<Identifiable, Type, Partial<Type>, Partial<Type>>({
+  return useRepositoryCreateAction<
+    Identifiable,
+    Type,
+    Partial<Type>,
+    Partial<Type>
+  >({
     repository,
     modal,
     onSuccess,

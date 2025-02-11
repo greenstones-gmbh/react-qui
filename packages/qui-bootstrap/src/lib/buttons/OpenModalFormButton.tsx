@@ -17,6 +17,7 @@ export function OpenModalFormButton<Type extends FieldValues>({
   size = "sm",
   variant = "outline-primary",
   className,
+  context,
 }: {
   modal: FC<ModalFormProps<Type>>;
 
@@ -32,6 +33,7 @@ export function OpenModalFormButton<Type extends FieldValues>({
   modalTitle?: string;
   modalCancelButtonLabel?: string;
   modalSubmitButtonLabel?: string;
+  context?: unknown;
 }) {
   return (
     <OpenModalButton
@@ -48,7 +50,7 @@ export function OpenModalFormButton<Type extends FieldValues>({
             submitButtonLabel={modalSubmitButtonLabel}
             handleClose={close}
             defaultValues={defaultValues}
-            //context={context}
+            context={context}
             onSubmit={async (data: Type) => {
               await onSubmit(data);
               close();

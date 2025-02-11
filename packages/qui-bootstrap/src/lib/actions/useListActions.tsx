@@ -10,7 +10,7 @@ import { ActionButton } from "../buttons";
 
 export function useListActions<
   RepositoryType extends Record<string, any>,
-  Identifiable extends Record<string, any>
+  Identifiable extends Record<string, any> = RepositoryType
 >({
   modal,
 
@@ -21,8 +21,8 @@ export function useListActions<
 
   repository,
 
-  reloadList,
-  reloadItem,
+  onSuccess,
+
   navigationProps,
 
   modalFormSize = "lg",
@@ -63,8 +63,10 @@ export function useListActions<
   deleteModalSize?: "sm" | "lg" | "xl";
   unsetKeysOnCopy?: (keyof RepositoryType)[];
 
-  reloadList?: () => void;
-  reloadItem?: () => void;
+  onSuccess?: (
+    type: "edit" | "delete" | "copy" | "create" | "reload",
+    value: unknown
+  ) => void;
 
   navigationProps?: NavigationProps<RepositoryType>;
 }) {
@@ -77,13 +79,12 @@ export function useListActions<
     modalFormSize,
     createFormValues,
     navigationProps,
-    reload: reloadList,
+    onSuccess,
   });
 
   const itemActions = useListItemActions({
     repository,
-    reloadList,
-    reloadItem,
+    onSuccess,
     navigationProps,
     modal,
 
@@ -109,7 +110,6 @@ export function useBaseListActions<
   Identifiable extends Record<string, any>
 >({
   repository,
-  reload,
   modal,
   modalFormSize = "lg",
   createTitle = "Create Item",
@@ -117,6 +117,7 @@ export function useBaseListActions<
   cancelButtonLabel = "Cancel",
   createFormValues,
   navigationProps,
+  onSuccess,
 }: {
   repository: DataRepository<
     RepositoryType,
@@ -125,6 +126,7 @@ export function useBaseListActions<
     Partial<RepositoryType>
   >;
   reload?: () => void;
+  onSuccess?: (type: "create" | "reload", value: unknown) => void;
   modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
   createTitle?: string;
   createButtonLabel?: string;
@@ -136,7 +138,8 @@ export function useBaseListActions<
   const navigate = useNavigate();
 
   const onCreate = (v: RepositoryType) => {
-    reload?.();
+    onSuccess?.("create", v);
+
     if (navigationProps) {
       if (navigationProps.navigateAfterCreate) {
         navigate(navigationProps.path(v));
@@ -160,7 +163,7 @@ export function useBaseListActions<
     defaultFormValues: createFormValues,
   });
 
-  const reloadList = () => reload?.();
+  const reloadList = () => onSuccess?.("reload", undefined);
 
   return { create, reloadList };
 }
@@ -170,19 +173,13 @@ export interface BaseListActions {
   reloadList?: () => void;
 }
 
-export interface ListItemActions<
-  T extends Identifiable,
-  Identifiable extends Record<string, any>
-> {
+export interface ListItemActions<T extends Record<string, any>> {
   edit?: (entity: T) => Promise<void>;
   remove?: (entity: T) => Promise<void>;
   copy?: (entity: T) => Promise<void>;
 }
 
-export function ListItemButtons<
-  T extends Identifiable,
-  Identifiable extends Record<string, any>
->({
+export function ListItemButtons<T extends Record<string, any>>({
   entity,
   actions,
   size = "sm",
@@ -197,7 +194,7 @@ export function ListItemButtons<
   after,
 }: {
   entity: T;
-  actions: ListItemActions<T, Identifiable>;
+  actions: ListItemActions<T>;
   size?: "sm" | "lg";
   variant?: string;
   className?: string;
@@ -248,10 +245,7 @@ export function ListItemButtons<
   );
 }
 
-function column<
-  T extends Identifiable,
-  Identifiable extends Record<string, any>
->(fn: (v: T) => ReactNode) {
+function column<T extends Record<string, any>>(fn: (v: T) => ReactNode) {
   return {
     render: (v) => fn(v),
     header: " ",
@@ -263,17 +257,14 @@ function column<
 
 export const ListActionsColumns = {
   column,
-  editDeleteButtons<
-    T extends Identifiable,
-    Identifiable extends Record<string, any>
-  >(
-    actions: ListItemActions<T, Identifiable>,
+  editDeleteButtons<T extends Record<string, any>>(
+    actions: ListItemActions<T>,
     ops: {
       before?: (v: T) => ReactNode;
       after?: (v: T) => ReactNode;
     } = {}
   ) {
-    return column<T, Identifiable>((v) => (
+    return column<T>((v) => (
       <ListItemButtons
         entity={v}
         actions={actions}
@@ -289,13 +280,13 @@ export const ListActionsColumns = {
     T extends Identifiable,
     Identifiable extends Record<string, any>
   >(
-    actions: ListItemActions<T, Identifiable>,
+    actions: ListItemActions<T>,
     ops: {
       before?: (v: T) => ReactNode;
       after?: (v: T) => ReactNode;
     } = {}
   ) {
-    return column<T, Identifiable>((v) => (
+    return column<T>((v) => (
       <ListItemButtons
         entity={v}
         actions={actions}

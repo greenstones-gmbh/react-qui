@@ -23,6 +23,7 @@ export interface ModalFormProps<Type extends FieldValues>
   onSubmit: (v: Type) => Promise<any>;
   children?: ReactNode | ((props: UseFormReturn<Type>) => ReactNode);
   transformOnSubmit?: (v: Type) => Promise<Type>;
+  context?: unknown;
 }
 
 export function ModalForm<Type extends FieldValues>({

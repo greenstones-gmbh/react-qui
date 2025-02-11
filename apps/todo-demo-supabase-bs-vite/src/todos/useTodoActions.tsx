@@ -20,12 +20,10 @@ import { useAuth } from "@clickapp/qui-core";
 type Todo = Tables<"todos">;
 
 export function useTodoActions({
-  reloadList,
-  reloadItem,
+  onSuccess,
   navigationProps,
 }: {
-  reloadList?: (params?: any) => void;
-  reloadItem?: (params?: any) => void;
+  onSuccess?: (action: string, value: unknown) => void;
   navigationProps?: NavigationProps<Todo>;
 }) {
   const { user } = useAuth();
@@ -36,14 +34,13 @@ export function useTodoActions({
     Identifiable<number>
   >("todos");
 
-  const actions = useListActions({
+  const actions = useListActions<Todo>({
     repository,
     modal: (props) => <TodoModalForm {...props} />,
     editTitle: "Edit Todo",
     copyTitle: "Copy Todo",
     createTitle: "Create Todo",
-    reloadList,
-    reloadItem,
+    onSuccess,
     navigationProps,
     createFormValues() {
       return {
@@ -55,8 +52,7 @@ export function useTodoActions({
 
   const complete: ListItemAction<Todo> = async (e: Todo) => {
     await repository.update(e, { is_complete: !e.is_complete });
-    reloadItem?.();
-    reloadList?.();
+    onSuccess?.("complete", e);
   };
 
   return { ...actions, complete };

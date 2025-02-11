@@ -37,7 +37,8 @@ export function useBaseListItemActions<
     RepositoryCreateType,
     RepositoryUpdateType
   >;
-  onSuccess?: () => void;
+
+  onSuccess?: (type: "edit" | "delete" | "copy", value: unknown) => void;
 
   modal: (props: ModalFormProps<FormFields>) => JSX.Element;
   editProps: {
@@ -89,7 +90,7 @@ export function useBaseListItemActions<
         defaultValues: async () => props.defaultValues,
         ...editProps.modalProps,
       }),
-    onSuccess,
+    onSuccess: (v) => onSuccess?.("edit", v),
     ...editProps.transform,
   });
 
@@ -102,7 +103,7 @@ export function useBaseListItemActions<
         defaultValues: async () => props.defaultValues,
         ...copyProps.modalProps,
       }),
-    onSuccess,
+    onSuccess: (v) => onSuccess?.("copy", v),
     ...copyProps.transform,
   });
 
@@ -115,7 +116,7 @@ export function useBaseListItemActions<
         message={deleteProps.message(value)}
       />
     ),
-    onSuccess,
+    onSuccess: (v) => onSuccess?.("delete", v),
   });
 
   return { edit, remove, copy };
@@ -126,9 +127,6 @@ export function useListItemActions<
   Identifiable extends Record<string, any>
 >({
   repository,
-
-  reloadList,
-  reloadItem,
   navigationProps,
 
   modal,
@@ -145,6 +143,7 @@ export function useListItemActions<
   deleteMessage = () => <>Are you sure you want to delete this item?</>,
   deleteButtonLabel = "Delete",
   unsetKeysOnCopy = ["id"],
+  onSuccess,
 }: {
   repository: DataRepository<
     RepositoryType,
@@ -152,7 +151,7 @@ export function useListItemActions<
     Partial<RepositoryType>,
     Partial<RepositoryType>
   >;
-  //onSuccess?: () => void;
+  onSuccess?: (type: "edit" | "delete" | "copy", value: unknown) => void;
   modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
 
   editTitle?: string;
@@ -167,14 +166,11 @@ export function useListItemActions<
   deleteModalSize?: "sm" | "lg" | "xl";
   unsetKeysOnCopy?: (keyof RepositoryType)[];
 
-  reloadList?: () => void;
-  reloadItem?: () => void;
-
   navigationProps?: NavigationProps<RepositoryType>;
 }) {
   const navigate = useNavigate();
 
-  const view = navigationProps?.view ?? (reloadItem ? "detail" : "list");
+  const view = navigationProps?.view ?? "list";
 
   let navigateAfterEdit = true;
   let navigateAfterCopy = true;
@@ -205,8 +201,7 @@ export function useListItemActions<
   }
 
   const onEdit = (v: RepositoryType) => {
-    reloadItem?.();
-    reloadList?.();
+    onSuccess?.("edit", v);
     if (navigationProps) {
       if (navigateAfterEdit) {
         navigate(navigationProps.path(v));
@@ -215,7 +210,7 @@ export function useListItemActions<
   };
 
   const onCopy = (v: RepositoryType) => {
-    reloadList?.();
+    onSuccess?.("copy", v);
     if (navigationProps) {
       if (navigateAfterCopy) {
         navigate(navigationProps.path(v));
@@ -224,8 +219,8 @@ export function useListItemActions<
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onDelete = (_v: Identifiable) => {
-    reloadList?.();
+  const onDelete = (v: Identifiable) => {
+    onSuccess?.("delete", v);
     if (navigationProps) {
       if (navigateAfterDelete) {
         navigate(navigationProps.listPath);

@@ -42,7 +42,9 @@ export function TodoMasterDetailListPage() {
   // );
 
   const actions = useTodoActions({
-    reloadList: list.sourceData.reload,
+    onSuccess: () => {
+      list.sourceData.reload();
+    },
     navigationProps: {
       path: (v) => `/todos/${v.id}`,
       listPath: "/todos",
@@ -132,8 +134,10 @@ export function TodoMasterDetailPage() {
   );
 
   const actions = useTodoActions({
-    reloadList: list.sourceData.reload,
-    reloadItem: result.reload,
+    onSuccess: (action) => {
+      list.sourceData.reload();
+      if (action !== "delete") result.reload();
+    },
     navigationProps: {
       path: (v) => `/todos/${v.id}`,
       listPath: "/todos",

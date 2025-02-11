@@ -16,7 +16,9 @@ export function TodoList() {
   const list = useTodoList();
 
   const actions = useTodoActions({
-    reloadList: list.sourceData.reload,
+    onSuccess: () => {
+      list.sourceData.reload();
+    },
   });
 
   const columns = useColumnBuilder<Todo>(
