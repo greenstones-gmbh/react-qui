@@ -1,7 +1,7 @@
 {
   "name": "@clickapp/qui-supabase",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.6",
   "type": "module",
   "main": "./dist/qui-supabase.umd.cjs",
   "module": "./dist/qui-supabase.js",

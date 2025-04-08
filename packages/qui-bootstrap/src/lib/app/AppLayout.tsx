@@ -6,14 +6,13 @@ import {
   useState,
 } from "react";
 import { Dropdown, Nav, NavItem } from "react-bootstrap";
-import { BsGrid1X2 } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
 import { TopNavbar } from "../navbar";
 import { BrandSidebar, BrandSidebarLayout } from "./BrandSidebarLayout";
 import { Sidebar } from "./Sidebar";
 import { SidebarLayout } from "./SidebarLayout";
 import { TopNavLayout } from "./TopNavLayout";
-import { IoSettingsSharp } from "react-icons/io5";
 
 export interface LayoutOptions {
   layout?: "topnav" | "topnav-fluid" | "sidebar" | "brand-sidebar";

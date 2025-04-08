@@ -5,7 +5,7 @@ import { NavbarAuthButtons } from "../navbar";
 import { AppLayout, LayoutOptions, LayoutSwitcherDropdown } from "./AppLayout";
 import { NavbarBrand } from "./BrandSidebarLayout";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav } from "react-bootstrap";
 import { I18nContextProvider } from "../labels/Labels";
 

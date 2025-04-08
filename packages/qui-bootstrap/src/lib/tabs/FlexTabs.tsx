@@ -39,15 +39,6 @@ export const Tabs = ({
           </div>
         ) : null;
       })}
-      {/* {tabList.map((t, index) => {
-        return tabs.isActive(t.name) ? (
-          <div
-            className={classNames("d-flex flex-fill flex-column", tabClassName)}
-          >
-            {t.comp}
-          </div>
-        ) : null;
-      })} */}
     </div>
   );
 };

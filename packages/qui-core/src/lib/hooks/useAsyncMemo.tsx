@@ -1,24 +1,53 @@
 import { DependencyList, useEffect, useState } from "react";
 
+/**
+ * Interface representing the result of the useAsyncMemo hook.
+ */
 export interface AsyncMemoResult<T> {
+  /** The data returned by the async function. */
   data?: T;
+  /** The error returned by the async function, if any. */
   error?: Error;
+  /** Boolean indicating if there was an error. */
   isError: boolean;
+  /** Boolean indicating if the async function was successful. */
   isSuccess: boolean;
+  /** Boolean indicating if the async function is still pending. */
   isPending: boolean;
+  /** Function to reload the async function. */
   reload: (params?: any) => void;
+  /** Function to manually set the data. */
   setData: (data: T | undefined) => void;
 }
 
+/**
+ * Custom hook to handle asynchronous operations with memoization.
+ * The result will be held as state.
+ *
+ * @param factory - The async function to be executed.
+ * @param deps - Dependency list that will trigger the async function when changed.
+ * @returns An object containing the state and control functions of the async operation.
+ */
 export function useAsyncMemo<T>(
   factory: (params?: any) => Promise<T> | undefined | null,
   deps: DependencyList
 ): AsyncMemoResult<T>;
+
+/**
+ * Custom hook to handle asynchronous operations with memoization.
+ * The result will be held as state.
+ *
+ * @param factory - The async function to be executed.
+ * @param deps - Dependency list that will trigger the async function when changed.
+ * @param initial - Initial value for the data.
+ * @returns An object containing the state and control functions of the async operation.
+ */
 export function useAsyncMemo<T>(
   factory: (params?: any) => Promise<T> | undefined | null,
   deps: DependencyList,
   initial: T
 ): AsyncMemoResult<T>;
+
 export function useAsyncMemo<T>(
   factory: (params?: any) => Promise<T> | undefined | null,
   deps: DependencyList,

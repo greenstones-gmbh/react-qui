@@ -1,8 +1,5 @@
 import { DependencyList } from "react";
 import { useAsyncMemo } from "./useAsyncMemo";
-import { log } from "console";
-
-export const BASE_URL = "/msc-viewer";
 
 export function useFetch<Result = any>(
   url: string,

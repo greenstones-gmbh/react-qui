@@ -11,7 +11,7 @@ export function NavbarAuthButtons({
 }) {
   const auth = useAuth();
 
-  if (Object.keys(auth).length === 0) return undefined;
+  if (Object.keys(auth).length === 0) return null;
   const { logout, login, isAuthenticated, userDisplayName } = auth;
   return (
     <>
