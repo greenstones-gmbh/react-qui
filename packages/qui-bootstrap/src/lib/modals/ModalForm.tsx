@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import {
-  DefaultValues,
-  FieldValues,
+  type DefaultValues,
+  type FieldValues,
   FormProvider,
   useForm,
-  UseFormReturn,
+  type UseFormReturn,
 } from "react-hook-form";
 import { useModals } from "./Modals";
 
@@ -16,8 +16,9 @@ export interface ModalFormDisplayProps {
   size?: "sm" | "lg" | "xl";
 }
 
-export interface ModalFormProps<Type extends FieldValues>
-  extends ModalFormDisplayProps {
+export interface ModalFormProps<
+  Type extends FieldValues,
+> extends ModalFormDisplayProps {
   handleClose: any;
   defaultValues?: DefaultValues<Type> | ((payload?: unknown) => Promise<Type>);
   onSubmit: (v: Type) => Promise<any>;

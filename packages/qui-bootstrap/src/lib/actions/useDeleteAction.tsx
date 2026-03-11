@@ -1,9 +1,10 @@
-import { DataRepository, useModalContext } from "@clickapp/qui-core";
-import { PropsWithChildren } from "react";
-import { ListItemAction } from "./utils";
+import { type DataRepository, useModalContext } from "@clickapp/qui-core";
+import type { PropsWithChildren } from "react";
+import { type ListItemAction } from "./utils";
 
-export interface ConfirmModalControllerProps<Identifiable>
-  extends PropsWithChildren {
+export interface ConfirmModalControllerProps<
+  Identifiable,
+> extends PropsWithChildren {
   handleClose: () => void;
   onConfirm: (closeModal: () => void) => Promise<void>;
   value: Identifiable;
@@ -16,20 +17,22 @@ export interface ConfirmModalActionOptions<Identifiable> {
 
 interface RepositoryOptions<
   Identifiable extends Record<string, any>,
-  RepositoryType extends Record<string, any>
+  RepositoryType extends Record<string, any>,
 > {
   repository: DataRepository<RepositoryType, Identifiable, unknown, unknown>;
 }
 
 interface BaseDeleteActionOptions<
   Identifiable extends Record<string, any>,
-  RepositoryType extends Record<string, any>
-> extends ConfirmModalActionOptions<Identifiable>,
+  RepositoryType extends Record<string, any>,
+>
+  extends
+    ConfirmModalActionOptions<Identifiable>,
     RepositoryOptions<Identifiable, RepositoryType> {}
 
 export function useDeleteAction<
   Identifiable extends Record<string, any>,
-  RepositoryType extends Record<string, any>
+  RepositoryType extends Record<string, any>,
 >({
   repository,
   onSuccess,
@@ -52,7 +55,7 @@ export function useDeleteAction<
         value: id,
         onConfirm,
         handleClose: closeModal,
-      })
+      }),
     );
   };
 }

@@ -1,7 +1,7 @@
 import {
   createContext,
-  PropsWithChildren,
-  ReactNode,
+  type PropsWithChildren,
+  type ReactNode,
   useContext,
   useState,
 } from "react";
@@ -177,7 +177,7 @@ interface LayoutOptionsContextType {
 }
 
 export const LayoutOptionsContext = createContext<LayoutOptionsContextType>(
-  {} as LayoutOptionsContextType
+  {} as LayoutOptionsContextType,
 );
 
 export function LayoutSwitcherDropdown({

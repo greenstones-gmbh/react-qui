@@ -1,4 +1,4 @@
-import { AuthContext, BaseAuthProps, useRoles } from "@clickapp/qui-core";
+import { AuthContext, type BaseAuthProps, useRoles } from "@clickapp/qui-core";
 import { Provider, SupabaseClient } from "@supabase/supabase-js";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

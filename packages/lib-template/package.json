@@ -22,7 +22,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "show-bundle": "npx vite-bundle-visualizer"
+    "show-bundle": "bunx vite-bundle-visualizer"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

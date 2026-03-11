@@ -1,4 +1,8 @@
-import { ListPaging, ListQuery, ListSorting } from "@clickapp/qui-core";
+import {
+  type ListPaging,
+  type ListQuery,
+  type ListSorting,
+} from "@clickapp/qui-core";
 import {
   Button,
   ButtonGroup,
@@ -9,7 +13,7 @@ import {
   Table,
 } from "react-bootstrap";
 
-import { Column, Selection } from "@clickapp/qui-core";
+import { type Column, type Selection } from "@clickapp/qui-core";
 import classNames from "classnames";
 import {
   TbCaretDownFilled,
@@ -303,7 +307,7 @@ export function QuickTable<Type = any>({
   rowClassName,
 }: {
   items?: Type[];
-  sorting: ListSorting | undefined;
+  sorting?: ListSorting | undefined;
   columns: Column<Type>[];
 
   selection?: Selection<Type>;
@@ -358,7 +362,7 @@ function isFunction(v: any): v is Function {
 
 function getClassName<Type>(
   v: Type,
-  fn: string | ((v: Type) => string | undefined) | undefined
+  fn: string | ((v: Type) => string | undefined) | undefined,
 ): string | undefined {
   return isFunction(fn) ? fn(v) : fn;
 }

@@ -4,7 +4,7 @@ import { ModalContextProvider } from "@clickapp/qui-core";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { OpenModalFormButton } from "../../buttons/OpenModalFormButton";
-import { ModalForm, ModalFormProps } from "../../modals";
+import { ModalForm, type ModalFormProps } from "../../modals";
 
 import { CheckField, InputField, SelectField } from "../../forms";
 

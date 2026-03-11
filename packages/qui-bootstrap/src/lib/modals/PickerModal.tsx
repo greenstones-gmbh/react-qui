@@ -1,7 +1,7 @@
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { Button, ButtonToolbar, Modal } from "react-bootstrap";
-import { Column } from "@clickapp/qui-core";
-import { ListData } from "@clickapp/qui-core";
+import { type Column } from "@clickapp/qui-core";
+import { type ListData } from "@clickapp/qui-core";
 import { useSelection } from "@clickapp/qui-core";
 import { Paging, QueryInput, QuickTable } from "../tables/Tables";
 import { ActionButton } from "../buttons/ActionButton";

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Field, FieldOptions, Fields } from "../fields/Fields";
+import { type Field, type FieldOptions, Fields } from "../fields/Fields";
 
 export class DetailModelBuilder<Type> {
   blocks: DetaiModelBlock<Type>[] = [];

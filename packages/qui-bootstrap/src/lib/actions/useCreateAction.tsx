@@ -1,5 +1,5 @@
-import { DataRepository } from "@clickapp/qui-core";
-import { ModalFormActionOptions } from "./utils";
+import { type DataRepository } from "@clickapp/qui-core";
+import { type ModalFormActionOptions } from "./utils";
 import { useBaseCreateAction } from "./useBaseCreateAction";
 
 interface RepositoryOptions<

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import { OpenModalButton } from "./OpenModalButton";
 

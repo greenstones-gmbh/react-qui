@@ -1,16 +1,16 @@
 import { useMemo } from "react";
 import {
-  ListData,
-  ListOptions,
-  ListSource,
-  Sort,
+  type ListData,
+  type ListOptions,
+  type ListSource,
+  type Sort,
   createPageMeta,
   createSinglePage,
   useList,
 } from "./useList";
 
 export type Filter<Type, TQuery = string> = (
-  query?: TQuery
+  query?: TQuery,
 ) => (item: Type) => boolean;
 
 export type Sorter<Type> = (sort: Sort) => (a: Type, b: Type) => number;
@@ -22,7 +22,7 @@ export interface ArraySourceOptions<Type, Query> {
 
 export function useArraySource<Type, Query>(
   array: Type[] | undefined,
-  ops?: ArraySourceOptions<Type, Query>
+  ops?: ArraySourceOptions<Type, Query>,
 ) {
   const dep = array && array.length > 0 ? array : "-";
   const source = useMemo<ListSource<Type, Query>>(
@@ -31,14 +31,14 @@ export function useArraySource<Type, Query>(
         filter: ops?.filter,
         sorter: ops?.sorter,
       }),
-    [dep]
+    [dep],
   );
   return source;
 }
 
 export function useArray<Type, Query = string, SortId = string>(
   array: Type[] | undefined,
-  ops?: ArraySourceOptions<Type, Query> & ListOptions<Query>
+  ops?: ArraySourceOptions<Type, Query> & ListOptions<Query>,
 ): ListData<Type, Query> {
   const source = useArraySource(array, ops);
   return useList(source, ops);
@@ -46,9 +46,9 @@ export function useArray<Type, Query = string, SortId = string>(
 
 export function createArraySource<Type, Query>(
   items: Type[] | undefined,
-  ops?: ArraySourceOptions<Type, Query>
+  ops?: ArraySourceOptions<Type, Query>,
 ): ListSource<Type, Query> {
-  console.log("ArraySource.createArraySource", items);
+  //sconsole.log("ArraySource.createArraySource", items);
   return async (state) => {
     // console.log("ArraySource.run", state);
 
@@ -95,7 +95,7 @@ export function createArraySource<Type, Query>(
 export function createPage<Type>(
   items: Type[],
   page: number,
-  pageSize: number
+  pageSize: number,
 ) {
   const meta = createPageMeta(page, pageSize, items.length);
   const slice = items.slice(meta.range.start, meta.range.end);
@@ -140,7 +140,7 @@ function contains(v: any, term: string): boolean {
 }
 
 export function objectContains<Query = string>(
-  queryProp?: keyof Query
+  queryProp?: keyof Query,
 ): Filter<any, Query> {
   return (query?: Query) => {
     if (!query) return (v: any) => true;
@@ -154,7 +154,7 @@ export function objectContains<Query = string>(
 
 export function isEq<Type, Query>(
   prop: keyof Type,
-  queryProp?: keyof Query
+  queryProp?: keyof Query,
 ): Filter<Type, Query> {
   return (query?: Query) => {
     if (!query) return (v: any) => true;
@@ -168,7 +168,7 @@ export function isEq<Type, Query>(
 }
 
 export function isSatisfiedBy<Type, Query>(
-  fn: (value: Type, query?: Query) => boolean
+  fn: (value: Type, query?: Query) => boolean,
 ): Filter<Type, Query> {
   return (query?: Query) => {
     return (v: Type) => {
@@ -179,7 +179,7 @@ export function isSatisfiedBy<Type, Query>(
 
 export function like<Type, Query>(
   prop: keyof Type,
-  queryProp?: keyof Query
+  queryProp?: keyof Query,
 ): Filter<Type, Query> {
   return (query?: Query) => {
     if (!query) return (v: any) => true;
@@ -242,8 +242,8 @@ export const Filters = {
 function objectProps<Type>() {
   return (sort: Sort) => {
     return (a: Type, b: Type) => {
-      const va = (a as any)[sort.id];
-      const vb = (b as any)[sort.id];
+      const va = getByPath(a as any, sort.id);
+      const vb = getByPath(b as any, sort.id);
 
       return (
         (`${va}` || "").localeCompare(`${vb}` || "") *
@@ -256,3 +256,7 @@ function objectProps<Type>() {
 export const Sorters = {
   objectProps,
 };
+
+function getByPath<T = unknown>(obj: any, path: string): T | undefined {
+  return path.split(".").reduce((acc, key) => acc?.[key], obj);
+}

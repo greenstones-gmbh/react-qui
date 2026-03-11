@@ -1,16 +1,16 @@
-import { Column, DataRepository } from "@clickapp/qui-core";
-import { ModalFormControllerProps, NavigationProps } from "./utils";
+import { type Column, type DataRepository } from "@clickapp/qui-core";
+import { type ModalFormControllerProps, type NavigationProps } from "./utils";
 import { useCreateAction } from "./useCreateAction";
 import { useNavigate } from "react-router-dom";
 import { useListItemActions } from "./useListItemActions";
-import { ReactNode } from "react";
-import { ModalFormProps } from "../modals";
+import type { ReactNode } from "react";
+import { type ModalFormProps } from "../modals";
 import { ButtonGroup } from "react-bootstrap";
 import { ActionButton } from "../buttons";
 
 export function useListActions<
   RepositoryType extends Record<string, any>,
-  Identifiable extends Record<string, any> = RepositoryType
+  Identifiable extends Record<string, any> = RepositoryType,
 >({
   modal,
 
@@ -65,7 +65,7 @@ export function useListActions<
 
   onSuccess?: (
     type: "edit" | "delete" | "copy" | "create" | "reload",
-    value: unknown
+    value: unknown,
   ) => void;
 
   navigationProps?: NavigationProps<RepositoryType>;
@@ -107,7 +107,7 @@ export function useListActions<
 
 export function useBaseListActions<
   RepositoryType extends Record<string, any>,
-  Identifiable extends Record<string, any>
+  Identifiable extends Record<string, any>,
 >({
   repository,
   modal,
@@ -262,7 +262,7 @@ export const ListActionsColumns = {
     ops: {
       before?: (v: T) => ReactNode;
       after?: (v: T) => ReactNode;
-    } = {}
+    } = {},
   ) {
     return column<T>((v) => (
       <ListItemButtons
@@ -278,13 +278,13 @@ export const ListActionsColumns = {
 
   editDeleteCopyButtons<
     T extends Identifiable,
-    Identifiable extends Record<string, any>
+    Identifiable extends Record<string, any>,
   >(
     actions: ListItemActions<T>,
     ops: {
       before?: (v: T) => ReactNode;
       after?: (v: T) => ReactNode;
-    } = {}
+    } = {},
   ) {
     return column<T>((v) => (
       <ListItemButtons

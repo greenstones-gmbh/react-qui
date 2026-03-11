@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Form } from "react-bootstrap";
 import {
-  FieldValues,
-  Path,
-  RegisterOptions,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
   useFormContext,
 } from "react-hook-form";
 

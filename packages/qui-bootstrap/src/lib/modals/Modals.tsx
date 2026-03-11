@@ -1,7 +1,7 @@
 import { useModalContext } from "@clickapp/qui-core";
-import { ConfirmModal, ConfirmModalProps } from "./ConfirmModal";
-import { ErrorModal, ErrorModalProps } from "./ErrorModal";
-import { MessageModal, MessageModalProps } from "./MessageModal";
+import { ConfirmModal, type ConfirmModalProps } from "./ConfirmModal";
+import { ErrorModal, type ErrorModalProps } from "./ErrorModal";
+import { MessageModal, type MessageModalProps } from "./MessageModal";
 
 export function useModals() {
   const { openModal, closeModal } = useModalContext();

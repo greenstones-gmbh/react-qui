@@ -1,8 +1,12 @@
 import { AppRoutes, ModalContextProvider } from "@clickapp/qui-core";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { SignInPage } from "../auth";
 import { NavbarAuthButtons } from "../navbar";
-import { AppLayout, LayoutOptions, LayoutSwitcherDropdown } from "./AppLayout";
+import {
+  AppLayout,
+  type LayoutOptions,
+  LayoutSwitcherDropdown,
+} from "./AppLayout";
 import { NavbarBrand } from "./BrandSidebarLayout";
 
 //import "bootstrap/dist/css/bootstrap.min.css";

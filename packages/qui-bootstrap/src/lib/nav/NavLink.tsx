@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { Nav } from "react-bootstrap";
-import { NavLinkProps } from "react-router-dom";
+import type { NavLinkProps } from "react-router-dom";
 import { NavLink as AuthNavLink } from "@clickapp/qui-core";
 import classNames from "classnames";
 import "./NavLink.css";
@@ -29,7 +29,7 @@ PropsWithChildren<
       allowedRoles={allowedRoles}
       className={classNames(
         "qui-nav-link",
-        typeof className === "string" ? className : undefined
+        typeof className === "string" ? className : undefined,
       )}
       end={end}
     >
@@ -43,7 +43,7 @@ PropsWithChildren<
 function A(
   props: PropsWithChildren<
     NavLinkProps & { allowedRoles?: string; authenticated?: boolean }
-  >
+  >,
 ) {
   const { className, ...rest } = props;
   return (

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { PropsWithChildren, ReactNode } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { LayoutContext } from "./LayoutContext";
@@ -26,7 +26,7 @@ export function BrandSidebarLayout({
       <div
         className={classNames(
           "d-flex flex-row  flex-fill",
-          heightRelativeToParent ? "h-100" : "vh-100"
+          heightRelativeToParent ? "h-100" : "vh-100",
         )}
       >
         {sidebar}

@@ -1,8 +1,8 @@
-import { DataRepository, useModalContext } from "@clickapp/qui-core";
+import { type DataRepository, useModalContext } from "@clickapp/qui-core";
 import {
-  ModalFormActionOptions,
-  FormTransformOptions,
-  ListItemAction,
+  type ModalFormActionOptions,
+  type FormTransformOptions,
+  type ListItemAction,
 } from "./utils";
 
 interface RepositoryOptions<

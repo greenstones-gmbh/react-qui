@@ -16,5 +16,3 @@ export * from "./tabs";
 
 export * from "./actions";
 export * from "./labels";
-
-export { default as ReactFromModule } from "react";

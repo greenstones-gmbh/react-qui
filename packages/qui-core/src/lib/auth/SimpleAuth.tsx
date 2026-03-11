@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext, BaseAuthProps, useRoles } from "./Auth";
+import { AuthContext, type BaseAuthProps, useRoles } from "./Auth";
 
 export interface SimpleAuthProps extends BaseAuthProps {
   loginPath: string;

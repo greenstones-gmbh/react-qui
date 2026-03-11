@@ -6,17 +6,18 @@
     "apps/*"
   ],
   "scripts": {
-    "pub-local-core": "npm unpublish @clickapp/qui-core@0.0.6 --force --registry http://localhost:4873 && npm run build -w @clickapp/qui-core && npm publish -w @clickapp/qui-core --registry http://localhost:4873",
-    "pub-local-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.7  --registry http://localhost:4873 && npm run build -w @clickapp/qui-bootstrap && npm publish -w @clickapp/qui-bootstrap --registry http://localhost:4873",
-    "pub-local-supabase": "npm unpublish @clickapp/qui-supabase@0.0.6 --force  --registry http://localhost:4873 && npm run build -w @clickapp/qui-supabase && npm publish -w @clickapp/qui-supabase --registry http://localhost:4873 ",
-    "pub-local": "npm run pub-local-core && npm run pub-local-bs && npm run pub-local-supabase",
-    "build-all": "npm run build -w @clickapp/qui-core && npm run build -w @clickapp/qui-bootstrap && npm run build -w @clickapp/qui-supabase",
-    "pub-core": "npm publish -w @clickapp/qui-core --access public",
-    "pub-bs": "npm publish -w @clickapp/qui-bootstrap --access public",
-    "pub-supabase": "npm publish -w @clickapp/qui-supabase --access public"
+    "pub-local-core": "npm unpublish @clickapp/qui-core@0.0.6 --force --registry http://localhost:4873 && bun --filter './packages/qui-core' run build && bun publish --cwd packages/qui-core --registry http://localhost:4873",
+    "pub-local-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.7  --registry http://localhost:4873 && bun --filter './packages/qui-bootstrap' run build && bun publish --cwd packages/qui-bootstrap --registry http://localhost:4873",
+    "pub-local-supabase": "npm unpublish @clickapp/qui-supabase@0.0.6 --force  --registry http://localhost:4873 && bun --filter './packages/qui-supabase' run build && bun publish --cwd packages/qui-supabase --registry http://localhost:4873",
+    "pub-local": "bun run pub-local-core && bun run pub-local-bs && bun run pub-local-supabase",
+    "build-all": "bun --filter './packages/qui-core' run build && bun --filter './packages/qui-bootstrap' run build && bun --filter './packages/qui-supabase' run build",
+    "pub-core": "bun publish --cwd packages/qui-core --access public",
+    "pub-bs": "bun publish --cwd packages/qui-bootstrap --access public",
+    "pub-supabase": "bun publish --cwd packages/qui-supabase --access public"
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {
+    "@types/bun": "latest",
     "@chromatic-com/storybook": "^3.2.2",
     "@storybook/addon-essentials": "^8.4.2",
     "@storybook/addon-interactions": "^8.4.2",
@@ -27,5 +28,8 @@
     "@storybook/test": "^8.4.2",
     "prop-types": "^15.8.1",
     "storybook": "^8.4.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
   }
 }

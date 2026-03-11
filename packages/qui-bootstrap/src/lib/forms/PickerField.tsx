@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import {
-  FieldValues,
-  Path,
-  RegisterOptions,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
   useFormContext,
 } from "react-hook-form";
 

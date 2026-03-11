@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is an npm workspaces monorepo containing a multi-layer React component library published under the `@clickapp` scope.
+This is a bun workspaces monorepo containing a multi-layer React component library published under the `@clickapp` scope.
 
 **Workspace layout:**
 - `packages/` — 3 published libraries + 1 template
@@ -16,23 +16,23 @@ All commands run from the repo root unless noted otherwise.
 
 ### Development (per package/app)
 ```bash
-npm run dev          # Start Vite dev server
-npm run build        # tsc + vite build → dist/
-npm run watch        # Watch mode build
-npm run lint         # ESLint
-npm run storybook    # Storybook on port 6006 (packages only)
+bun run dev          # Start Vite dev server
+bun run build        # tsc + vite build → dist/
+bun run watch        # Watch mode build
+bun run lint         # ESLint
+bun run storybook    # Storybook on port 6006 (packages only)
 ```
 
 ### Build & publish all libraries
 ```bash
-npm run build-all    # Build qui-core, qui-bootstrap, qui-supabase
-npm run pub-local    # Publish all to local Verdaccio (localhost:4873) for testing
-npm run pub-local-core     # Publish qui-core locally
-npm run pub-local-bs       # Publish qui-bootstrap locally
-npm run pub-local-supabase # Publish qui-supabase locally
-npm run pub-core     # Publish qui-core to npm
-npm run pub-bs       # Publish qui-bootstrap to npm
-npm run pub-supabase # Publish qui-supabase to npm
+bun run build-all    # Build qui-core, qui-bootstrap, qui-supabase
+bun run pub-local    # Publish all to local Verdaccio (localhost:4873) for testing
+bun run pub-local-core     # Publish qui-core locally
+bun run pub-local-bs       # Publish qui-bootstrap locally
+bun run pub-local-supabase # Publish qui-supabase locally
+bun run pub-core     # Publish qui-core to npm
+bun run pub-bs       # Publish qui-bootstrap to npm
+bun run pub-supabase # Publish qui-supabase to npm
 ```
 
 There are no test commands — no unit/integration test framework is configured.

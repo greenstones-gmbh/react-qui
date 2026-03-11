@@ -3,9 +3,9 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useMemo } from "react";
 import { Form } from "react-bootstrap";
 import {
-  FieldValues,
-  Path,
-  RegisterOptions,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
   useController,
   useFormContext,
 } from "react-hook-form";

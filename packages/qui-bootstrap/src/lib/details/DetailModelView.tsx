@@ -5,7 +5,7 @@ import {
   DetailItemSeparator,
   DetailBlockSeparator,
 } from "./DetailView";
-import { DetailModel } from "@clickapp/qui-core";
+import { type DetailModel } from "@clickapp/qui-core";
 
 export function DetailModelView<Type>({
   model,

@@ -1,4 +1,3 @@
-import "./styles/core.css";
 export * from "./auth";
 export * from "./components";
 export * from "./fields";
@@ -10,4 +9,3 @@ export * from "./entity";
 export * from "./data";
 
 export * from "./Test";
-export { default as ReactFromModule } from "react";

@@ -19,12 +19,11 @@ import {
   SignInPage,
 } from "@clickapp/qui-bootstrap";
 import { AppRoutes } from "@clickapp/qui-core";
-import "@clickapp/qui-core/dist/style.css";
+//import "@clickapp/qui-core/dist/style.css";
 import { Breadcrumb, Nav } from "react-bootstrap";
 import { BsHouse } from "react-icons/bs";
 import { PiGraphBold } from "react-icons/pi";
 import { BrowserRouter, Route } from "react-router-dom";
-//import "@clickapp/qui-backdrop/dist/style.css";
 
 function Home() {
   return (

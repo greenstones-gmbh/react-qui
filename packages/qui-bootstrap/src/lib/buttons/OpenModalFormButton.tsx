@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { DefaultValues, FieldValues } from "react-hook-form";
-import { ModalFormProps } from "../modals/ModalForm";
+import { type FC } from "react";
+import type { DefaultValues, FieldValues } from "react-hook-form";
+import { type ModalFormProps } from "../modals/ModalForm";
 import { OpenModalButton } from "./OpenModalButton";
 
 export function OpenModalFormButton<Type extends FieldValues>({

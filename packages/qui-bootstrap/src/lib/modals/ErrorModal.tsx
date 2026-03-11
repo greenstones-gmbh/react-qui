@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { Button, Modal } from "react-bootstrap";
 
 export interface ErrorModalProps extends PropsWithChildren {

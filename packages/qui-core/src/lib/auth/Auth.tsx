@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect } from "react";
 import {
-  NavLinkProps,
+  type NavLinkProps,
   NavLink as RouterNavLink,
   useLocation,
 } from "react-router-dom";
@@ -23,7 +23,7 @@ export interface IAuthContext {
   loginWithPassword?(
     username: string,
     password: string,
-    returnTo?: string
+    returnTo?: string,
   ): Promise<void>;
   loginWithOAuth?(provider: string, returnTo?: string): Promise<void>;
 
@@ -78,7 +78,7 @@ export function NavLink({
 
 export function useRoles(
   user: any,
-  roleMapper?: (user: any) => Promise<string[]>
+  roleMapper?: (user: any) => Promise<string[]>,
 ) {
   const { data: roles } = useAsyncMemo(async () => {
     if (!user || !roleMapper) {

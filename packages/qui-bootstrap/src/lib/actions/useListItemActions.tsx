@@ -1,20 +1,20 @@
-import { DataRepository } from "@clickapp/qui-core";
+import { type DataRepository } from "@clickapp/qui-core";
 
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useBaseCopyAction, useCopyAction } from "./useCopyAction";
 import { useDeleteAction } from "./useDeleteAction";
 import { useBaseEditAction, useEditAction } from "./useEditAction";
 import {
-  FormTransformOptions,
-  ModalFormControllerProps,
-  NavigationProps,
+  type FormTransformOptions,
+  type ModalFormControllerProps,
+  type NavigationProps,
 } from "./utils";
 import { useNavigate } from "react-router-dom";
 import {
   ConfirmModal,
-  ConfirmModalDisplayProps,
-  ModalFormDisplayProps,
-  ModalFormProps,
+  type ConfirmModalDisplayProps,
+  type ModalFormDisplayProps,
+  type ModalFormProps,
 } from "../modals";
 
 export function useBaseListItemActions<
@@ -22,7 +22,7 @@ export function useBaseListItemActions<
   Identifiable extends Record<string, any>,
   RepositoryCreateType extends Record<string, any>,
   RepositoryUpdateType extends Record<string, any>,
-  FormFields extends Record<string, any>
+  FormFields extends Record<string, any>,
 >({
   repository,
   onSuccess,
@@ -124,7 +124,7 @@ export function useBaseListItemActions<
 
 export function useListItemActions<
   RepositoryType extends Record<string, any>,
-  Identifiable extends Record<string, any>
+  Identifiable extends Record<string, any>,
 >({
   repository,
   navigationProps,

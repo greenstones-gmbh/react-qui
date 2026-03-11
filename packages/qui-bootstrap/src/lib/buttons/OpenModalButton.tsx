@@ -1,5 +1,5 @@
 import { useModalContext } from "@clickapp/qui-core";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Button } from "react-bootstrap";
 
 export function OpenModalButton({

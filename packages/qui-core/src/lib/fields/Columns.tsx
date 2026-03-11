@@ -1,9 +1,9 @@
 import { useMemo, DependencyList } from "react";
 import {
-  Field,
-  FieldRenderOptions,
+  type Field,
+  type FieldRenderOptions,
   Fields,
-  FieldOptions,
+  type FieldOptions,
   createField,
 } from "./Fields";
 

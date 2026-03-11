@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, type ReactNode, useContext, useState } from "react";
 
 type LabelContextType = {
   t: (key: string, values?: Record<string, string>) => string;
@@ -28,7 +28,7 @@ export const I18nContextProvider = ({ children }: { children: ReactNode }) => {
       Object.keys(values).forEach((placeholder) => {
         translation = translation.replace(
           `{${placeholder}}`,
-          values[placeholder]
+          values[placeholder],
         );
       });
     }
@@ -48,7 +48,7 @@ export const useI18n = () => {
 };
 
 const LabelContext = createContext<{ t: (key: string) => string } | undefined>(
-  undefined
+  undefined,
 );
 
 export const LabelContextProvider = ({

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { AsyncMemoResult, useAsyncMemo } from "./useAsyncMemo";
+import { type AsyncMemoResult, useAsyncMemo } from "./useAsyncMemo";
 
 export interface Sort {
   id: string;

@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
-import { FieldValues, useFormContext } from "react-hook-form";
-import { InputFieldProps } from "./InputField";
+import { type FieldValues, useFormContext } from "react-hook-form";
+import { type InputFieldProps } from "./InputField";
 
 export function CheckField<Type extends FieldValues>({
   name,

@@ -1,17 +1,17 @@
-import { Column, ListData, ListQuery } from "@clickapp/qui-core";
-import { PropsWithChildren, ReactNode } from "react";
+import { type Column, type ListData, type ListQuery } from "@clickapp/qui-core";
+import type { PropsWithChildren, ReactNode } from "react";
 
 import { ButtonToolbar } from "react-bootstrap";
-import { ActionButton, ActionButtonDisplayProps } from "../buttons";
+import { ActionButton, type ActionButtonDisplayProps } from "../buttons";
 
 import {
   Paging,
   QueryInput,
   QuickTable,
-  QuickTableDisplayProps,
+  type QuickTableDisplayProps,
 } from "../tables";
 import { Page } from "./Page";
-import { BaseListActions } from "../actions";
+import { type BaseListActions } from "../actions";
 
 interface ListPageProps<Type, Query> {
   header?: ReactNode;
@@ -31,9 +31,13 @@ export function ListPage<Type, Query>(props: ListPageProps<Type, Query>) {
       query={props.list.query}
       filterField={props.filterField}
       createButtonProps={props.createButtonProps}
-      onCreate={async () => {
-        return await props?.actions?.create?.();
-      }}
+      onCreate={
+        props?.actions?.create
+          ? async () => {
+              return await props?.actions?.create?.();
+            }
+          : undefined
+      }
       children={props.toolbarContent}
     />
   );

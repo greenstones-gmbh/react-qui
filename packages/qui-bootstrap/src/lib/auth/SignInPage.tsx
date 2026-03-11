@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useAuth } from "@clickapp/qui-core";
 import { useLocation } from "react-router-dom";
 
@@ -73,7 +73,7 @@ export function SignInWithOAuthProviderButton({
   return (
     <Button
       variant="outline-primary"
-      onClick={(e) => {
+      onClick={() => {
         loginWithOAuth?.(provider, redirectTo);
       }}
     >
@@ -89,11 +89,7 @@ export function SignInWithPassword() {
   const { state } = useLocation();
   const { redirectTo } = state || {};
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       await loginWithPassword?.(data.email, data.password, redirectTo);

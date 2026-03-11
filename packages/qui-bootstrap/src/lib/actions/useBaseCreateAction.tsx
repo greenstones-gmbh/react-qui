@@ -1,5 +1,5 @@
 import { useModalContext } from "@clickapp/qui-core";
-import { ModalFormActionOptions } from "./utils";
+import { type ModalFormActionOptions } from "./utils";
 
 export function useBaseCreateAction<
   RepositoryType extends Record<string, any>,

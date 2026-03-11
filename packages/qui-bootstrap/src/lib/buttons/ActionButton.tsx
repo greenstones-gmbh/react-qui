@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useState } from "react";
+import { type PropsWithChildren, type ReactNode, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useModals } from "../modals/Modals";
 
