@@ -3,7 +3,7 @@ import { type ModalFormControllerProps, type NavigationProps } from "./utils";
 import { useCreateAction } from "./useCreateAction";
 import { useNavigate } from "react-router-dom";
 import { useListItemActions } from "./useListItemActions";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { type ModalFormProps } from "../modals";
 import { ButtonGroup } from "react-bootstrap";
 import { ActionButton } from "../buttons";
@@ -45,7 +45,7 @@ export function useListActions<
     Partial<RepositoryType>
   >;
 
-  modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
+  modal: (props: ModalFormProps<Partial<RepositoryType>>) => ReactElement;
   createTitle?: string;
   createButtonLabel?: string;
   cancelButtonLabel?: string;
@@ -127,7 +127,7 @@ export function useBaseListActions<
   >;
   reload?: () => void;
   onSuccess?: (type: "create" | "reload", value: unknown) => void;
-  modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
+  modal: (props: ModalFormProps<Partial<RepositoryType>>) => ReactElement;
   createTitle?: string;
   createButtonLabel?: string;
   cancelButtonLabel?: string;

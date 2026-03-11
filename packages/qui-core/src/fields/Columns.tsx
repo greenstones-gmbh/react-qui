@@ -1,4 +1,4 @@
-import { useMemo, DependencyList } from "react";
+import { useMemo, type DependencyList, type ReactElement } from "react";
 import {
   type Field,
   type FieldRenderOptions,
@@ -16,13 +16,13 @@ export interface ColumnOptions<EntityType> {
 }
 
 export interface Column<EntityType> extends ColumnOptions<EntityType> {
-  render: (entity: EntityType) => JSX.Element;
+  render: (entity: EntityType) => ReactElement;
   renderString(value: EntityType): string | undefined;
 }
 
 export function createColumn<EntityType>(
   field: Field<EntityType>,
-  options: ColumnOptions<EntityType> = {}
+  options: ColumnOptions<EntityType> = {},
 ): Column<EntityType> {
   return {
     ...options,
@@ -35,7 +35,7 @@ export function createColumn<EntityType>(
 export function createColumnForProp<EntityType, PropType>(
   prop: string,
   options: ColumnOptions<EntityType> &
-    FieldRenderOptions<EntityType, PropType> = {}
+    FieldRenderOptions<EntityType, PropType> = {},
 ): Column<EntityType> {
   const field = Fields.byNestedProp(prop, options);
   return createColumn(field, { sortKey: prop, ...options });
@@ -46,14 +46,14 @@ export class ColumnBuilder<Type> {
 
   column<PropType = string>(
     prop: Extract<keyof Type, string>,
-    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {}
+    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {},
   ): ColumnBuilder<Type> {
     return this.prop(prop, options);
   }
 
   prop<PropType = string>(
     prop: string,
-    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {}
+    options: ColumnOptions<Type> & FieldRenderOptions<Type, PropType> = {},
   ): ColumnBuilder<Type> {
     const field = Fields.byNestedProp(prop, options);
     return this.field(field, { sortKey: prop, ...options });
@@ -61,7 +61,7 @@ export class ColumnBuilder<Type> {
 
   label<PropType = string>(
     label: string,
-    options: ColumnOptions<Type> & FieldOptions<Type, PropType> = {}
+    options: ColumnOptions<Type> & FieldOptions<Type, PropType> = {},
   ): ColumnBuilder<Type> {
     const field = createField({ label, ...options });
     return this.field(field, options);
@@ -79,7 +79,7 @@ export class ColumnBuilder<Type> {
 }
 
 export function createColumns<Type = any>(
-  configurer?: (builder: ColumnBuilder<Type>) => void
+  configurer?: (builder: ColumnBuilder<Type>) => void,
 ) {
   const tb = new ColumnBuilder<Type>();
   configurer?.(tb);
@@ -88,13 +88,13 @@ export function createColumns<Type = any>(
 
 export function filterColumns<Type = any>(
   columns: Column<Type>[],
-  excludeHeaders: string[]
+  excludeHeaders: string[],
 ) {
   return columns.filter((c) => excludeHeaders.indexOf(c.header ?? "-") === -1);
 }
 
 export function useColumnGenerator<Type>(
-  items: Type[] | undefined
+  items: Type[] | undefined,
 ): Column<Type>[] {
   return useMemo<Column<Type>[]>(() => {
     return createColumns<Type>((b) => {
@@ -108,7 +108,7 @@ export function useColumnGenerator<Type>(
 
 export function useColumnBuilder<Type>(
   configurer: (builder: ColumnBuilder<Type>) => void,
-  deps: DependencyList = []
+  deps: DependencyList = [],
 ) {
   const cols = useMemo(() => {
     return createColumns<Type>(configurer);

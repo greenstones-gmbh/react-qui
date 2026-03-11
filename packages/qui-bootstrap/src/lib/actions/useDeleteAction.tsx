@@ -1,5 +1,5 @@
 import { type DataRepository, useModalContext } from "@clickapp/qui-core";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { type ListItemAction } from "./utils";
 
 export interface ConfirmModalControllerProps<
@@ -12,7 +12,7 @@ export interface ConfirmModalControllerProps<
 
 export interface ConfirmModalActionOptions<Identifiable> {
   onSuccess?: (value: unknown) => void;
-  modal: (props: ConfirmModalControllerProps<Identifiable>) => JSX.Element;
+  modal: (props: ConfirmModalControllerProps<Identifiable>) => ReactElement;
 }
 
 interface RepositoryOptions<

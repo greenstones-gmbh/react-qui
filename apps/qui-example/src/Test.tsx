@@ -2,7 +2,7 @@ import { BootstrapApp, NavLink } from "@clickapp/qui-bootstrap";
 import { Nav } from "react-bootstrap";
 import { BsBook } from "react-icons/bs";
 import { BrowserRouter, Route } from "react-router-dom";
-import { SimpleTable, Todos } from "./SimpleTable";
+import { SimpleTable } from "./SimpleTable";
 import { TodoListPage } from "./TodoListPage";
 
 export function Test() {

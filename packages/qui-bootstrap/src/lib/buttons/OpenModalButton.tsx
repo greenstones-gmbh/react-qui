@@ -1,5 +1,5 @@
 import { useModalContext } from "@clickapp/qui-core";
-import { type ReactNode } from "react";
+import { type ReactElement, type ReactNode } from "react";
 import { Button } from "react-bootstrap";
 
 export function OpenModalButton({
@@ -15,7 +15,7 @@ export function OpenModalButton({
   size?: "sm" | "lg";
   className?: string;
   disabled?: boolean;
-  modal: (close: () => void) => JSX.Element;
+  modal: (close: () => void) => ReactElement;
 }) {
   const { openModal, closeModal } = useModalContext();
 

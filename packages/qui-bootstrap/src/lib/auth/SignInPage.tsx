@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useAuth } from "@clickapp/qui-core";
@@ -9,7 +9,7 @@ type Inputs = {
   password: string;
 };
 
-const SocialProviderButtons: { [id: string]: JSX.Element } = {
+const SocialProviderButtons: { [id: string]: ReactElement } = {
   bitbucket: (
     <SignInWithOAuthProviderButton provider="bitbucket" name="Bitbucket" />
   ),

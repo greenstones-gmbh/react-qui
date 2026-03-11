@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { type PropsWithChildren, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext, type BaseAuthProps, useRoles } from "./Auth";
 
@@ -34,7 +34,7 @@ export function SimpleAuth({
   const loginWithPassword = async (
     username: string,
     password: string,
-    returnTo?: string
+    returnTo?: string,
   ) => {
     const u = createUser(username);
     setUser(u);

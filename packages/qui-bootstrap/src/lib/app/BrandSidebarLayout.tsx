@@ -1,5 +1,9 @@
 import classNames from "classnames";
-import { type PropsWithChildren, type ReactNode } from "react";
+import {
+  type PropsWithChildren,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { LayoutContext } from "./LayoutContext";
@@ -13,8 +17,8 @@ export function BrandSidebarLayout({
   fluidContent = true,
   contentInsetsClassName = "px-4",
 }: PropsWithChildren<{
-  top?: JSX.Element;
-  sidebar: JSX.Element;
+  top?: ReactElement;
+  sidebar: ReactElement;
   heightRelativeToParent?: boolean;
   fluidContent?: boolean;
   contentInsetsClassName?: string;

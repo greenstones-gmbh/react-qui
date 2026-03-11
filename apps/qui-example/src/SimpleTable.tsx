@@ -2,12 +2,9 @@ import { Page, QuickTable } from "@clickapp/qui-bootstrap";
 import {
   Sorters,
   useArray,
-  useColumnBuilder,
   useColumnGenerator,
   useFetch,
-  useList,
 } from "@clickapp/qui-core";
-import { Breadcrumb } from "react-bootstrap";
 
 interface User {
   id: number;

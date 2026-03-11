@@ -20,13 +20,14 @@ import {
   TbCaretUpDownFilled,
   TbCaretUpFilled,
 } from "react-icons/tb";
+import type { ReactElement } from "react";
 
 export function SortingColumnHeader({
   header,
   sorting,
   sortId,
 }: {
-  header: string | JSX.Element;
+  header: string | ReactElement;
   sorting: ListSorting | undefined;
   sortId: string | undefined;
 }) {

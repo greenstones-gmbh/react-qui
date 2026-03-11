@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import {
   type FieldValues,
@@ -17,7 +17,7 @@ export function PickerField<Type extends FieldValues>({
   name: Path<Type>;
   label: string;
   format: (v: any) => string;
-  picker: (params: any) => JSX.Element;
+  picker: (params: any) => ReactElement;
   ops?: RegisterOptions;
 }) {
   const [show, setShow] = useState(false);

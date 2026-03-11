@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import { LayoutContext } from "./LayoutContext";
 
@@ -11,8 +11,8 @@ export function SidebarLayout({
   heightRelativeToParent,
   contentInsetsClassName = "px-4",
 }: PropsWithChildren<{
-  top?: JSX.Element;
-  sidebar: JSX.Element;
+  top?: ReactElement;
+  sidebar: ReactElement;
   heightRelativeToParent?: boolean;
   fluidContent?: boolean;
   contentInsetsClassName?: string;
@@ -21,7 +21,7 @@ export function SidebarLayout({
     <div
       className={classNames(
         "d-flex flex-row flex-fill",
-        heightRelativeToParent ? "h-100" : "vh-100"
+        heightRelativeToParent ? "h-100" : "vh-100",
       )}
     >
       <div className="d-flex flex-column flex-fill ">

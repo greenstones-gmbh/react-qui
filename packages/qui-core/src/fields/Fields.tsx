@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import { DateFormatter } from "../components/DateFormatter";
+import type { ReactElement } from "react";
 
 // Fields
 
 export interface Field<EntityType> {
   label: string;
-  render(value: EntityType): JSX.Element;
+  render(value: EntityType): ReactElement;
   renderString(value: EntityType): string | undefined;
 }
 
 // Fields builder
 
 export interface RenderFieldFunction<EntityType, FieldType> {
-  (field: FieldType, entity: EntityType): JSX.Element;
+  (field: FieldType, entity: EntityType): ReactElement;
 }
 
 export interface FieldConstructionOptions<EntityType, FieldType> {
@@ -27,13 +28,14 @@ export interface FieldRenderOptions<EntityType, FieldType> {
 }
 
 export interface FieldOptions<EntityType, FieldType>
-  extends FieldRenderOptions<EntityType, FieldType>,
+  extends
+    FieldRenderOptions<EntityType, FieldType>,
     FieldConstructionOptions<EntityType, FieldType> {}
 
 export function createField<EntityType, PropType>(
-  options?: FieldOptions<EntityType, PropType>
+  options?: FieldOptions<EntityType, PropType>,
 ): Field<EntityType> {
-  const render: (value: EntityType) => JSX.Element = (v) => (
+  const render: (value: EntityType) => ReactElement = (v) => (
     <FieldValue v={v} options={options} />
   );
   return {
@@ -48,7 +50,7 @@ export function createField<EntityType, PropType>(
 
 export function createFieldByNestedProp<EntityType, PropType>(
   prop: string,
-  options?: FieldRenderOptions<EntityType, PropType>
+  options?: FieldRenderOptions<EntityType, PropType>,
 ): Field<EntityType> {
   return createField({
     ...options,
@@ -59,7 +61,7 @@ export function createFieldByNestedProp<EntityType, PropType>(
 
 export function createFieldByProp<EntityType, PropType>(
   prop: keyof EntityType,
-  options?: FieldRenderOptions<EntityType, PropType>
+  options?: FieldRenderOptions<EntityType, PropType>,
 ): Field<EntityType> {
   return createField({
     label: `${String(prop)}`,
@@ -91,10 +93,9 @@ export const Fields = {
 export const FieldRenderers = {
   asIsoDate:
     (
-      type: "date" | "time" | "datetime" = "date"
+      type: "date" | "time" | "datetime" = "date",
     ): RenderFieldFunction<any, string> =>
-    (v) =>
-      <DateFormatter isoString={v} type={type} />,
+    (v) => <DateFormatter isoString={v} type={type} />,
 };
 
 function Value({ value }: { value: any }) {

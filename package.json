@@ -7,9 +7,9 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "pub-local-core": "npm unpublish @clickapp/qui-core@0.0.6 --force --registry http://localhost:4873 && bun --filter './packages/qui-core' run build && bun publish --cwd packages/qui-core --registry http://localhost:4873",
-    "pub-local-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.7  --registry http://localhost:4873 && bun --filter './packages/qui-bootstrap' run build && bun publish --cwd packages/qui-bootstrap --registry http://localhost:4873",
-    "pub-local-supabase": "npm unpublish @clickapp/qui-supabase@0.0.6 --force  --registry http://localhost:4873 && bun --filter './packages/qui-supabase' run build && bun publish --cwd packages/qui-supabase --registry http://localhost:4873",
+    "pub-local-core": "bun publish --cwd packages/qui-core --registry http://0.0.0.0:4873 --access public",
+    "pub-local-bs": "bun publish --cwd packages/qui-bootstrap --registry http://0.0.0.0:4873 --access public",
+    "pub-local-supabase": "bun publish --cwd packages/qui-supabase --registry http://0.0.0.0:4873 --access public",
     "pub-local": "bun run pub-local-core && bun run pub-local-bs && bun run pub-local-supabase",
     "build-all": "bun --filter './packages/qui-core' run build && bun --filter './packages/qui-bootstrap' run build && bun --filter './packages/qui-supabase' run build",
     "pub-core": "bun publish --cwd packages/qui-core --access public",
@@ -38,15 +38,12 @@
     "storybook": "^8.4.2",
     "typescript-eslint": "^8.57.0"
   },
-  "peerDependencies": {
-    "typescript": "^5.9.3"
-  },
   "catalog": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-router-dom": "^7",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "date-fns": "^4.1"
   }
 }

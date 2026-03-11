@@ -1,6 +1,6 @@
 import { type DataRepository } from "@clickapp/qui-core";
 
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { useBaseCopyAction, useCopyAction } from "./useCopyAction";
 import { useDeleteAction } from "./useDeleteAction";
 import { useBaseEditAction, useEditAction } from "./useEditAction";
@@ -40,7 +40,7 @@ export function useBaseListItemActions<
 
   onSuccess?: (type: "edit" | "delete" | "copy", value: unknown) => void;
 
-  modal: (props: ModalFormProps<FormFields>) => JSX.Element;
+  modal: (props: ModalFormProps<FormFields>) => ReactElement;
   editProps: {
     modalProps: ModalFormDisplayProps;
     transform: FormTransformOptions<
@@ -152,7 +152,7 @@ export function useListItemActions<
     Partial<RepositoryType>
   >;
   onSuccess?: (type: "edit" | "delete" | "copy", value: unknown) => void;
-  modal: (props: ModalFormProps<Partial<RepositoryType>>) => JSX.Element;
+  modal: (props: ModalFormProps<Partial<RepositoryType>>) => ReactElement;
 
   editTitle?: string;
   editButtonLabel?: string;

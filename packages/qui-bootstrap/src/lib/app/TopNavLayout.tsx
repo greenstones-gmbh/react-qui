@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import { LayoutContext } from "./LayoutContext";
 
@@ -9,7 +9,7 @@ export function TopNavLayout({
   heightRelativeToParent,
   fluid = false,
 }: PropsWithChildren<{
-  top: JSX.Element;
+  top: ReactElement;
   heightRelativeToParent?: boolean;
   fluid?: boolean;
 }>) {
@@ -18,7 +18,7 @@ export function TopNavLayout({
       <div
         className={classNames(
           "d-flex flex-column  flex-fill",
-          heightRelativeToParent ? "h-100" : "vh-100"
+          heightRelativeToParent ? "h-100" : "vh-100",
         )}
       >
         <div className="flex-shrink-0">{top}</div>
