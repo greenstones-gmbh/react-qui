@@ -157,7 +157,7 @@ function useListState<Query>(ops?: {
       query,
       sort,
     }),
-    [paging, sorting, filtering, page, pageSize, query, sort]
+    [paging, sorting, filtering, page, pageSize, query, sort],
   );
 
   //   const isSortIdActive = (id: SortId) => !!sort && sort.id === id;
@@ -196,7 +196,7 @@ export interface ListOptions<Query> {
 
 export function useList<Type, Query>(
   source: ListSource<Type, Query>,
-  ops?: ListOptions<Query>
+  ops?: ListOptions<Query>,
 ): ListData<Type, Query> {
   const { state, helpers } = useListState(ops);
 
@@ -247,7 +247,7 @@ export function useList<Type, Query>(
             setQuery(
               e.target.type === "checkbox"
                 ? e.target.checked
-                : (e.target.value as Query)
+                : (e.target.value as Query),
             );
           },
         };
@@ -306,9 +306,9 @@ export function useList<Type, Query>(
       const rangeString = `${range.start + 1}-${range.end}`;
 
       const pages = (paginatorSize: number = 5) => {
-        var newSize = Math.min(paginatorSize, totalPages);
+        const newSize = Math.min(paginatorSize, totalPages);
         const paginationLeftSide = Math.floor(newSize / 2);
-        var paginatorFirstPage = Math.max(0, page - paginationLeftSide);
+        let paginatorFirstPage = Math.max(0, page - paginationLeftSide);
 
         if (paginatorFirstPage + newSize > totalPages)
           paginatorFirstPage = totalPages - newSize;
@@ -393,7 +393,7 @@ export function createSinglePage<Type>(items: Type[]) {
 export function createPageMeta(
   page: number,
   pageSize: number,
-  totalItems: number
+  totalItems: number,
 ): PageMeta {
   const start = pageSize * page;
   const end = Math.min(pageSize * page + pageSize, totalItems);

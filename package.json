@@ -6,6 +6,7 @@
     "apps/*"
   ],
   "scripts": {
+    "lint": "eslint .",
     "pub-local-core": "npm unpublish @clickapp/qui-core@0.0.6 --force --registry http://localhost:4873 && bun --filter './packages/qui-core' run build && bun publish --cwd packages/qui-core --registry http://localhost:4873",
     "pub-local-bs": "npm unpublish @clickapp/qui-bootstrap@0.0.7  --registry http://localhost:4873 && bun --filter './packages/qui-bootstrap' run build && bun publish --cwd packages/qui-bootstrap --registry http://localhost:4873",
     "pub-local-supabase": "npm unpublish @clickapp/qui-supabase@0.0.6 --force  --registry http://localhost:4873 && bun --filter './packages/qui-supabase' run build && bun publish --cwd packages/qui-supabase --registry http://localhost:4873",
@@ -17,8 +18,8 @@
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {
-    "@types/bun": "latest",
     "@chromatic-com/storybook": "^3.2.2",
+    "@eslint/js": "^10.0.1",
     "@storybook/addon-essentials": "^8.4.2",
     "@storybook/addon-interactions": "^8.4.2",
     "@storybook/addon-onboarding": "^8.4.2",
@@ -26,8 +27,16 @@
     "@storybook/react": "^8.4.2",
     "@storybook/react-vite": "^8.4.2",
     "@storybook/test": "^8.4.2",
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "eslint": "^10.0.3",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.4.0",
+    "jiti": "^2.6.1",
     "prop-types": "^15.8.1",
-    "storybook": "^8.4.2"
+    "storybook": "^8.4.2",
+    "typescript-eslint": "^8.57.0"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
