@@ -12,15 +12,15 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1"
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
   },
   "peerDependencies": {
-    "date-fns": "^4.1",
+    "date-fns": "catalog:",
     "file-saver": "^2.0.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
   "sideEffects": false
 }

@@ -140,15 +140,15 @@
       "version": "0.0.6",
       "devDependencies": {
         "@types/file-saver": "^2.0.7",
-        "@types/react": "^18.3.12",
-        "@types/react-dom": "^18.3.1",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
       },
       "peerDependencies": {
         "date-fns": "^4.1",
         "file-saver": "^2.0.5",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-router-dom": "^6.27.0",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "react-router-dom": "catalog:",
       },
     },
     "packages/qui-supabase": {
@@ -177,6 +177,13 @@
         "react-dom": "^18.3.1",
       },
     },
+  },
+  "catalog": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
   },
   "packages": {
     "@adobe/css-tools": ["@adobe/css-tools@4.4.4", "", {}, "sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg=="],
