@@ -27,10 +27,7 @@ export const AtButton = ({
   onClick,
 }: AtButtonProps) => {
   return (
-    <button
-      className={`clickapp-qui-color1`}
-      onClick={isDisabled ? onClick : undefined}
-    >
+    <button className={`qui-color1`} onClick={isDisabled ? onClick : undefined}>
       {label}
     </button>
   );

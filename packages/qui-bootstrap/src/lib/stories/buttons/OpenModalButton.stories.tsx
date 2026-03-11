@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { OpenModalButton } from "../../buttons/OpenModalButton";
-import { ModalContextProvider } from "@clickapp/qui-core";
+import { ModalContextProvider } from "@greenstones/qui-core";
 import React from "react";
 import { MessageModal } from "../../modals";
 
 const meta = {
-  title: "clickapp/Buttons/OpenModalButton",
+  title: "qui/Buttons/OpenModalButton",
   component: OpenModalButton,
   tags: ["autodocs"],
   parameters: {

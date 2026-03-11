@@ -7,7 +7,7 @@
 //   Page,
 //   SidebarLayout,
 //   TopNavbar,
-// } from "@clickapp/qui-bootstrap";
+// } from "@greenstones/qui-bootstrap";
 
 import {
   AppLayout,
@@ -17,9 +17,9 @@ import {
   NavLink,
   Page,
   SignInPage,
-} from "@clickapp/qui-bootstrap";
-import { AppRoutes } from "@clickapp/qui-core";
-//import "@clickapp/qui-core/dist/style.css";
+} from "@greenstones/qui-bootstrap";
+import { AppRoutes } from "@greenstones/qui-core";
+//import "@greenstones/qui-core/dist/style.css";
 import { Breadcrumb, Nav } from "react-bootstrap";
 import { BsHouse } from "react-icons/bs";
 import { PiGraphBold } from "react-icons/pi";

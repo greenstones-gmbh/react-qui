@@ -1,4 +1,4 @@
-import { type Column, type ListData, type ListQuery } from "@clickapp/qui-core";
+import { type Column, type ListData, type ListQuery } from "@greenstones/qui-core";
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { ButtonToolbar } from "react-bootstrap";

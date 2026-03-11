@@ -1,8 +1,8 @@
-# @clickapp/qui-bootstrap
+# @greenstones/qui-bootstrap
 
 > Bootstrap 5 high-level component library — application layouts, list and details pages, tables with actions, modals.
 
-[![npm version](https://img.shields.io/npm/v/@clickapp/qui-bootstrap)](https://www.npmjs.com/package/@clickapp/qui-bootstrap)
+[![npm version](https://img.shields.io/npm/v/@greenstones/qui-bootstrap)](https://www.npmjs.com/package/@greenstones/qui-bootstrap)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.3-purple)](https://getbootstrap.com/)
@@ -11,7 +11,7 @@
 
 ## Why this library
 
-`@clickapp/qui-bootstrap` provides a set of ready-made, composable components for common admin and data-driven UI patterns. Instead of assembling the same structures from scratch for every project, you drop in a component and focus on the data and business logic.
+`@greenstones/qui-bootstrap` provides a set of ready-made, composable components for common admin and data-driven UI patterns. Instead of assembling the same structures from scratch for every project, you drop in a component and focus on the data and business logic.
 
 **Reusable building blocks**
 
@@ -28,27 +28,20 @@
 ## Installation
 
 ```bash
-# npm
-npm install @clickapp/qui-bootstrap
-
-# yarn
-yarn add @clickapp/qui-bootstrap
-
-# pnpm
-pnpm add @clickapp/qui-bootstrap
+bun add @greenstones/qui-bootstrap
 ```
 
 Install peer dependencies if not already present:
 
 ```bash
-npm install @clickapp/qui-core bootstrap react-bootstrap react-hook-form \
+bun add @greenstones/qui-core bootstrap react-bootstrap react-hook-form \
             react-router-dom react-icons classnames react react-dom
 ```
 
 Import the stylesheet once in your app entry point:
 
 ```ts
-import '@clickapp/qui-bootstrap/dist/style.css';
+import '@greenstones/qui-bootstrap/dist/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
@@ -65,8 +58,8 @@ import {
   NavLink,
   Page,
   QuickTable,
-} from '@clickapp/qui-bootstrap';
-import '@clickapp/qui-bootstrap/dist/style.css';
+} from '@greenstones/qui-bootstrap';
+import '@greenstones/qui-bootstrap/dist/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // 1. Define your routes
@@ -156,7 +149,7 @@ function BootstrapApp(props: BootstrapAppProps): JSX.Element
 **Example**
 
 ```tsx
-import { BootstrapApp } from '@clickapp/qui-bootstrap';
+import { BootstrapApp } from '@greenstones/qui-bootstrap';
 
 <BootstrapApp
   projectName="Dashboard"
@@ -203,7 +196,7 @@ function useLayoutPrefs(prefs?: Partial<LayoutPrefs>): LayoutPrefs
 ```
 
 ```tsx
-import { useLayoutPrefs } from '@clickapp/qui-bootstrap';
+import { useLayoutPrefs } from '@greenstones/qui-bootstrap';
 
 function MyPage() {
   const { fluid, insetsClassName } = useLayoutPrefs({ fluid: true });
@@ -317,7 +310,7 @@ function SignInPage(props: SignInPageProps): JSX.Element
 | `children` | `ReactNode` | no | Additional content |
 
 ```tsx
-import { SignInPage } from '@clickapp/qui-bootstrap';
+import { SignInPage } from '@greenstones/qui-bootstrap';
 
 <SignInPage
   title="Welcome back"
@@ -365,7 +358,7 @@ function ActionButton(props: ActionButtonProps): JSX.Element
 | `errorBody` | `ReactNode` | no | Error modal body |
 
 ```tsx
-import { ActionButton } from '@clickapp/qui-bootstrap';
+import { ActionButton } from '@greenstones/qui-bootstrap';
 
 <ActionButton
   label="Save"
@@ -429,7 +422,7 @@ function OpenModalButton(props: OpenModalButtonProps): JSX.Element
 | `disabled` | `boolean` | no | Disable the button |
 
 ```tsx
-import { OpenModalButton } from '@clickapp/qui-bootstrap';
+import { OpenModalButton } from '@greenstones/qui-bootstrap';
 
 <OpenModalButton
   label="Open details"
@@ -465,8 +458,8 @@ function OpenModalFormButton<Type extends FieldValues>(
 | `context` | `object` | no | Extra context passed to modal component |
 
 ```tsx
-import { OpenModalFormButton } from '@clickapp/qui-bootstrap';
-import { InputField } from '@clickapp/qui-bootstrap';
+import { OpenModalFormButton } from '@greenstones/qui-bootstrap';
+import { InputField } from '@greenstones/qui-bootstrap';
 
 interface TaskForm { title: string }
 
@@ -508,7 +501,7 @@ function InputField<Type extends FieldValues>(
 
 ```tsx
 import { useForm, FormProvider } from 'react-hook-form';
-import { InputField } from '@clickapp/qui-bootstrap';
+import { InputField } from '@greenstones/qui-bootstrap';
 
 interface LoginForm { email: string; password: string }
 
@@ -661,7 +654,7 @@ function ModalForm<Type extends FieldValues>(
 | `transformOnSubmit` | `(data: Type) => Type` | no | Transform values before submit |
 
 ```tsx
-import { ModalForm, InputField } from '@clickapp/qui-bootstrap';
+import { ModalForm, InputField } from '@greenstones/qui-bootstrap';
 
 <ModalForm<TaskForm>
   handleClose={close}
@@ -689,7 +682,7 @@ function useModals(): {
 ```
 
 ```tsx
-import { useModals } from '@clickapp/qui-bootstrap';
+import { useModals } from '@greenstones/qui-bootstrap';
 
 function DeleteButton({ id }: { id: string }) {
   const { confirm, showErrorMessage } = useModals();
@@ -805,7 +798,7 @@ CollapseNav.Item(props: { to: string; children: ReactNode }): JSX.Element
 | `className` | `string` | no | Extra classes |
 
 ```tsx
-import CollapseNav from '@clickapp/qui-bootstrap';
+import CollapseNav from '@greenstones/qui-bootstrap';
 
 <CollapseNav label="Admin" id="admin-nav" expanded>
   <CollapseNav.Item to="/admin/users">Users</CollapseNav.Item>
@@ -909,7 +902,7 @@ function Page(props: PageProps): JSX.Element
 | `noInsets` | `boolean` | no | Remove default padding |
 
 ```tsx
-import { Page } from '@clickapp/qui-bootstrap';
+import { Page } from '@greenstones/qui-bootstrap';
 
 <Page header="Dashboard" loading={isLoading} error={error}>
   <p>Content here</p>
@@ -998,7 +991,7 @@ function QuickTable<Type>(props: QuickTableProps<Type>): JSX.Element
 | `rowClassName` | `(item: Type) => string` | no | Per-row class function |
 
 ```tsx
-import { QuickTable } from '@clickapp/qui-bootstrap';
+import { QuickTable } from '@greenstones/qui-bootstrap';
 
 interface User { id: string; name: string; email: string }
 
@@ -1110,7 +1103,7 @@ function DetailBlockSeparator(): JSX.Element
 ```
 
 ```tsx
-import { DetailView, DetailBlock, DetailItem } from '@clickapp/qui-bootstrap';
+import { DetailView, DetailBlock, DetailItem } from '@greenstones/qui-bootstrap';
 
 <DetailView>
   <DetailBlock>
@@ -1139,7 +1132,7 @@ function DetailTable(props: {
 
 #### `DetailModelView`
 
-Renders a `DetailModel` descriptor from `@clickapp/qui-core`.
+Renders a `DetailModel` descriptor from `@greenstones/qui-core`.
 
 ```ts
 function DetailModelView<Type>(props: {
@@ -1186,7 +1179,7 @@ function useListActions<RepositoryType, Identifiable>(
 | `navigationProps` | `NavigationProps<Identifiable>` | no | Post-action navigation config |
 
 ```tsx
-import { useListActions, ListItemButtons } from '@clickapp/qui-bootstrap';
+import { useListActions, ListItemButtons } from '@greenstones/qui-bootstrap';
 
 function TaskListPage() {
   const { data, reload } = useListData<Task, TaskQuery>(taskRepo, defaultQuery);
@@ -1350,7 +1343,7 @@ function useI18n(): (key: string, values?: Record<string, string>) => string
 ```
 
 ```tsx
-import { useI18n } from '@clickapp/qui-bootstrap';
+import { useI18n } from '@greenstones/qui-bootstrap';
 
 function SubmitButton() {
   const t = useI18n();
@@ -1412,7 +1405,7 @@ class RepositoryHelper<
 ```
 
 ```tsx
-import { RepositoryHelper } from '@clickapp/qui-bootstrap';
+import { RepositoryHelper } from '@greenstones/qui-bootstrap';
 
 interface TaskForm { title: string; dueDate: string }
 interface Task     { id: string; title: string; due_date: Date }
@@ -1439,8 +1432,8 @@ import {
   useListActions, ListItemButtons,
   InputField, SelectField,
   ModalFormControllerProps,
-} from '@clickapp/qui-bootstrap';
-import { useListData } from '@clickapp/qui-core';
+} from '@greenstones/qui-bootstrap';
+import { useListData } from '@greenstones/qui-core';
 
 interface Project { id: string; name: string; status: 'active' | 'archived' }
 interface ProjectQuery { search: string }
@@ -1512,7 +1505,7 @@ export function ProjectListPage() {
 ### Runtime layout switching
 
 ```tsx
-import { AppLayout, LayoutSwitcherDropdown, TopNavbar } from '@clickapp/qui-bootstrap';
+import { AppLayout, LayoutSwitcherDropdown, TopNavbar } from '@greenstones/qui-bootstrap';
 
 <AppLayout
   layout="sidebar"
@@ -1604,7 +1597,7 @@ const actions = useListActions<
 Use this as the props type for any component passed as the `modal` prop:
 
 ```ts
-import type { ModalFormControllerProps } from '@clickapp/qui-bootstrap';
+import type { ModalFormControllerProps } from '@greenstones/qui-bootstrap';
 import type { FieldValues } from 'react-hook-form';
 
 interface ProjectForm extends FieldValues {
@@ -1627,7 +1620,7 @@ function ProjectModal(_props: ModalFormControllerProps<ProjectForm>) {
 ### `ListItemAction`
 
 ```ts
-import type { ListItemAction } from '@clickapp/qui-bootstrap';
+import type { ListItemAction } from '@greenstones/qui-bootstrap';
 
 const customDelete: ListItemAction<Project> = async (project) => {
   await api.delete(project.id);
@@ -1708,7 +1701,7 @@ try {
 Use `GlobalErrorPage` as the fallback in React error boundaries:
 
 ```tsx
-import { GlobalErrorPage } from '@clickapp/qui-bootstrap';
+import { GlobalErrorPage } from '@greenstones/qui-bootstrap';
 
 <ErrorBoundary fallbackRender={({ error }) => <GlobalErrorPage error={error} />}>
   <App />
@@ -1724,38 +1717,38 @@ import { GlobalErrorPage } from '@clickapp/qui-bootstrap';
 ```bash
 # Clone the monorepo
 git clone <repo-url>
-cd clickapp-monorepo/clickapp
+cd react-qui
 
 # Install all dependencies
-npm install
+bun install
 
 # Build qui-core first (qui-bootstrap depends on it)
-cd packages/qui-core && npm run build && cd ../..
+cd packages/qui-core && bun run build && cd ../..
 
 # Start qui-bootstrap dev server / Storybook
 cd packages/qui-bootstrap
-npm run storybook      # Component development on http://localhost:6006
-npm run build          # Production build to dist/
-npm run watch          # Watch mode
-npm run lint           # ESLint
+bun run storybook      # Component development on http://localhost:6006
+bun run build          # Production build to dist/
+bun run watch          # Watch mode
+bun run lint           # ESLint
 ```
 
 ### Local end-to-end testing
 
 ```bash
 # Publish all packages to a local Verdaccio registry (localhost:4873)
-npm run pub-local       # from monorepo root
+bun run pub-local       # from monorepo root
 
 # Or publish only qui-bootstrap
-npm run pub-local-bs
+bun run pub-local-bs
 ```
 
 ### PR guide
 
 1. Fork and create a feature branch: `git checkout -b feat/my-feature`
 2. Add or update component stories in `src/` alongside the source file
-3. Run `npm run lint` — all lint rules must pass
-4. Run `npm run build` — the build must succeed with no TypeScript errors
+3. Run `bun run lint` — all lint rules must pass
+4. Run `bun run build` — the build must succeed with no TypeScript errors
 5. Open a pull request against `main`
 
 > There is no automated test suite. Component behaviour is verified via Storybook stories.
@@ -1770,4 +1763,4 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-MIT © ClickApp
+MIT © Greenstones GmbH

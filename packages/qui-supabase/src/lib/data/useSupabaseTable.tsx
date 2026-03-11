@@ -6,7 +6,7 @@ import {
   createPageMeta,
   createSinglePage,
   useList,
-} from "@clickapp/qui-core";
+} from "@greenstones/qui-core";
 import type { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useCallback, useMemo } from "react";

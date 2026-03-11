@@ -6,15 +6,15 @@ import {
   ListPage,
   Page,
   QueryCheckbox,
-} from "@clickapp/qui-bootstrap";
+} from "@greenstones/qui-bootstrap";
 
 import {
   Fields,
   ListData,
   useColumnBuilder,
   useDetaiModelBuilder,
-} from "@clickapp/qui-core";
-import { useSupabaseQuery } from "@clickapp/qui-supabase";
+} from "@greenstones/qui-core";
+import { useSupabaseQuery } from "@greenstones/qui-supabase";
 import { Breadcrumb, ButtonToolbar } from "react-bootstrap";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 

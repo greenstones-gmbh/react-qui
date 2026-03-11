@@ -1,4 +1,4 @@
-import { AppRoutes, ModalContextProvider } from "@clickapp/qui-core";
+import { AppRoutes, ModalContextProvider } from "@greenstones/qui-core";
 import type { PropsWithChildren, ReactNode } from "react";
 import { SignInPage } from "../auth";
 import { NavbarAuthButtons } from "../navbar";

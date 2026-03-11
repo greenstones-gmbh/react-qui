@@ -1,4 +1,4 @@
-import { type DataRepository, useModalContext } from "@clickapp/qui-core";
+import { type DataRepository, useModalContext } from "@greenstones/qui-core";
 import {
   type ModalFormActionOptions,
   type ListItemAction,

@@ -4,7 +4,7 @@ import type {
   PostgrestFilterBuilder,
   PostgrestBuilder,
 } from "@supabase/postgrest-js";
-import { useAsyncMemo } from "@clickapp/qui-core";
+import { useAsyncMemo } from "@greenstones/qui-core";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useSupabaseClient } from "../SupabaseContext";
 

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ConfirmButton } from "../../buttons/ConfirmButton";
-import { ModalContextProvider } from "@clickapp/qui-core";
+import { ModalContextProvider } from "@greenstones/qui-core";
 import React from "react";
 
 const meta = {
-  title: "clickapp/Buttons/ConfirmButton",
+  title: "qui/Buttons/ConfirmButton",
   component: ConfirmButton,
   tags: ["autodocs"],
   parameters: {

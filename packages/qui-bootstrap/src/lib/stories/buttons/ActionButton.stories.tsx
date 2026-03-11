@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ActionButton } from "../../buttons/ActionButton";
-import { ModalContextProvider } from "@clickapp/qui-core";
+import { ModalContextProvider } from "@greenstones/qui-core";
 import React from "react";
 
 const meta = {
-  title: "clickapp/Buttons/ActionButton",
+  title: "qui/Buttons/ActionButton",
   component: ActionButton,
   tags: ["autodocs"],
   parameters: {
@@ -65,7 +65,7 @@ export const ShowErrorMessageOnFail: Story = {
     onClick: async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       throw new Error(
-        "An error occurred. Please check your input and try again."
+        "An error occurred. Please check your input and try again.",
       );
     },
   },
@@ -77,7 +77,7 @@ export const ShowCustomErrorMessage: Story = {
     onClick: async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       throw new Error(
-        "An error occurred. Please check your input and try again."
+        "An error occurred. Please check your input and try again.",
       );
     },
     errorTitle: "Custom Error Title",

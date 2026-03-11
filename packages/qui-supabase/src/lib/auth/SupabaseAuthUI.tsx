@@ -1,7 +1,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "@clickapp/qui-core";
+import { useAuth } from "@greenstones/qui-core";
 
 export const SupabaseAuthUI = ({
   supabaseClient,

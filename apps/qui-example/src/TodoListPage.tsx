@@ -1,4 +1,4 @@
-import { ListPage, Page, QuickTable } from "@clickapp/qui-bootstrap";
+import { ListPage, Page, QuickTable } from "@greenstones/qui-bootstrap";
 import {
   Filters,
   Sorters,
@@ -7,7 +7,7 @@ import {
   useColumnGenerator,
   useFetch,
   useList,
-} from "@clickapp/qui-core";
+} from "@greenstones/qui-core";
 import { Breadcrumb } from "react-bootstrap";
 
 interface User {

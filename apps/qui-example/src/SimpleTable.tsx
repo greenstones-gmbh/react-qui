@@ -1,10 +1,10 @@
-import { Page, QuickTable } from "@clickapp/qui-bootstrap";
+import { Page, QuickTable } from "@greenstones/qui-bootstrap";
 import {
   Sorters,
   useArray,
   useColumnGenerator,
   useFetch,
-} from "@clickapp/qui-core";
+} from "@greenstones/qui-core";
 
 interface User {
   id: number;

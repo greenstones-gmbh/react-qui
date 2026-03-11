@@ -1,4 +1,4 @@
-import { DataRepository } from "@clickapp/qui-core";
+import { DataRepository } from "@greenstones/qui-core";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Identifiable } from "./Identifiable";
 

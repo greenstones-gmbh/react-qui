@@ -1,5 +1,5 @@
 {
-  "name": "@clickapp/todo-demo-supabase-bs-vite",
+  "name": "@greenstones/todo-demo-supabase-bs-vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clickapp/qui-bootstrap": "*",
-    "@clickapp/qui-core": "*",
-    "@clickapp/qui-supabase": "*",
+    "@greenstones/qui-bootstrap": "*",
+    "@greenstones/qui-core": "*",
+    "@greenstones/qui-supabase": "*",
     "@supabase/supabase-js": "^2.47.14",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",

@@ -1,6 +1,6 @@
 import { Button, Nav, Navbar } from "react-bootstrap";
 
-import { useAuth } from "@clickapp/qui-core";
+import { useAuth } from "@greenstones/qui-core";
 
 export function NavbarAuthButtons({
   variant = "outline-primary",

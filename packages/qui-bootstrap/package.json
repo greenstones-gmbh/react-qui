@@ -1,5 +1,5 @@
 {
-  "name": "@clickapp/qui-bootstrap",
+  "name": "@greenstones/qui-bootstrap",
   "private": false,
   "version": "0.0.7",
   "type": "module",
@@ -27,7 +27,7 @@
     "storybook-addon-remix-react-router": "^3.0.1"
   },
   "peerDependencies": {
-    "@clickapp/qui-core": "*",
+    "@greenstones/qui-core": "*",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "react": "catalog:",

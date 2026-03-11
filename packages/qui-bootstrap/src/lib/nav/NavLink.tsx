@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { Nav } from "react-bootstrap";
 import type { NavLinkProps } from "react-router-dom";
-import { NavLink as AuthNavLink } from "@clickapp/qui-core";
+import { NavLink as AuthNavLink } from "@greenstones/qui-core";
 import classNames from "classnames";
 import "./NavLink.css";
 

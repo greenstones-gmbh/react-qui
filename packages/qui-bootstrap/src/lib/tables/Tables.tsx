@@ -2,7 +2,7 @@ import {
   type ListPaging,
   type ListQuery,
   type ListSorting,
-} from "@clickapp/qui-core";
+} from "@greenstones/qui-core";
 import {
   Button,
   ButtonGroup,
@@ -13,7 +13,7 @@ import {
   Table,
 } from "react-bootstrap";
 
-import { type Column, type Selection } from "@clickapp/qui-core";
+import { type Column, type Selection } from "@greenstones/qui-core";
 import classNames from "classnames";
 import {
   TbCaretDownFilled,

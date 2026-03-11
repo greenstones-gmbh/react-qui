@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a bun workspaces monorepo containing a multi-layer React component library published under the `@clickapp` scope.
+This is a bun workspaces monorepo containing a multi-layer React component library published under the `@greenstones` scope.
 
 **Workspace layout:**
 - `packages/` — 3 published libraries + 1 template
@@ -47,11 +47,11 @@ qui-core  →  qui-bootstrap  →  apps
            qui-supabase (independent, wraps Supabase JS)
 ```
 
-**`@clickapp/qui-core`** — Abstract base layer. Auth contexts, generic form field abstractions, modal management context, React hooks, entity/data utilities. No styling opinions.
+**`@greenstones/qui-core`** — Abstract base layer. Auth contexts, generic form field abstractions, modal management context, React hooks, entity/data utilities. No styling opinions.
 
-**`@clickapp/qui-bootstrap`** — Concrete Bootstrap 5 implementations of qui-core abstractions. Buttons, form fields (Input, Select, Date, Check, Picker), tables, navbar, app layout, modal components, page containers, detail views, tabs. Depends on `qui-core`.
+**`@greenstones/qui-bootstrap`** — Concrete Bootstrap 5 implementations of qui-core abstractions. Buttons, form fields (Input, Select, Date, Check, Picker), tables, navbar, app layout, modal components, page containers, detail views, tabs. Depends on `qui-core`.
 
-**`@clickapp/qui-supabase`** — Supabase integration: auth UI wrapper and data access layer. Depends on Supabase JS client and React; independent of qui-core.
+**`@greenstones/qui-supabase`** — Supabase integration: auth UI wrapper and data access layer. Depends on Supabase JS client and React; independent of qui-core.
 
 **`lib-template`** — Copy this when creating a new package; it establishes the standard package structure.
 

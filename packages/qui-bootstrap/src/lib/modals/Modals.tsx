@@ -1,4 +1,4 @@
-import { useModalContext } from "@clickapp/qui-core";
+import { useModalContext } from "@greenstones/qui-core";
 import { ConfirmModal, type ConfirmModalProps } from "./ConfirmModal";
 import { ErrorModal, type ErrorModalProps } from "./ErrorModal";
 import { MessageModal, type MessageModalProps } from "./MessageModal";

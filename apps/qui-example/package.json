@@ -1,5 +1,5 @@
 {
-  "name": "@clickapp/qui-example",
+  "name": "@greenstones/qui-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clickapp/qui-bootstrap": "*",
-    "@clickapp/qui-core": "*",
+    "@greenstones/qui-bootstrap": "*",
+    "@greenstones/qui-core": "*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "classnames": "^2.5.1",

@@ -31,7 +31,7 @@ export default defineConfig({
         "react-bootstrap",
         "react-router-dom",
         "classnames",
-        "@clickapp/qui-core",
+        "@greenstones/qui-core",
         /node_modules/,
       ],
 

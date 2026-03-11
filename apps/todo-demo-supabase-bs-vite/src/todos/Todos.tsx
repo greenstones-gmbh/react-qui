@@ -1,5 +1,5 @@
-import { createColumn, FieldRenderers, Fields } from "@clickapp/qui-core";
-import { useSupabaseTable } from "@clickapp/qui-supabase";
+import { createColumn, FieldRenderers, Fields } from "@greenstones/qui-core";
+import { useSupabaseTable } from "@greenstones/qui-supabase";
 import { Badge } from "react-bootstrap";
 import { Tables } from "./database.types";
 

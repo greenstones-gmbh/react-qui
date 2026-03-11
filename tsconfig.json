@@ -28,8 +28,8 @@
 
     // Workspace package paths
     "paths": {
-      "@clickapp/qui-core": ["./packages/qui-core/index.ts"],
-      "@clickapp/qui-bootstrap": ["./packages/qui-bootstrap/index.ts"]
+      "@greenstones/qui-core": ["./packages/qui-core/index.ts"],
+      "@greenstones/qui-bootstrap": ["./packages/qui-bootstrap/index.ts"]
     }
   }
 }

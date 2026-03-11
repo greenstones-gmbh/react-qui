@@ -1,4 +1,4 @@
-import { type DataRepository } from "@clickapp/qui-core";
+import { type DataRepository } from "@greenstones/qui-core";
 
 import type { ReactElement, ReactNode } from "react";
 import { useBaseCopyAction, useCopyAction } from "./useCopyAction";

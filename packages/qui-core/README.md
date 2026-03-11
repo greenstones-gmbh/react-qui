@@ -1,8 +1,8 @@
-# @clickapp/qui-core
+# @greenstones/qui-core
 
 Reusable high-level components for authentication, secure routing, list and detail views, and modal management. No styling opinions.
 
-[![npm version](https://img.shields.io/npm/v/@clickapp/qui-core)](https://www.npmjs.com/package/@clickapp/qui-core)
+[![npm version](https://img.shields.io/npm/v/@greenstones/qui-core)](https://www.npmjs.com/package/@greenstones/qui-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
 
@@ -10,34 +10,27 @@ Reusable high-level components for authentication, secure routing, list and deta
 
 ## Why this library
 
-Building React applications requires solving the same problems repeatedly: authentication state, paginated/sortable/filterable lists, async data loading, modal management, and table column definitions. `@clickapp/qui-core` provides:
+Building React applications requires solving the same problems repeatedly: authentication state, paginated/sortable/filterable lists, async data loading, modal management, and table column definitions. `@greenstones/qui-core` provides:
 
 
 - **Auth out of the box** — `SimpleAuth` covers demos and prototypes; swap in any provider by implementing `IAuthContext`. Role-based guards and auth-aware nav links are included.
 - **Auth-ready routing** — `AuthContext`, `Guard`, and `AppRoutes` wire up protected routes without locking you into an auth provider.
 - **Batteries-included list management** — `useList` and `useArray` handle paging, sorting, and filtering with a single composable source interface.
 - **Structured detail views** — `DetailModelBuilder` lets you define block-based detail layouts declaratively; auto-generate them from any object or compose them field by field.
-- **Zero styling** — No CSS framework dependency. Pair with `@clickapp/qui-bootstrap` or bring your own components.
+- **Zero styling** — No CSS framework dependency. Pair with `@greenstones/qui-bootstrap` or bring your own components.
 
 ---
 
 ## Installation
 
 ```bash
-# npm
-npm install @clickapp/qui-core
-
-# yarn
-yarn add @clickapp/qui-core
-
-# pnpm
-pnpm add @clickapp/qui-core
+bun add @greenstones/qui-core
 ```
 
 ### Peer dependencies
 
 ```bash
-npm install react react-dom react-router-dom date-fns file-saver
+bun install react react-dom react-router-dom date-fns file-saver
 ```
 
 | Package | Version |
@@ -51,7 +44,7 @@ npm install react react-dom react-router-dom date-fns file-saver
 ### CSS
 
 ```tsx
-import '@clickapp/qui-core/dist/style.css';
+import '@greenstones/qui-core/dist/style.css';
 ```
 
 ---
@@ -69,7 +62,7 @@ import {
   useArray,
   useColumnBuilder,
   useDetaiModelBuilder,
-} from '@clickapp/qui-core';
+} from '@greenstones/qui-core';
 
 interface User {
   id: number;
@@ -264,7 +257,7 @@ function useAuth(): IAuthContext
 Hook to consume the auth context. Must be used inside an `AuthContext.Provider`.
 
 ```tsx
-import { useAuth } from '@clickapp/qui-core';
+import { useAuth } from '@greenstones/qui-core';
 
 function ProfileBadge() {
   const { userDisplayName, isAuthenticated, logout } = useAuth();
@@ -545,7 +538,7 @@ interface FieldOptions<EntityType, PropType> {
 | `linkTo` | `(entity) => string` | No | Wrap the value in a `<Link>` to this path |
 
 ```ts
-import { createField, FieldRenderers } from '@clickapp/qui-core';
+import { createField, FieldRenderers } from '@greenstones/qui-core';
 
 interface Order { id: number; createdAt: string; total: number; }
 
@@ -778,7 +771,7 @@ function useAsyncMemo<T>(
 | `setData` | `(data: T \| undefined) => void` | Directly set data |
 
 ```tsx
-import { useAsyncMemo } from '@clickapp/qui-core';
+import { useAsyncMemo } from '@greenstones/qui-core';
 
 function UserProfile({ userId }: { userId: string }) {
   const { data: user, isPending, error } = useAsyncMemo(
@@ -918,7 +911,7 @@ type ListSource<Type, Query> = (state: ListState<Query>) => Promise<{
 | `bind()` | `() => Binding` | Binding for the whole query as a string |
 
 ```tsx
-import { useList, ListSource } from '@clickapp/qui-core';
+import { useList, ListSource } from '@greenstones/qui-core';
 
 interface User { id: number; name: string; }
 interface UserQuery { name?: string; }
@@ -986,7 +979,7 @@ interface ArraySourceOptions<Type, Query> {
 ```
 
 ```tsx
-import { useArray, Filters, Sorters } from '@clickapp/qui-core';
+import { useArray, Filters, Sorters } from '@greenstones/qui-core';
 
 function ProductList({ products }: { products: Product[] }) {
   const { items, paging, query } = useArray(products, {
@@ -1155,7 +1148,7 @@ interface DetaiModelBlock<Type> {
 ```
 
 ```ts
-import { createDetails } from '@clickapp/qui-core';
+import { createDetails } from '@greenstones/qui-core';
 
 interface Customer { name: string; email: string; phone: string; city: string; }
 
@@ -1223,7 +1216,7 @@ function useModalContext(): {
 Hook for opening and closing modals. Supports stacking — each `openModal` pushes onto the stack; `closeModal` pops the top modal.
 
 ```tsx
-import { useModalContext } from '@clickapp/qui-core';
+import { useModalContext } from '@greenstones/qui-core';
 
 function DeleteButton({ id }: { id: number }) {
   const { openModal, closeModal } = useModalContext();
@@ -1364,7 +1357,7 @@ type DataObject = Record<string, any>
 ```
 
 ```ts
-import { DataRepository } from '@clickapp/qui-core';
+import { DataRepository } from '@greenstones/qui-core';
 
 interface Post { id: string; title: string; body: string; }
 interface PostId { id: string; }
@@ -1384,7 +1377,7 @@ class PostRepository implements DataRepository<Post, PostId> {
 ### Composing filters for `useArray`
 
 ```ts
-import { useArray, Filters } from '@clickapp/qui-core';
+import { useArray, Filters } from '@greenstones/qui-core';
 
 interface Product { name: string; category: string; inStock: boolean; }
 interface ProductFilter { term?: string; category?: string; inStockOnly?: boolean; }
@@ -1435,7 +1428,7 @@ function WizardButton() {
 ### Custom `ListSource` with an API backend
 
 ```ts
-import { ListSource, createPageMeta } from '@clickapp/qui-core';
+import { ListSource, createPageMeta } from '@greenstones/qui-core';
 
 interface UserQuery { term?: string; }
 
@@ -1581,8 +1574,8 @@ This library does not provide React error boundaries. Wrap your trees with your 
 
 ```bash
 git clone <repo>
-cd clickapp-monorepo/clickapp
-npm install
+cd react-qui
+bun install
 ```
 
 ### Development
@@ -1590,40 +1583,40 @@ npm install
 ```bash
 # Build qui-core in watch mode
 cd packages/qui-core
-npm run watch
+bun run watch
 
 # Run Storybook
-npm run storybook
+bun run storybook
 ```
 
 ### Build
 
 ```bash
 # From packages/qui-core
-npm run build
+bun run build
 
 # From monorepo root
-npm run build-all
+bun run build-all
 ```
 
 ### Lint
 
 ```bash
-npm run lint
+bun run lint
 ```
 
 ### Local publishing (Verdaccio)
 
 ```bash
 # From monorepo root — requires a running Verdaccio on localhost:4873
-npm run pub-local-core
+bun run pub-local-core
 ```
 
 ### Pull Request guide
 
 1. Branch from `main`.
 2. Make focused, well-described commits.
-3. Run `npm run lint` and `npm run build` before opening a PR.
+3. Run `bun run lint` and `bun run build` before opening a PR.
 4. There is no test suite — include Storybook stories for new components.
 
 ---

@@ -7,11 +7,11 @@
 //   Page,
 //   SidebarLayout,
 //   TopNavbar,
-// } from "@clickapp/qui-bootstrap";
+// } from "@greenstones/qui-bootstrap";
 
-import { BootstrapApp, NavLink } from "@clickapp/qui-bootstrap";
-import "@clickapp/qui-bootstrap/dist/style.css";
-import { Supabase } from "@clickapp/qui-supabase";
+import { BootstrapApp, NavLink } from "@greenstones/qui-bootstrap";
+import "@greenstones/qui-bootstrap/dist/style.css";
+import { Supabase } from "@greenstones/qui-supabase";
 import { createClient } from "@supabase/supabase-js";
 import { Nav } from "react-bootstrap";
 import { BsBook } from "react-icons/bs";

@@ -1,4 +1,4 @@
-import { BootstrapApp, NavLink } from "@clickapp/qui-bootstrap";
+import { BootstrapApp, NavLink } from "@greenstones/qui-bootstrap";
 import { Nav } from "react-bootstrap";
 import { BsBook } from "react-icons/bs";
 import { BrowserRouter, Route } from "react-router-dom";

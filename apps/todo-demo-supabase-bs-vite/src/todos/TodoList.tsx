@@ -1,11 +1,11 @@
-import { useColumnBuilder } from "@clickapp/qui-core";
+import { useColumnBuilder } from "@greenstones/qui-core";
 
 import {
   ActionButton,
   ListActionsColumns,
   ListPage,
   QueryDropdown,
-} from "@clickapp/qui-bootstrap";
+} from "@greenstones/qui-bootstrap";
 
 import { Todo, TodoColumns, useTodoList } from "./Todos";
 import { useTodoActions } from "./useTodoActions";

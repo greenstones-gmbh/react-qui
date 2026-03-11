@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { useAuth } from "@clickapp/qui-core";
+import { useAuth } from "@greenstones/qui-core";
 import { useLocation } from "react-router-dom";
 
 type Inputs = {

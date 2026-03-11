@@ -26,7 +26,7 @@ const subheader = (
 );
 
 const meta = {
-  title: "clickapp/Page",
+  title: "qui/Page",
   component: Page,
   tags: ["autodocs"],
   parameters: {

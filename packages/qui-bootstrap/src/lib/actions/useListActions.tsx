@@ -1,4 +1,4 @@
-import { type Column, type DataRepository } from "@clickapp/qui-core";
+import { type Column, type DataRepository } from "@greenstones/qui-core";
 import { type ModalFormControllerProps, type NavigationProps } from "./utils";
 import { useCreateAction } from "./useCreateAction";
 import { useNavigate } from "react-router-dom";

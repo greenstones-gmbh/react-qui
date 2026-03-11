@@ -1,4 +1,4 @@
-import { useModalContext } from "@clickapp/qui-core";
+import { useModalContext } from "@greenstones/qui-core";
 import { type ReactElement, type ReactNode } from "react";
 import { Button } from "react-bootstrap";
 

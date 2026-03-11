@@ -7,15 +7,15 @@ import {
   ModalFormProps,
   NavigationProps,
   useListActions,
-} from "@clickapp/qui-bootstrap";
+} from "@greenstones/qui-bootstrap";
 
 import {
   Identifiable,
   useSupabaseTypedRepository,
-} from "@clickapp/qui-supabase";
+} from "@greenstones/qui-supabase";
 
 import { Database, Tables } from "./database.types";
-import { useAuth } from "@clickapp/qui-core";
+import { useAuth } from "@greenstones/qui-core";
 
 type Todo = Tables<"todos">;
 

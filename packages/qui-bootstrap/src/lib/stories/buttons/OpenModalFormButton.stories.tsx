@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ModalContextProvider } from "@clickapp/qui-core";
+import { ModalContextProvider } from "@greenstones/qui-core";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { OpenModalFormButton } from "../../buttons/OpenModalFormButton";
@@ -9,7 +9,7 @@ import { ModalForm, type ModalFormProps } from "../../modals";
 import { CheckField, InputField, SelectField } from "../../forms";
 
 const meta = {
-  title: "clickapp/Buttons/OpenModalFormButton",
+  title: "qui/Buttons/OpenModalFormButton",
   component: OpenModalFormButton,
   tags: ["autodocs"],
   parameters: {
@@ -41,7 +41,7 @@ export const EditModal: Story = {
 };
 
 function TestModal(
-  props: ModalFormProps<{ firstName: string; lastName: string }>
+  props: ModalFormProps<{ firstName: string; lastName: string }>,
 ) {
   return (
     <ModalForm {...props}>

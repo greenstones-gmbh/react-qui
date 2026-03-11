@@ -1,4 +1,4 @@
-import { type DataObject, type Identifiable, type DataRepository } from "@clickapp/qui-core";
+import { type DataObject, type Identifiable, type DataRepository } from "@greenstones/qui-core";
 
 export class RepositoryHelper<
   IdentifiableType extends Identifiable,

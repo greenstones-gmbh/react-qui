@@ -1,6 +1,6 @@
-# @clickapp/lib-template
+# @greenstones/lib-template
 
-> Starter template for new `@clickapp` React component libraries. Copy this package to bootstrap a new library with Vite, TypeScript, Storybook, and dual ESM/UMD output already configured.
+> Starter template for new `@greenstones` React component libraries. Copy this package to bootstrap a new library with Vite, TypeScript, Storybook, and dual ESM/UMD output already configured.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -33,7 +33,7 @@ Setting up a new React component library involves the same boilerplate every tim
 cp -r packages/lib-template packages/my-new-lib
 
 # 2. Update package.json
-#    - name:    "@clickapp/my-new-lib"
+#    - name:    "@greenstones/my-new-lib"
 #    - version: "0.0.1"
 #    - main:    "./dist/my-new-lib.umd.cjs"
 #    - module:  "./dist/my-new-lib.js"
@@ -43,17 +43,17 @@ cp -r packages/lib-template packages/my-new-lib
 #    - lib.name:     "MyNewLib"
 
 # 4. Install dependencies from the repo root
-npm install
+bun install
 
 # 5. Start Storybook
-cd packages/my-new-lib && npm run storybook
+cd packages/my-new-lib && bun run storybook
 ```
 
 Fields to change in **`package.json`**:
 
 | Field | Template value | Replace with |
 |-------|---------------|--------------|
-| `name` | `@clickapp/lib-template` | `@clickapp/your-lib-name` |
+| `name` | `@greenstones/lib-template` | `@greenstones/your-lib-name` |
 | `main` | `./dist/lib-template.umd.cjs` | `./dist/your-lib-name.umd.cjs` |
 | `module` | `./dist/lib-template.js` | `./dist/your-lib-name.js` |
 
@@ -100,13 +100,13 @@ The `atoms/` directory is the conventional home for low-level, single-responsibi
 ## Commands
 
 ```bash
-npm run dev            # Vite dev server
-npm run build          # tsc + Vite library build → dist/
-npm run watch          # Watch mode build
-npm run lint           # ESLint
-npm run storybook      # Storybook on http://localhost:6006
-npm run build-storybook # Static Storybook build
-npm run show-bundle    # Bundle size visualiser
+bun run dev            # Vite dev server
+bun run build          # tsc + Vite library build → dist/
+bun run watch          # Watch mode build
+bun run lint           # ESLint
+bun run storybook      # Storybook on http://localhost:6006
+bun run build-storybook # Static Storybook build
+bun run show-bundle    # Bundle size visualiser
 ```
 
 ---
@@ -153,7 +153,7 @@ interface AtButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 **Returns:** `JSX.Element` — an HTML `<button>` element.
 
 ```tsx
-import { AtButton } from '@clickapp/lib-template';
+import { AtButton } from '@greenstones/lib-template';
 
 <AtButton label="Click me" />
 <AtButton label="Save" variant="PRIMARY" />
@@ -175,7 +175,7 @@ const AT_BUTTON_VARIANT: {
 ```
 
 ```ts
-import { AT_BUTTON_VARIANT } from '@clickapp/lib-template';
+import { AT_BUTTON_VARIANT } from '@greenstones/lib-template';
 
 const variant = AT_BUTTON_VARIANT.PRIMARY; // 'primary'
 ```
@@ -205,7 +205,7 @@ const variantClasses: Record<AtButtonVariant, string> = {
 ```
 
 ```tsx
-import { variantClasses } from '@clickapp/lib-template';
+import { variantClasses } from '@greenstones/lib-template';
 
 // Wire into a component:
 <button className={variantClasses[variant]}>{label}</button>
@@ -234,7 +234,7 @@ function objectValuesToControls(
 **Returns:** `{ control: string; options: string[] }` — spread directly into `argTypes`.
 
 ```ts
-import { objectValuesToControls, AT_BUTTON_VARIANT } from '@clickapp/lib-template';
+import { objectValuesToControls, AT_BUTTON_VARIANT } from '@greenstones/lib-template';
 import type { Meta } from '@storybook/react';
 import { AtButton } from './index';
 
@@ -302,14 +302,14 @@ build: {
 },
 ```
 
-### Using with `@clickapp/qui-core`
+### Using with `@greenstones/qui-core`
 
-If the new library depends on `@clickapp/qui-core`, add it as a peer dependency and external:
+If the new library depends on `@greenstones/qui-core`, add it as a peer dependency and external:
 
 ```json
 // package.json
 "peerDependencies": {
-  "@clickapp/qui-core": "*",
+  "@greenstones/qui-core": "*",
   "react": "^18.3.1",
   "react-dom": "^18.3.1"
 }
@@ -317,7 +317,7 @@ If the new library depends on `@clickapp/qui-core`, add it as a peer dependency 
 
 ```ts
 // vite.config.ts — already included in the template externals list
-external: [..., '@clickapp/qui-core']
+external: [..., '@greenstones/qui-core']
 ```
 
 ---
@@ -417,7 +417,7 @@ The generated `dist/style.css` is a named package export. Consumers must import 
 
 ```ts
 // consumer app
-import '@clickapp/my-lib/dist/style.css';
+import '@greenstones/my-lib/dist/style.css';
 ```
 
 ---
@@ -440,16 +440,16 @@ When building a real library, consider adding an error boundary component and do
 ```bash
 # Clone the monorepo
 git clone <repo-url>
-cd clickapp-monorepo/clickapp
+cd react-qui
 
 # Install all workspace dependencies
-npm install
+bun install
 
 # Work on the template
 cd packages/lib-template
-npm run storybook      # Component development on http://localhost:6006
-npm run build          # Verify production build
-npm run lint           # ESLint
+bun run storybook      # Component development on http://localhost:6006
+bun run build          # Verify production build
+bun run lint           # ESLint
 ```
 
 ### Running tests
@@ -466,7 +466,7 @@ npx vitest             # Watch mode
 2. Keep changes generic — this is a template, not a real library
 3. Add a Storybook story for any new example component
 4. Add a Vitest test alongside each component
-5. Run `npm run lint` and `npm run build` — both must pass
+5. Run `bun run lint` and `bun run build` — both must pass
 6. Open a pull request against `main`
 
 ---
@@ -479,4 +479,4 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-MIT © ClickApp
+MIT © Greenstones GmbH

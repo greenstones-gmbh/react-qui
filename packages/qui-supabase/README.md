@@ -1,8 +1,8 @@
-# @clickapp/qui-supabase
+# @greenstones/qui-supabase
 
 > Supabase integration for React — authentication provider, role-based access control, repository pattern, and paginated table hooks.
 
-[![npm version](https://img.shields.io/npm/v/@clickapp/qui-supabase)](https://www.npmjs.com/package/@clickapp/qui-supabase)
+[![npm version](https://img.shields.io/npm/v/@greenstones/qui-supabase)](https://www.npmjs.com/package/@greenstones/qui-supabase)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Supabase](https://img.shields.io/badge/Supabase-JS%20v2-green)](https://supabase.com/)
@@ -11,12 +11,12 @@
 
 ## Why this library
 
-`@clickapp/qui-supabase` provides ready-made, reusable building blocks for wiring Supabase into a React application:
+`@greenstones/qui-supabase` provides ready-made, reusable building blocks for wiring Supabase into a React application:
 
-- **Auth provider** — `SupabaseAuth` handles session initialisation, auth state change events, login/logout navigation, and populates `AuthContext` from `@clickapp/qui-core`. Drop it in once; every downstream component gets authentication state automatically.
+- **Auth provider** — `SupabaseAuth` handles session initialisation, auth state change events, login/logout navigation, and populates `AuthContext` from `@greenstones/qui-core`. Drop it in once; every downstream component gets authentication state automatically.
 - **Auth UI** — `SupabaseAuthUI` wraps Supabase's pre-built Auth UI with redirect handling so you don't need to build a login page.
-- **Repository pattern** — `SupabaseRepository` is a typed CRUD class implementing the `DataRepository` interface from `@clickapp/qui-core`. Create one per table; it handles create, read, update, and delete with composable primary-key support.
-- **Table hooks** — `useSupabaseTable` returns a `ListData` object (pagination, sorting, filtering) compatible with `@clickapp/qui-bootstrap`'s `QuickTable` and `ListPage` components — no glue code required.
+- **Repository pattern** — `SupabaseRepository` is a typed CRUD class implementing the `DataRepository` interface from `@greenstones/qui-core`. Create one per table; it handles create, read, update, and delete with composable primary-key support.
+- **Table hooks** — `useSupabaseTable` returns a `ListData` object (pagination, sorting, filtering) compatible with `@greenstones/qui-bootstrap`'s `QuickTable` and `ListPage` components — no glue code required.
 - **Query hook** — `useSupabaseQuery` wraps any Supabase query builder in a memoised async hook.
 - **Edge Function hook** — `useSupabaseFunction` invokes a Supabase Edge Function and surfaces HTTP errors cleanly.
 - **Typed repositories** — `useSupabaseTypedRepository` accepts Supabase-generated database types and infers `Row`, `Insert`, and `Update` shapes automatically.
@@ -26,20 +26,13 @@
 ## Installation
 
 ```bash
-# npm
-npm install @clickapp/qui-supabase
-
-# yarn
-yarn add @clickapp/qui-supabase
-
-# pnpm
-pnpm add @clickapp/qui-supabase
+bun add @greenstones/qui-supabase
 ```
 
 Install peer dependencies if not already present:
 
 ```bash
-npm install @supabase/supabase-js @supabase/auth-ui-react @supabase/auth-ui-shared \
+bun add @supabase/supabase-js @supabase/auth-ui-react @supabase/auth-ui-shared \
             date-fns react react-dom
 ```
 
@@ -50,7 +43,7 @@ npm install @supabase/supabase-js @supabase/auth-ui-react @supabase/auth-ui-shar
 ```tsx
 import { createClient } from '@supabase/supabase-js';
 import { BrowserRouter } from 'react-router-dom';
-import { Supabase, useSupabaseTable, useSupabaseRepository } from '@clickapp/qui-supabase';
+import { Supabase, useSupabaseTable, useSupabaseRepository } from '@greenstones/qui-supabase';
 
 // 1. Create Supabase client
 const supabase = createClient(
@@ -134,7 +127,7 @@ function SupabaseContextProvider(props: {
 
 ```tsx
 import { createClient } from '@supabase/supabase-js';
-import { SupabaseContextProvider } from '@clickapp/qui-supabase';
+import { SupabaseContextProvider } from '@greenstones/qui-supabase';
 
 const client = createClient(url, anonKey);
 
@@ -162,7 +155,7 @@ function useSupabaseClient(client?: SupabaseClient): SupabaseClient
 **Throws:** `Error("No Supabase Client defined.")` if no client is available.
 
 ```tsx
-import { useSupabaseClient } from '@clickapp/qui-supabase';
+import { useSupabaseClient } from '@greenstones/qui-supabase';
 
 function MyComponent() {
   const supabase = useSupabaseClient();
@@ -183,7 +176,7 @@ const CreateReactApp: {
 ```
 
 ```ts
-import { CreateReactApp } from '@clickapp/qui-supabase';
+import { CreateReactApp } from '@greenstones/qui-supabase';
 
 const client = CreateReactApp.createSupabaseClient();
 ```
@@ -201,7 +194,7 @@ const ViteApp: {
 ```
 
 ```ts
-import { ViteApp } from '@clickapp/qui-supabase';
+import { ViteApp } from '@greenstones/qui-supabase';
 
 const client = ViteApp.createSupabaseClient();
 ```
@@ -236,7 +229,7 @@ function Supabase(props: PropsWithChildren<SupabaseProps>): JSX.Element
 | `children` | `ReactNode` | **yes** | App tree |
 
 ```tsx
-import { Supabase, ViteApp } from '@clickapp/qui-supabase';
+import { Supabase, ViteApp } from '@greenstones/qui-supabase';
 
 const supabase = ViteApp.createSupabaseClient();
 
@@ -260,7 +253,7 @@ const supabase = ViteApp.createSupabaseClient();
 
 #### `SupabaseAuth`
 
-Authentication state manager. Fetches the current session on mount, subscribes to Supabase auth state changes, and populates `AuthContext` from `@clickapp/qui-core` with user state and auth methods. Returns `null` while the initial session load is in progress.
+Authentication state manager. Fetches the current session on mount, subscribes to Supabase auth state changes, and populates `AuthContext` from `@greenstones/qui-core` with user state and auth methods. Returns `null` while the initial session load is in progress.
 
 ```ts
 interface SupabaseAuthProps extends BaseAuthProps {
@@ -295,7 +288,7 @@ function SupabaseAuth(props: PropsWithChildren<SupabaseAuthProps>): JSX.Element 
 | `hasRole(role)` | `(role: string) => boolean` | Role check |
 
 ```tsx
-import { SupabaseAuth, tableRoleMapper } from '@clickapp/qui-supabase';
+import { SupabaseAuth, tableRoleMapper } from '@greenstones/qui-supabase';
 
 <SupabaseAuth
   loginPath="/login"
@@ -325,7 +318,7 @@ function SupabaseAuthUI(props: {
 | `providers` | `string[]` | no | OAuth providers to display (default: `['azure', 'bitbucket']`) |
 
 ```tsx
-import { SupabaseAuthUI } from '@clickapp/qui-supabase';
+import { SupabaseAuthUI } from '@greenstones/qui-supabase';
 
 // In your /login route component:
 function LoginPage() {
@@ -398,8 +391,8 @@ function hasOneOfRoles(
 **Returns:** `true` if the user has at least one of the given roles.
 
 ```tsx
-import { hasOneOfRoles } from '@clickapp/qui-supabase';
-import { useAuth } from '@clickapp/qui-core';
+import { hasOneOfRoles } from '@greenstones/qui-supabase';
+import { useAuth } from '@greenstones/qui-core';
 
 function AdminPanel() {
   const { hasRole } = useAuth();
@@ -417,7 +410,7 @@ function AdminPanel() {
 
 #### `SupabaseRepository`
 
-Generic CRUD repository class implementing the `DataRepository<T, Id, CreateType, UpdateType>` interface from `@clickapp/qui-core`. One instance per table.
+Generic CRUD repository class implementing the `DataRepository<T, Id, CreateType, UpdateType>` interface from `@greenstones/qui-core`. One instance per table.
 
 ```ts
 class SupabaseRepository<
@@ -457,7 +450,7 @@ new SupabaseRepository(
 All methods throw on Supabase errors via `.throwOnError()`.
 
 ```tsx
-import { SupabaseRepository } from '@clickapp/qui-supabase';
+import { SupabaseRepository } from '@greenstones/qui-supabase';
 
 interface Task { id: string; title: string; done: boolean }
 
@@ -509,7 +502,7 @@ function useSupabaseRepository<
 **Returns:** Memoised `SupabaseRepository` instance.
 
 ```tsx
-import { useSupabaseRepository } from '@clickapp/qui-supabase';
+import { useSupabaseRepository } from '@greenstones/qui-supabase';
 
 interface Task { id: string; title: string; done: boolean }
 
@@ -548,7 +541,7 @@ function useSupabaseTypedRepository<
 ```ts
 // Generated by: supabase gen types typescript > src/database.types.ts
 import type { Database } from './database.types';
-import { useSupabaseTypedRepository } from '@clickapp/qui-supabase';
+import { useSupabaseTypedRepository } from '@greenstones/qui-supabase';
 
 const repo = useSupabaseTypedRepository<Database, 'tasks'>('tasks');
 
@@ -564,7 +557,7 @@ const task = await repo.findById({ id: '1' });  // Row shape
 
 #### `useSupabaseTable`
 
-Hook that fetches a Supabase table with pagination, sorting, and optional filtering. Returns a `ListData` object compatible with `@clickapp/qui-bootstrap`'s `QuickTable`, `ListPage`, and `Paging` components.
+Hook that fetches a Supabase table with pagination, sorting, and optional filtering. Returns a `ListData` object compatible with `@greenstones/qui-bootstrap`'s `QuickTable`, `ListPage`, and `Paging` components.
 
 ```ts
 function useSupabaseTable<Type, Query = string>(
@@ -588,7 +581,7 @@ function useSupabaseTable<Type, Query = string>(
 **Returns:** `ListData<Type, Query>` — data, paging controls, sorting state, query state, and `reload` function.
 
 ```tsx
-import { useSupabaseTable } from '@clickapp/qui-supabase';
+import { useSupabaseTable } from '@greenstones/qui-supabase';
 
 interface Task { id: string; title: string; done: boolean }
 interface TaskQuery { search: string; showDone: boolean }
@@ -646,7 +639,7 @@ function createSupabaseSource<Type, Query>(
 ```
 
 ```ts
-import { createSupabaseSource } from '@clickapp/qui-supabase';
+import { createSupabaseSource } from '@greenstones/qui-supabase';
 
 const source = createSupabaseSource<Task, TaskQuery>(supabase, 'tasks', {
   filter: (qb, q) => { if (q?.search) qb.ilike('title', `%${q.search}%`); },
@@ -674,7 +667,7 @@ interface SupabaseSourceOptions<Query> {
 
 #### `useSupabaseQuery`
 
-General-purpose hook for any Supabase query. Wraps a query builder function with `useAsyncMemo` from `@clickapp/qui-core` and re-runs when `query` changes.
+General-purpose hook for any Supabase query. Wraps a query builder function with `useAsyncMemo` from `@greenstones/qui-core` and re-runs when `query` changes.
 
 ```ts
 interface QueryFn<Type, Query> {
@@ -698,7 +691,7 @@ function useSupabaseQuery<Type = any, Query = any>(
 **Returns:** `{ data: Type \| undefined, loading: boolean, error: Error \| undefined, reload: () => void }`
 
 ```tsx
-import { useSupabaseQuery } from '@clickapp/qui-supabase';
+import { useSupabaseQuery } from '@greenstones/qui-supabase';
 
 interface Stats { total: number; done: number }
 
@@ -736,8 +729,8 @@ function useSupabaseFunction(
 **Returns:** `() => Promise<void>` — throws `Error` on `FunctionsHttpError`.
 
 ```tsx
-import { useSupabaseFunction } from '@clickapp/qui-supabase';
-import { ActionButton } from '@clickapp/qui-bootstrap';
+import { useSupabaseFunction } from '@greenstones/qui-supabase';
+import { ActionButton } from '@greenstones/qui-bootstrap';
 
 function SyncButton() {
   const syncData = useSupabaseFunction('sync-data', {
@@ -800,7 +793,7 @@ async function remove<Type>(
 ```
 
 ```ts
-import { getById, update, insert, remove } from '@clickapp/qui-supabase';
+import { getById, update, insert, remove } from '@greenstones/qui-supabase';
 
 const task    = await getById<Task>(supabase, 'tasks', '123');
 const created = await insert<Omit<Task,'id'>, Task>(supabase, 'tasks', { title: 'New', done: false });
@@ -823,7 +816,7 @@ interface Identifiable<Type = string> {
 ```
 
 ```ts
-import type { Identifiable } from '@clickapp/qui-supabase';
+import type { Identifiable } from '@greenstones/qui-supabase';
 
 interface Task extends Identifiable { title: string; done: boolean }
 interface Product extends Identifiable<number> { name: string; price: number }
@@ -833,19 +826,19 @@ interface Product extends Identifiable<number> { name: string; price: number }
 
 ## Advanced Usage
 
-### Full CRUD list page with `@clickapp/qui-bootstrap`
+### Full CRUD list page with `@greenstones/qui-bootstrap`
 
 ```tsx
 import {
   useSupabaseTable,
   useSupabaseRepository,
-} from '@clickapp/qui-supabase';
+} from '@greenstones/qui-supabase';
 import {
   Page, QuickTable, Paging,
   useListActions, ListItemButtons,
   InputField, CheckField,
   ModalFormControllerProps,
-} from '@clickapp/qui-bootstrap';
+} from '@greenstones/qui-bootstrap';
 
 interface Task { id: string; title: string; done: boolean }
 interface TaskQuery { search: string }
@@ -899,8 +892,8 @@ export function TaskListPage() {
 ### Role-based access control
 
 ```tsx
-import { Supabase, tableRoleMapper, hasOneOfRoles } from '@clickapp/qui-supabase';
-import { useAuth } from '@clickapp/qui-core';
+import { Supabase, tableRoleMapper, hasOneOfRoles } from '@greenstones/qui-supabase';
+import { useAuth } from '@greenstones/qui-core';
 import { Navigate } from 'react-router-dom';
 
 // App root
@@ -929,7 +922,7 @@ npx supabase gen types typescript --project-id your-project-id > src/database.ty
 
 ```ts
 import type { Database } from './database.types';
-import { useSupabaseTypedRepository } from '@clickapp/qui-supabase';
+import { useSupabaseTypedRepository } from '@greenstones/qui-supabase';
 
 const repo = useSupabaseTypedRepository<Database, 'tasks'>('tasks');
 
@@ -943,7 +936,7 @@ const task = await repo.findById({ id: '1' });     // returns Row type
 ### Custom query with joins
 
 ```tsx
-import { useSupabaseQuery } from '@clickapp/qui-supabase';
+import { useSupabaseQuery } from '@greenstones/qui-supabase';
 
 interface TaskWithUser {
   id: string;
@@ -1006,7 +999,7 @@ useSupabaseTable<Task, TaskQuery>('tasks', {
 ### `Identifiable` variants
 
 ```ts
-import type { Identifiable } from '@clickapp/qui-supabase';
+import type { Identifiable } from '@greenstones/qui-supabase';
 
 interface User    extends Identifiable         { name: string }          // id: string
 interface Product extends Identifiable<number> { name: string }          // id: number
@@ -1119,38 +1112,38 @@ if (error) return <p>Error: {error.message}</p>;
 ```bash
 # Clone the monorepo
 git clone <repo-url>
-cd clickapp-monorepo/clickapp
+cd react-qui
 
 # Install all dependencies
-npm install
+bun install
 
 # Build qui-core first
-cd packages/qui-core && npm run build && cd ../..
+cd packages/qui-core && bun run build && cd ../..
 
 # Start Storybook for qui-supabase
 cd packages/qui-supabase
-npm run storybook      # http://localhost:6006
-npm run build          # Production build → dist/
-npm run watch          # Watch mode
-npm run lint           # ESLint
+bun run storybook      # http://localhost:6006
+bun run build          # Production build → dist/
+bun run watch          # Watch mode
+bun run lint           # ESLint
 ```
 
 ### Local end-to-end testing
 
 ```bash
 # Publish all packages to local Verdaccio (localhost:4873)
-npm run pub-local            # from monorepo root
+bun run pub-local            # from monorepo root
 
 # Or publish only qui-supabase
-npm run pub-local-supabase
+bun run pub-local-supabase
 ```
 
 ### PR guide
 
 1. Fork and create a feature branch: `git checkout -b feat/my-feature`
 2. Add or update Storybook stories alongside the source file
-3. Run `npm run lint` — all lint rules must pass
-4. Run `npm run build` — must succeed with no TypeScript errors
+3. Run `bun run lint` — all lint rules must pass
+4. Run `bun run build` — must succeed with no TypeScript errors
 5. Open a pull request against `main`
 
 > There is no automated test suite. Behaviour is verified via Storybook stories and manual testing against a Supabase project.
@@ -1165,4 +1158,4 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-MIT © ClickApp
+MIT © Greenstones GmbH

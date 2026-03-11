@@ -184,7 +184,7 @@ export function TestSidebarNav() {
 }
 
 export function TestNavbarBrand() {
-  return <NavbarBrand name="clickapp" icon={BsBox} className="ms-0" />;
+  return <NavbarBrand name="react-qui" icon={BsBox} className="ms-0" />;
 }
 
 export function TestCollapseNav() {

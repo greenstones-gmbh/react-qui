@@ -1,6 +1,6 @@
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 
-import { useAuth } from "@clickapp/qui-core";
+import { useAuth } from "@greenstones/qui-core";
 import { PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 

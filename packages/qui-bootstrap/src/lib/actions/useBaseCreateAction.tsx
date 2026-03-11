@@ -1,4 +1,4 @@
-import { useModalContext } from "@clickapp/qui-core";
+import { useModalContext } from "@greenstones/qui-core";
 import { type ModalFormActionOptions } from "./utils";
 
 export function useBaseCreateAction<
