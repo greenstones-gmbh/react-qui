@@ -10,7 +10,8 @@
 // } from "@greenstones/qui-bootstrap";
 
 import { BootstrapApp, NavLink } from "@greenstones/qui-bootstrap";
-import "@greenstones/qui-bootstrap/dist/style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+//import "@greenstones/qui-bootstrap/dist/style.css";
 import { Supabase } from "@greenstones/qui-supabase";
 import { createClient } from "@supabase/supabase-js";
 import { Nav } from "react-bootstrap";
@@ -26,7 +27,7 @@ import {
 
 const supabaseClient = createClient<Database>(
   import.meta.env.VITE_SUPABASE_URL!,
-  import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY!
+  import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY!,
 );
 
 function App() {

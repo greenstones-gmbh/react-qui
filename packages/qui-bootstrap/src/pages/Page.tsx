@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { BasePage } from "./BasePage";
 import { GenericErrorPage } from "./ErrorPage";
 import { LoadingPage } from "./LoadingPage";
@@ -36,7 +36,7 @@ export function Page({
   loading?: boolean;
   error?: any;
 }>) {
-  var h = undefined;
+  let h = undefined;
 
   if (loading) return <LoadingPage />;
 
@@ -44,7 +44,7 @@ export function Page({
 
   if (header) {
     if (typeof header === "string") {
-      h = <PageHeader children={header} />;
+      h = <PageHeader>{header}</PageHeader>;
     } else {
       h = header;
     }

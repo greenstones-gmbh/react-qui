@@ -1,12 +1,12 @@
 import {
-  FunctionInvokeOptions,
+  type FunctionInvokeOptions,
   FunctionsHttpError,
 } from "@supabase/supabase-js";
 import { useSupabaseClient } from "../SupabaseContext";
 
 export function useSupabaseFunction(
   fn: string,
-  options: FunctionInvokeOptions = { method: "GET" }
+  options: FunctionInvokeOptions = { method: "GET" },
 ) {
   const client = useSupabaseClient();
   return async () => {

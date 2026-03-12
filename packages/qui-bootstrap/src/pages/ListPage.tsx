@@ -1,4 +1,8 @@
-import { type Column, type ListData, type ListQuery } from "@greenstones/qui-core";
+import {
+  type Column,
+  type ListData,
+  type ListQuery,
+} from "@greenstones/qui-core";
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { ButtonToolbar } from "react-bootstrap";
@@ -38,8 +42,9 @@ export function ListPage<Type, Query>(props: ListPageProps<Type, Query>) {
             }
           : undefined
       }
-      children={props.toolbarContent}
-    />
+    >
+      {props.toolbarContent}
+    </ListPageToolbar>
   );
 
   return (

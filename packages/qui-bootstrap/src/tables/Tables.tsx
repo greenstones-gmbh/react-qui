@@ -83,8 +83,8 @@ export function QueryCheckbox<Query>({
   label: string;
   className?: string;
 }) {
-  var v = checked;
-  var chg = onChange;
+  let v = checked;
+  let chg = onChange;
 
   if (!v || !chg) {
     const f = field ? query?.field(field) : query?.bind();

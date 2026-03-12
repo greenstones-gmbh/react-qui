@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { Container } from "react-bootstrap";
 import { useLayoutPrefs } from "../app/LayoutContext";
 

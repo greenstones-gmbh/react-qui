@@ -15,9 +15,9 @@ export interface QueryFn<Type, Query> {
 export function useSupabaseQuery<Type = any, Query = any>(
   queryFn: (
     supabaseClient: SupabaseClient,
-    query?: Query
-  ) => PostgrestFilterBuilder<any, any, any> | PostgrestBuilder<any>,
-  query?: Query
+    query?: Query,
+  ) => PostgrestFilterBuilder<any, any, any, any> | PostgrestBuilder<any, any>,
+  query?: Query,
 ) {
   const supabaseClient = useSupabaseClient();
   const fn: QueryFn<Type, Query> = useCallback<QueryFn<Type, Query>>(
@@ -25,7 +25,7 @@ export function useSupabaseQuery<Type = any, Query = any>(
       const { data } = await queryFn(c, query).throwOnError();
       return data as Type;
     },
-    []
+    [],
   );
   return useAsyncMemo<Type>(() => fn(supabaseClient, query), [query]);
 }

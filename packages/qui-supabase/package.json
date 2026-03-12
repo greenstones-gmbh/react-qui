@@ -3,50 +3,26 @@
   "private": false,
   "version": "0.0.6",
   "type": "module",
-  "main": "./dist/qui-supabase.umd.cjs",
-  "module": "./dist/qui-supabase.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/qui-supabase.js",
-      "require": "./dist/qui-supabase.umd.cjs"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
+  "module": "index.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "watch": "tsc && vite build --watch",
     "lint": "eslint .",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "show-bundle": "bunx vite-bundle-visualizer"
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^4.3.3",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0",
-    "typescript-eslint": "^8.11.0",
-    "vite": "^5.4.10",
-    "vite-plugin-dts": "^4.3.0"
+    "@types/react-dom": "catalog:"
   },
   "peerDependencies": {
+    "@greenstones/qui-core": "*",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.47.13",
     "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/postgrest-js": "latest",
     "date-fns": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {}
+  "sideEffects": false
 }

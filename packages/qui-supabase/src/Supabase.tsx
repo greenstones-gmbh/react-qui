@@ -1,6 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { PropsWithChildren } from "react";
-import { SupabaseAuth, SupabaseAuthProps } from "./auth";
+import type { PropsWithChildren } from "react";
+import { SupabaseAuth, type SupabaseAuthProps } from "./auth";
 import { SupabaseContextProvider } from "./SupabaseContext";
 
 export interface SupabaseProps {

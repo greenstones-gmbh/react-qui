@@ -1,8 +1,8 @@
 import {
-  ListData,
-  ListOptions,
-  ListSource,
-  ListState,
+  type ListData,
+  type ListOptions,
+  type ListSource,
+  type ListState,
   createPageMeta,
   createSinglePage,
   useList,
@@ -16,14 +16,14 @@ export interface SupabaseSourceOptions<Query> {
   supabaseClient?: SupabaseClient;
   select?: string;
   filter?: (
-    queryBuilder: PostgrestFilterBuilder<any, any, any>,
-    query?: Query
+    queryBuilder: PostgrestFilterBuilder<any, any, any, any>,
+    query?: Query,
   ) => void;
 }
 
 export function useSupabaseTable<Type, Query = string>(
   from: string,
-  ops?: SupabaseSourceOptions<Query> & ListOptions<Query>
+  ops?: SupabaseSourceOptions<Query> & ListOptions<Query>,
 ): ListData<Type, Query> {
   const { filter, filtering, ...rest } = ops || {};
   const modifiedOps = {
@@ -38,13 +38,13 @@ export function useSupabaseTable<Type, Query = string>(
 
 export function useSupabaseSource<Type, Query>(
   from: string,
-  ops?: SupabaseSourceOptions<Query>
+  ops?: SupabaseSourceOptions<Query>,
 ) {
   const supabaseClient = useSupabaseClient(ops?.supabaseClient);
 
   const source = useMemo<ListSource<Type, Query>>(
     () => createSupabaseSource<Type, Query>(supabaseClient, from, ops),
-    [supabaseClient, from, ops?.select]
+    [supabaseClient, from, ops?.select],
   );
   return source;
 }
@@ -52,7 +52,7 @@ export function useSupabaseSource<Type, Query>(
 export function createSupabaseSource<Type, Query>(
   supabaseClient: SupabaseClient,
   from: string,
-  ops?: SupabaseSourceOptions<Query>
+  ops?: SupabaseSourceOptions<Query>,
 ): ListSource<Type, Query> {
   return async (state) => {
     const {
@@ -104,7 +104,7 @@ export function createSupabaseSource<Type, Query>(
 
 export function useSupabaseTableQuery<Type, Query>(
   table: string,
-  ops?: SupabaseSourceOptions<Query> & ListOptions<Query>
+  ops?: SupabaseSourceOptions<Query> & ListOptions<Query>,
 ) {
   const supabaseClient = useSupabaseClient(ops?.supabaseClient);
   const source: ListSource<Type, Query> = useCallback(
@@ -150,7 +150,7 @@ export function useSupabaseTableQuery<Type, Query>(
 
       return createPages(data as Type[]);
     },
-    []
+    [],
   );
 
   return useList(source, ops);

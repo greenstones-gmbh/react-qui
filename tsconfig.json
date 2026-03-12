@@ -29,7 +29,8 @@
     // Workspace package paths
     "paths": {
       "@greenstones/qui-core": ["./packages/qui-core/index.ts"],
-      "@greenstones/qui-bootstrap": ["./packages/qui-bootstrap/index.ts"]
+      "@greenstones/qui-bootstrap": ["./packages/qui-bootstrap/index.ts"],
+      "@greenstones/qui-supabase": ["./packages/qui-supabase/index.ts"]
     }
   }
 }

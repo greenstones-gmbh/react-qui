@@ -1,6 +1,10 @@
-import { AuthContext, type BaseAuthProps, useRoles } from "@greenstones/qui-core";
-import { Provider, SupabaseClient } from "@supabase/supabase-js";
-import { PropsWithChildren, useEffect, useState } from "react";
+import {
+  AuthContext,
+  type BaseAuthProps,
+  useRoles,
+} from "@greenstones/qui-core";
+import { type Provider, SupabaseClient } from "@supabase/supabase-js";
+import { type PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSupabaseClient } from "../SupabaseContext";
 
@@ -48,7 +52,7 @@ export function SupabaseAuth({
             navigate(afterLogoutPath ?? "/");
           }
         }
-      }
+      },
     );
     return () => authListener.subscription.unsubscribe();
   }, []);
@@ -80,7 +84,7 @@ export function SupabaseAuth({
   const loginWithPassword = async (
     username: string,
     password: string,
-    returnTo?: string
+    returnTo?: string,
   ) => {
     const { data, error } = await supabaseClient.auth.signInWithPassword({
       email: username,
@@ -128,7 +132,7 @@ export function SupabaseAuth({
 export function tableRoleMapper(
   supabaseClient: SupabaseClient,
   table: string,
-  roleColumn: string = "role"
+  roleColumn: string = "role",
 ) {
   return async (user: any) => {
     const { data } = await supabaseClient

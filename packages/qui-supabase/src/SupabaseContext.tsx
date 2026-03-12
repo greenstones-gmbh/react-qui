@@ -1,11 +1,11 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { createContext, PropsWithChildren, useContext } from "react";
+import { createContext, type PropsWithChildren, useContext } from "react";
 
 export const CreateReactApp = {
   createSupabaseClient: () => {
     return createClient(
       process.env.REACT_APP_SUPABASE_URL!,
-      process.env.REACT_APP_SUPABASE_SERVICE_ANON_KEY!
+      process.env.REACT_APP_SUPABASE_SERVICE_ANON_KEY!,
     );
   },
 };
@@ -15,12 +15,12 @@ export const ViteApp = {
     console.log(
       "create supabase client from vite env",
       import.meta.env.VITE_SUPABASE_URL,
-      import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY
+      import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY,
     );
 
     return createClient(
       import.meta.env.VITE_SUPABASE_URL!,
-      import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY!
+      import.meta.env.VITE_SUPABASE_SERVICE_ANON_KEY!,
     );
   },
 };

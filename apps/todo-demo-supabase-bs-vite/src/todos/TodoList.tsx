@@ -42,11 +42,11 @@ export function TodoList() {
             >
               {v.is_complete ? "Reset" : "Complete"}
             </ActionButton>
-          ))
+          )),
         )
         .add(ListActionsColumns.editDeleteCopyButtons(actions));
     },
-    [actions]
+    [actions],
   );
 
   return (
@@ -62,7 +62,7 @@ export function TodoList() {
           <QueryDropdown
             query={list.query!}
             field="hideCompleted"
-            label="Is complete?"
+            label="Hide completed?"
             values={[true, false]}
             labels={["Yes", "No"]}
           />

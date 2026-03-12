@@ -1,14 +1,13 @@
-import { DataRepository } from "@greenstones/qui-core";
+import type { DataRepository } from "@greenstones/qui-core";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Identifiable } from "./Identifiable";
+import type { Identifiable } from "./Identifiable";
 
 export class SupabaseRepository<
   T extends Record<string, any>,
   Id extends Record<string, any> = Identifiable,
   CreateType = Omit<T, keyof Id> & Partial<Id>,
-  UpdateType = Partial<T>
-> implements DataRepository<T, Id, CreateType, UpdateType>
-{
+  UpdateType = Partial<T>,
+> implements DataRepository<T, Id, CreateType, UpdateType> {
   private table: string;
   private supabase: SupabaseClient;
   private primaryKeys: (keyof Id)[];
@@ -16,7 +15,7 @@ export class SupabaseRepository<
   constructor(
     supabase: SupabaseClient,
     tableName: string,
-    primaryKeys: (keyof Id)[] = ["id"]
+    primaryKeys: (keyof Id)[] = ["id"],
   ) {
     this.table = tableName;
     this.supabase = supabase;
@@ -80,7 +79,7 @@ export class SupabaseRepository<
 
 function pick<T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Pick<T, K> {
   const result = {} as Pick<T, K>;
   for (const key of keys) {

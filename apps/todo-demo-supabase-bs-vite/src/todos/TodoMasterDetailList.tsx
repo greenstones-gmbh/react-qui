@@ -80,11 +80,11 @@ export function TodoMasterDetailListPage() {
             >
               {v.is_complete ? "Reset" : "Complete"}
             </ActionButton>
-          ))
+          )),
         )
         .add(ListActionsColumns.editDeleteButtons(actions));
     },
-    [actions]
+    [actions],
   );
 
   return (
@@ -130,7 +130,7 @@ export function TodoMasterDetailPage() {
 
   const result = useSupabaseQuery(
     (supabase, id) => supabase.from("todos").select("*").eq("id", id).single(),
-    id
+    id,
   );
 
   const actions = useTodoActions({
