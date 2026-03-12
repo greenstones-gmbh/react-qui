@@ -3,9 +3,8 @@
 > Bootstrap 5 high-level component library — application layouts, list and details pages, tables with actions, modals.
 
 [![npm version](https://img.shields.io/npm/v/@greenstones/qui-bootstrap)](https://www.npmjs.com/package/@greenstones/qui-bootstrap)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.3-purple)](https://getbootstrap.com/)
+
 
 ---
 
@@ -41,7 +40,6 @@ bun add @greenstones/qui-core bootstrap react-bootstrap react-hook-form \
 Import the stylesheet once in your app entry point:
 
 ```ts
-import '@greenstones/qui-bootstrap/dist/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 

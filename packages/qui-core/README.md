@@ -4,7 +4,6 @@ Reusable high-level components for authentication, secure routing, list and deta
 
 [![npm version](https://img.shields.io/npm/v/@greenstones/qui-core)](https://www.npmjs.com/package/@greenstones/qui-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
 
 ---
 
@@ -31,20 +30,6 @@ bun add @greenstones/qui-core
 
 ```bash
 bun install react react-dom react-router-dom date-fns file-saver
-```
-
-| Package | Version |
-|---|---|
-| `react` | `^18.3.1` |
-| `react-dom` | `^18.3.1` |
-| `react-router-dom` | `^6.27.0` |
-| `date-fns` | `^4.1` |
-| `file-saver` | `^2.0.5` |
-
-### CSS
-
-```tsx
-import '@greenstones/qui-core/dist/style.css';
 ```
 
 ---
