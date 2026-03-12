@@ -1,0 +1,9 @@
+.bg-purple,
+.bg-sidebar {
+  background-color: #5046e6;
+}
+
+.bg-purple .nav-pills .nav-link.active,
+.bg-sidebar .nav-pills .nav-link.active {
+  --bs-nav-pills-link-active-bg: #4338ca;
+}

@@ -4,12 +4,6 @@
   "version": "0.0.7",
   "type": "module",
   "module": "index.ts",
-  "exports": {
-    ".": "./index.ts",
-    "./Sidebar.css": "./src/lib/app/Sidebar.css",
-    "./CollapseNav.css": "./src/lib/nav/CollapseNav.css",
-    "./NavLink.css": "./src/lib/nav/NavLink.css"
-  },
   "scripts": {
     "lint": "eslint .",
     "storybook": "storybook dev -p 6006",

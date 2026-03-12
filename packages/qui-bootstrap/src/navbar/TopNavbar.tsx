@@ -1,8 +1,10 @@
 import { Container, Navbar } from "react-bootstrap";
 
 import classNames from "classnames";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { useLayoutPrefs } from "../app/LayoutContext";
+
+import "./TopNavbar.css";
 
 export function TopNavbar({
   theme,
