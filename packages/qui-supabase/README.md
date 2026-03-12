@@ -71,12 +71,12 @@ interface Task { id: string; title: string; done: boolean }
 function TaskListPage() {
   const listData = useSupabaseTable<Task>('tasks', {
     paging: true,
-    pageSize: 20,
+    initialPageSize: 20,
   });
 
   return (
     <ul>
-      {listData.data?.items.map(t => <li key={t.id}>{t.title}</li>)}
+      {listData.items?.map(t => <li key={t.id}>{t.title}</li>)}
     </ul>
   );
 }
