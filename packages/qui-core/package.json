@@ -1,7 +1,7 @@
 {
   "name": "@greenstones/qui-core",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.1",
   "type": "module",
   "module": "index.ts",
   "scripts": {

@@ -1,8 +1,20 @@
 import classNames from "classnames";
 import type { PropsWithChildren, ReactNode } from "react";
-import { BasePage } from "./BasePage";
+import { BasePage, type BasePageOptions } from "./BasePage";
 import { GenericErrorPage } from "./ErrorPage";
 import { LoadingPage } from "./LoadingPage";
+
+export interface PageOptions extends BasePageOptions {
+  breadcrumb?: ReactNode;
+  header?: ReactNode | string;
+  headerLead?: ReactNode | string;
+  subheader?: ReactNode;
+  footer?: ReactNode;
+  scrollBody?: boolean;
+  fillBody?: boolean;
+  loading?: boolean;
+  error?: any;
+}
 
 /** 
   Page with header, subheader/toolbar, scrollable body, and footer.
@@ -11,6 +23,7 @@ import { LoadingPage } from "./LoadingPage";
 export function Page({
   breadcrumb,
   header,
+  headerLead,
   subheader,
   footer,
   scrollBody = true,
@@ -22,20 +35,9 @@ export function Page({
   children,
   loading,
   error,
-}: PropsWithChildren<{
-  breadcrumb?: ReactNode;
-  header?: ReactNode | string;
-  subheader?: ReactNode;
-  footer?: ReactNode;
-  scrollBody?: boolean;
-  fillBody?: boolean;
-  fluid?: boolean;
-  className?: string;
-  insets?: string;
-  noInsets?: boolean;
-  loading?: boolean;
-  error?: any;
-}>) {
+  containerWidth,
+  containerClassName,
+}: PageOptions) {
   let h = undefined;
 
   if (loading) return <LoadingPage />;
@@ -44,7 +46,7 @@ export function Page({
 
   if (header) {
     if (typeof header === "string") {
-      h = <PageHeader>{header}</PageHeader>;
+      h = <PageHeader lead={headerLead}>{header}</PageHeader>;
     } else {
       h = header;
     }
@@ -56,6 +58,8 @@ export function Page({
       fluid={fluid}
       insets={insets}
       noInsets={noInsets}
+      containerWidth={containerWidth}
+      containerClassName={containerClassName}
     >
       {breadcrumb}
       {h}
@@ -76,13 +80,32 @@ export function Page({
 export function PageHeader({
   children,
   addon,
-}: { addon?: ReactNode | undefined } & PropsWithChildren) {
+  lead,
+}: {
+  addon?: ReactNode | undefined;
+  lead?: ReactNode | string;
+} & PropsWithChildren) {
+  let l;
+
+  const leadExists = !!lead;
+
+  if (leadExists) {
+    if (typeof lead === "string") {
+      l = <div className="lead">{lead}</div>;
+    } else {
+      l = lead;
+    }
+  }
+
   return (
-    <div className="d-flex align-items-center mb-3 gap-3">
-      <div>
-        <h1 className="mb-0">{children}</h1>
+    <div className="mb-3">
+      <div className="d-flex align-items-center gap-3">
+        <div>
+          <h1 className="mb-0">{children}</h1>
+        </div>
+        {addon}
       </div>
-      {addon}
+      {leadExists && <div className="mt-1">{l}</div>}
     </div>
   );
 }

@@ -16,12 +16,11 @@
   },
   "peerDependencies": {
     "@greenstones/qui-core": "*",
-    "bootstrap": "^5.3.3",
-    "classnames": "^2.5.1",
+    "classnames": "catalog:",
     "react": "catalog:",
-    "react-bootstrap": "^2.10.5",
+    "react-bootstrap": "catalog:",
     "react-dom": "catalog:",
-    "react-hook-form": "^7.53.1",
+    "react-hook-form": "catalog:",
     "react-icons": "^5.3.0",
     "react-router-dom": "catalog:"
   },

@@ -11,10 +11,9 @@
     "pub-local-bs": "bun publish --cwd packages/qui-bootstrap --registry http://0.0.0.0:4873 --access public",
     "pub-local-supabase": "bun publish --cwd packages/qui-supabase --registry http://0.0.0.0:4873 --access public",
     "pub-local": "bun run pub-local-core && bun run pub-local-bs && bun run pub-local-supabase",
-    "build-all": "bun --filter './packages/qui-core' run build && bun --filter './packages/qui-bootstrap' run build && bun --filter './packages/qui-supabase' run build",
-    "pub-core": "bun publish --cwd packages/qui-core --access public",
-    "pub-bs": "bun publish --cwd packages/qui-bootstrap --access public",
-    "pub-supabase": "bun publish --cwd packages/qui-supabase --access public"
+    "pub-core-apha": "bun publish --cwd packages/qui-core --access public --tag alpha",
+    "pub-bs-apha": "bun publish --cwd packages/qui-bootstrap --access public --tag alpha",
+    "pub-supabase-apha": "bun publish --cwd packages/qui-supabase --access public --tag alpha"
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {
@@ -44,6 +43,9 @@
     "react-router-dom": "^7",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "date-fns": "^4.1"
+    "date-fns": "^4.1",
+    "react-bootstrap": "^2.10",
+    "classnames": "^2",
+    "react-hook-form": "^7"
   }
 }

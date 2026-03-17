@@ -27,6 +27,7 @@ interface ListPageProps<Type, Query> {
   filterField?: keyof Query;
   createButtonProps?: ActionButtonDisplayProps;
   tableProps?: QuickTableDisplayProps<Type>;
+  breadcrumb?: ReactNode;
 }
 
 export function ListPage<Type, Query>(props: ListPageProps<Type, Query>) {
@@ -51,6 +52,7 @@ export function ListPage<Type, Query>(props: ListPageProps<Type, Query>) {
     <Page
       header={props.header}
       subheader={toolbar}
+      breadcrumb={props.breadcrumb}
       footer={<Paging paging={props.list.paging} />}
     >
       <QuickTable

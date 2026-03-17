@@ -1,0 +1,41 @@
+{
+  "name": "@greenstones/qui-ai",
+  "private": false,
+  "version": "0.0.1-alpha.1",
+  "type": "module",
+  "module": "index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@greenstones/qui-bootstrap": "workspace:*",
+    "@greenstones/qui-core": "workspace:*",
+    "chroma-js": "^3.2.0",
+    "classnames": "^2.5.1",
+    "lucide-react": "^0.500",
+    "react-markdown": "^10.1.0",
+    "recharts": "^3",
+    "rehype-raw": "^7",
+    "remark-gfm": "^4"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
+  },
+  "peerDependencies": {
+    "date-fns": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-bootstrap": "catalog:",
+    "react-router-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "@ai-sdk/amazon-bedrock": "^4",
+    "@ai-sdk/anthropic": "^3",
+    "@ai-sdk/openai": "^3",
+    "@openai/agents": "^0.7",
+    "@openai/agents-extensions": "^0.7"
+  },
+  "sideEffects": false
+}
