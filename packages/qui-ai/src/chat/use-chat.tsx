@@ -11,19 +11,35 @@ import {
   type Session,
   type UnknownItem,
 } from "@openai/agents";
+
 import React, {
   startTransition,
   useEffect,
   useOptimistic,
   useRef,
   useState,
-  type ComponentProps,
-  type ElementType,
   type ReactElement,
-  type ReactNode,
 } from "react";
 import type { MessageItem } from "./MessageItem";
-import type { ExtraProps } from "react-markdown";
+
+// Safari < 16.4 polyfill: ReadableStream does not implement Symbol.asyncIterator
+if (
+  typeof ReadableStream !== "undefined" &&
+  !(ReadableStream.prototype as any)[Symbol.asyncIterator]
+) {
+  (ReadableStream.prototype as any)[Symbol.asyncIterator] = async function* () {
+    const reader = this.getReader();
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) return;
+        yield value;
+      }
+    } finally {
+      reader.releaseLock();
+    }
+  };
+}
 
 const MAX_MESSAGES = 20;
 

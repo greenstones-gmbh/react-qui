@@ -1,14 +1,13 @@
-import { ListPage, Page, QuickTable } from "@greenstones/qui-bootstrap";
+import { AssistantButton, useChat } from "@greenstones/qui-ai";
+import { ListPage } from "@greenstones/qui-bootstrap";
 import {
   Filters,
   Sorters,
   useArray,
   useColumnBuilder,
-  useColumnGenerator,
   useFetch,
-  useList,
 } from "@greenstones/qui-core";
-import { Breadcrumb } from "react-bootstrap";
+import { appAgent, appAgentSession } from "../AppAgent";
 
 interface User {
   id: number;
@@ -42,5 +41,14 @@ export function TodoListPage() {
       .prop("company.name", { header: "Company" }),
   );
 
-  return <ListPage header="List Page" list={list} columns={columns1} />;
+  const chat = useChat({
+    agent: appAgent,
+    session: appAgentSession,
+  });
+
+  return (
+    <ListPage header="List Page" list={list} columns={columns1}>
+      <AssistantButton chat={chat} />
+    </ListPage>
+  );
 }

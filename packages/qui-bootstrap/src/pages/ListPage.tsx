@@ -17,7 +17,7 @@ import {
 import { Page } from "./Page";
 import { type BaseListActions } from "../actions";
 
-interface ListPageProps<Type, Query> {
+interface ListPageProps<Type, Query> extends PropsWithChildren {
   header?: ReactNode;
   list: ListData<Type, Query>;
   toolbar?: ReactNode;
@@ -61,6 +61,7 @@ export function ListPage<Type, Query>(props: ListPageProps<Type, Query>) {
         sorting={props.list.sorting}
         columns={props.columns}
       />
+      {props.children}
     </Page>
   );
 }
