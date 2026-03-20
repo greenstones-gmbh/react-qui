@@ -1,5 +1,6 @@
 import {
   ActionButton,
+  BsFieldRenderers,
   DetailModelView,
   ListItemButtons,
   ListPage,
@@ -102,7 +103,13 @@ export function MasterDetailPage() {
     b.addLine(Fields.byProp("email"));
     b.addLine(Fields.byProp("phone"));
     b.block();
-    b.addLine(Fields.byNestedProp("company.name"));
+    b.addLine(
+      Fields.byNestedProp("company.name", {
+        renderField: BsFieldRenderers.asExternalLink({
+          href: () => "asdas",
+        }),
+      }),
+    );
     b.addLine(Fields.byNestedProp("company.bs"));
   });
 

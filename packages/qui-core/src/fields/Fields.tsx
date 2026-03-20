@@ -1,6 +1,6 @@
+import type { HTMLAttributeAnchorTarget, ReactElement, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { DateFormatter } from "../components/DateFormatter";
-import type { ReactElement } from "react";
 
 // Fields
 
@@ -96,6 +96,37 @@ export const FieldRenderers = {
       type: "date" | "time" | "datetime" = "date",
     ): RenderFieldFunction<any, string> =>
     (v) => <DateFormatter isoString={v} type={type} />,
+
+  asExternalLink<EntityType, FieldType>({
+    className,
+    target = "_blank",
+    href,
+    postEl,
+    title,
+  }: {
+    className?: string;
+    target?: HTMLAttributeAnchorTarget;
+    href: (v: EntityType) => string | undefined;
+    postEl?: ReactNode;
+    title?: string;
+  }): RenderFieldFunction<EntityType, FieldType> {
+    return (v, e) => {
+      const h = href(e);
+      if (!h) return <Value value={v} />;
+      return (
+        <a
+          href={href(e)}
+          className={className}
+          target={target}
+          rel="noopener"
+          title={title}
+        >
+          <Value value={v} />
+          {postEl}
+        </a>
+      );
+    };
+  },
 };
 
 function Value({ value }: { value: any }) {

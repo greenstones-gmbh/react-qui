@@ -1,5 +1,5 @@
 import { AssistantButton, useChat } from "@greenstones/qui-ai";
-import { ListPage } from "@greenstones/qui-bootstrap";
+import { BsFieldRenderers, ListPage } from "@greenstones/qui-bootstrap";
 import {
   Filters,
   Sorters,
@@ -37,7 +37,12 @@ export function TodoListPage() {
       .column("username", { header: "Username" })
       .column("name")
       .column("email")
-      .column("phone")
+      .column("phone", {
+        renderField: BsFieldRenderers.asExternalLink({
+          href: (e) => `https://asdas.de/${e.username}`,
+          title: "Open in AreaManager",
+        }),
+      })
       .prop("company.name", { header: "Company" }),
   );
 

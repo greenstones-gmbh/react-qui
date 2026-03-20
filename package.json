@@ -13,7 +13,12 @@
     "pub-local": "bun run pub-local-core && bun run pub-local-bs && bun run pub-local-supabase",
     "pub-core-apha": "bun publish --cwd packages/qui-core --access public --tag alpha",
     "pub-bs-apha": "bun publish --cwd packages/qui-bootstrap --access public --tag alpha",
-    "pub-supabase-apha": "bun publish --cwd packages/qui-supabase --access public --tag alpha"
+    "pub-supabase-apha": "bun publish --cwd packages/qui-supabase --access public --tag alpha",
+    "pub-core": "bun publish --cwd packages/qui-core --access public",
+    "pub-bs": "bun publish --cwd packages/qui-bootstrap --access public",
+    "pub-supabase": "bun publish --cwd packages/qui-supabase --access public",
+    "pub-ai": "bun publish --cwd packages/qui-ai --access public",
+    "pub": "bun run pub-core && bun run pub-bs && bun run pub-supabase"
   },
   "author": "artem.grinstein@greenstones.de",
   "devDependencies": {

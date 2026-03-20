@@ -75,6 +75,7 @@ export const AssistantButton = ({
             bottom: "5.4rem",
             right: "1.2rem",
             width: "28rem",
+            zIndex: 200000,
           }}
         >
           <ChatPanel
