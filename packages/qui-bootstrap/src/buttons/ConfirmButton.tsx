@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import { OpenModalButton } from "./OpenModalButton";
 
@@ -15,6 +15,7 @@ export function ConfirmButton({
   variant = "outline-primary",
   className,
   disabled,
+  style,
 }: {
   onClick: () => Promise<void>;
   confirmTitle?: ReactNode;
@@ -29,6 +30,7 @@ export function ConfirmButton({
   variant?: string;
   className?: string;
   disabled?: boolean;
+  style?: CSSProperties;
 }) {
   return (
     <OpenModalButton
@@ -37,6 +39,7 @@ export function ConfirmButton({
       label={label}
       className={className}
       disabled={disabled}
+      style={style}
       modal={(close) => {
         return (
           <ConfirmModal

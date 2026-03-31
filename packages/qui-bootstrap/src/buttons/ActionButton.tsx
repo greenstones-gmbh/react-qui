@@ -1,4 +1,9 @@
-import { type PropsWithChildren, type ReactNode, useState } from "react";
+import {
+  type CSSProperties,
+  type PropsWithChildren,
+  type ReactNode,
+  useState,
+} from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useModals } from "../modals/Modals";
 
@@ -15,6 +20,7 @@ export interface ActionButtonDisplayProps extends PropsWithChildren {
   className?: string;
   size?: "sm" | "lg";
   label?: string;
+  style?: CSSProperties;
 }
 
 export const ActionButton = ({
@@ -28,6 +34,7 @@ export const ActionButton = ({
   errorTitle = "Action Failed",
   errorBody,
   label,
+  style,
   ...props
 }: ActionButtonProps) => {
   const [running, setRunning] = useState(false);
@@ -40,6 +47,7 @@ export const ActionButton = ({
       disabled={disabled || running}
       className={className}
       size={size}
+      style={style}
       onClick={(e) => {
         setRunning(true);
 

@@ -19,8 +19,10 @@ import React, {
   useRef,
   useState,
   type ReactElement,
+  type ReactNode,
 } from "react";
 import type { MessageItem } from "./MessageItem";
+import type { FunctionCallProps } from "./messages/FunctionCall";
 
 // Safari < 16.4 polyfill: ReadableStream does not implement Symbol.asyncIterator
 if (
@@ -58,6 +60,9 @@ export interface Chat {
   isRunning: boolean;
   usage: Usage;
   widgets?: Widgets;
+  examples?: string[];
+  functionCalls?: Record<string, (props: FunctionCallProps) => ReactNode>;
+  defaultFunctionCall?: (props: FunctionCallProps) => ReactNode;
 }
 
 export interface Widgets {
@@ -69,6 +74,9 @@ export interface ChatOption<Context> {
   session: Session;
   provider?: () => { context: Context; state: any };
   widgets?: Widgets;
+  examples?: string[];
+  functionCalls?: Record<string, (props: FunctionCallProps) => ReactNode>;
+  defaultFunctionCall?: (props: FunctionCallProps) => ReactNode;
 }
 
 export function useChat<Context>({
@@ -76,6 +84,9 @@ export function useChat<Context>({
   session,
   provider,
   widgets,
+  examples,
+  functionCalls,
+  defaultFunctionCall,
 }: ChatOption<Context>): Chat {
   const [usage, setUsage] = useState<Usage>(new Usage());
   const [history, setHistory] = useState<MessageItem[]>([]);
@@ -203,7 +214,7 @@ export function useChat<Context>({
             const d = event.data.delta;
             startTransition(() => {
               addStreamingMessage(d);
-              scrollToTheEnd();
+              if (d.indexOf("\n") !== -1) scrollToTheEnd();
             });
             //await new Promise((resolve) => setTimeout(resolve, 1000));
           }
@@ -269,6 +280,9 @@ export function useChat<Context>({
     isRunning,
     usage,
     widgets,
+    examples,
+    functionCalls,
+    defaultFunctionCall,
   };
 }
 

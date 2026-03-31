@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Info } from "lucide-react";
 
 import { Overlay, Popover } from "react-bootstrap";
 import { ActionLink } from "../buttons/ActionLink";
@@ -14,7 +15,7 @@ export function IconPopupTrigger({ Icon, children, className }: any) {
         className={className}
         onClick={async () => setShow(!show)}
       >
-        <Icon color="#777" size={12} />
+        <Icon color="#777" size={12} style={{ marginTop: -2 }} />
       </ActionLink>
 
       <Overlay
@@ -29,5 +30,17 @@ export function IconPopupTrigger({ Icon, children, className }: any) {
         </Popover>
       </Overlay>
     </>
+  );
+}
+
+export function InfoPopup({ v }: any) {
+  if (!v) return undefined;
+  const text = typeof v === "string" ? v : JSON.stringify(v, null, 2);
+  return (
+    <IconPopupTrigger Icon={Info} className="ms-2">
+      <div className="overflow-auto" style={{ maxHeight: 400 }}>
+        <pre>{text}</pre>
+      </div>
+    </IconPopupTrigger>
   );
 }

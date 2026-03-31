@@ -4,7 +4,6 @@ import { ChatPanel, EmptyPlaceholder, type ChatPanelProps } from "./ChatPanel";
 export function ChatPage({
   chat,
   empty = <EmptyPlaceholder />,
-  examples,
   tools,
   variant,
   formClassName,
@@ -23,7 +22,6 @@ export function ChatPage({
           empty,
           formClassName,
           tools,
-          examples,
           variant,
         }}
       />

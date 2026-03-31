@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const BootstrapStylesComponents = {
   h1: ({ children }) => <h1 className="">{children}</h1>,
   h2: ({ children }) => <h2 className="">{children}</h2>,
@@ -16,22 +18,22 @@ export const BootstrapStylesComponents = {
   thead: ({ children }) => <thead className="">{children}</thead>,
   th: ({ children }) => <th>{children}</th>,
   td: ({ children }) => <td>{children}</td>,
-  code: ({ inline, children }) =>
-    inline ? (
+  code: ({ inline, children, ...props }) => {
+    return inline ? (
       <code className="bg-light text-danger rounded">{children}</code>
     ) : (
       // <pre className="bg-light p-2 rounded my-1">
       <code>{children}</code>
       // </pre>
-    ),
+    );
+  },
+  pre: ({ children }) => (
+    <pre className="bg-light p-3 my-2 border rounded">{children}</pre>
+  ),
   strong: ({ children }) => <strong className="">{children}</strong>,
   em: ({ children }) => (
     <em className="fst-italic text-secondary">{children}</em>
   ),
   hr: () => <hr className="" />,
-  a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noreferrer">
-      {children}
-    </a>
-  ),
+  a: ({ href, children }) => <Link to={href}>{children}</Link>,
 };

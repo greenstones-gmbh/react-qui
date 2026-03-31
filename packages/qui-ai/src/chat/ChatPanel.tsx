@@ -6,7 +6,11 @@ import { MarkdownContent } from "../md/MarkdownContent";
 import { ChatForm } from "./ChatForm";
 import { ChatMessages } from "./ChatMessages";
 import { AssistantMessage } from "./messages/AssistantMessage";
-import { FunctionCall } from "./messages/FunctionCall";
+import {
+  FunctionCall,
+  FunctionCalls,
+  type FunctionCallProps,
+} from "./messages/FunctionCall";
 import { UserMessage } from "./messages/UserMessage";
 import { MessageContent } from "./TextContent";
 import type { Chat } from "./use-chat";
@@ -14,7 +18,6 @@ import type { Chat } from "./use-chat";
 export interface ChatPanelProps {
   chat: Chat;
   empty?: ReactNode;
-  examples?: string[];
   tools?: ReactNode;
   variant?: undefined | "bordered" | "standard";
   formClassName?: string;
@@ -31,7 +34,6 @@ export function ChatPanel({
   empty,
   formClassName,
   tools,
-  examples,
   variant,
   centerOnEmpty = true,
   chatMessagesClassName = "gap-3",
@@ -76,7 +78,13 @@ export function ChatPanel({
               />
             )}
             renderFunctionCall={(call, result) => (
-              <FunctionCall call={call} result={result} />
+              <FunctionCalls
+                call={call}
+                result={result}
+                defaultFunctionCalls={chat.defaultFunctionCall}
+                functionCalls={chat.functionCalls}
+              />
+              // <FunctionCall {...{ call, result }} />
             )}
           />
 
@@ -111,7 +119,7 @@ export function ChatPanel({
           chat={chat}
           className={formClassName}
           tools={tools}
-          examples={examples}
+          examples={chat.examples}
           variant={variant}
         />
         {centerOnEmpty && isEmptyChat && (

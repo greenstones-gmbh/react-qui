@@ -77,8 +77,6 @@ export function ChatForm({
       break;
   }
 
-  console.log(variantProps);
-
   return (
     <div className={classNames(variantProps.mainClassName, className)}>
       <form
