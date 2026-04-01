@@ -52,10 +52,6 @@ export const AssistantButton = ({
           <Offcanvas.Body className="flex-fill d-flex flex-column">
             <ChatPanel
               chat={chat}
-              examples={[
-                "What’s the weather like in Frankfurt?",
-                "Create a table listing the current weather in the 5 largest German cities",
-              ]}
               userMessagePosition="end"
               centerOnEmpty={false}
               chatMessagesClassName="gap-1"
@@ -80,10 +76,6 @@ export const AssistantButton = ({
         >
           <ChatPanel
             chat={chat}
-            examples={[
-              "What’s the weather like in Frankfurt?",
-              "Create a table listing the current weather in the 5 largest German cities",
-            ]}
             userMessagePosition="end"
             centerOnEmpty={false}
             chatMessagesClassName="gap-1"

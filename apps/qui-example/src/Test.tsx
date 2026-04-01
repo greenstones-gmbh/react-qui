@@ -7,17 +7,16 @@ import {
 import { Nav, NavDropdown } from "react-bootstrap";
 import { BsBook } from "react-icons/bs";
 import { BrowserRouter, Route } from "react-router-dom";
-import { SimpleTable } from "./tables/SimpleTable";
-import { TodoListPage } from "./pages/TodoListPage";
-import { AiChat, ChatLight } from "./agents/ChatLight";
+import { ChatLight } from "./agents/ChatLight";
 import { WeatherAgentPage } from "./agents/WeatherAgentPage";
-import { SimplePage } from "./pages/SimplePage";
 import {
   MasterDetailContainer,
   MasterDetailListPage,
   MasterDetailPage,
-  TodoMasterDetailContainer,
 } from "./pages/MasterDetailPage";
+import { SimplePage } from "./pages/SimplePage";
+import { TodoListPage } from "./pages/TodoListPage";
+import { SimpleTable } from "./tables/SimpleTable";
 
 export function Test() {
   return (

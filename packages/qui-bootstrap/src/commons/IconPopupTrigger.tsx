@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { Info } from "lucide-react";
 
 import { Overlay, Popover } from "react-bootstrap";
+import { BsInfoCircle } from "react-icons/bs";
 import { ActionLink } from "../buttons/ActionLink";
 
 export function IconPopupTrigger({ Icon, children, className }: any) {
@@ -33,11 +33,12 @@ export function IconPopupTrigger({ Icon, children, className }: any) {
   );
 }
 
-export function InfoPopup({ v }: any) {
+export function InfoPopup({ v, Icon = BsInfoCircle }: any) {
   if (!v) return undefined;
+
   const text = typeof v === "string" ? v : JSON.stringify(v, null, 2);
   return (
-    <IconPopupTrigger Icon={Info} className="ms-2">
+    <IconPopupTrigger Icon={Icon} className="ms-2">
       <div className="overflow-auto" style={{ maxHeight: 400 }}>
         <pre>{text}</pre>
       </div>

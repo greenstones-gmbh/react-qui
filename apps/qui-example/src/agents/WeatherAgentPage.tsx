@@ -109,6 +109,10 @@ export function WeatherAgentPage() {
     agent,
     session,
     widgets,
+    examples: [
+      "What’s the weather like in Frankfurt?",
+      "Create a table listing the current weather in the 5 largest German cities",
+    ],
   });
 
   return (
@@ -119,10 +123,6 @@ export function WeatherAgentPage() {
           shows temperatures, conditions, and forecasts for any city on demand.
       `}
       chat={chat}
-      examples={[
-        "What’s the weather like in Frankfurt?",
-        "Create a table listing the current weather in the 5 largest German cities",
-      ]}
       containerWidth={6}
       variant="bordered"
       formClassName="bg-light"

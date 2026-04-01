@@ -28,7 +28,6 @@ export function ChatLight() {
     <ChatPage
       header="Chat (light styling)"
       chat={chat}
-      examples={[]}
       containerWidth={5}
       variant="bordered"
       formClassName="bg-white"

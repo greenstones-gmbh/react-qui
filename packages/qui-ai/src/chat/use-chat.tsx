@@ -290,7 +290,7 @@ function cleanupMessages(history: MessageItem[]) {
   return history.map((m: any) => {
     if (m.role === "user") {
       m.content = m.content.filter(
-        (cm) =>
+        (cm: any) =>
           !(
             cm.text.startsWith("@@@CURRENT_STATE@@@") ||
             cm.text.startsWith("@@@DATA@@@")
@@ -330,7 +330,7 @@ function createInput(
 
 function getUsage(result: StreamedRunResult<any, any>) {
   const modelResponses = (result as any).state._modelResponses;
-  const usages: Usage[] = modelResponses.map((m) => m.usage);
+  const usages: Usage[] = modelResponses.map((m: any) => m.usage);
   const sum = new Usage();
   usages.forEach((u) => {
     sum.add(u);

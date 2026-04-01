@@ -19,7 +19,7 @@
     "@openai/agents-extensions": "^0.7.2",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
-    "lucide-react": "^0.577.0",
+    "lucide-react": "^1.7.0",
     "react": "catalog:",
     "react-bootstrap": "^2.10.5",
     "react-dom": "catalog:",
@@ -33,6 +33,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^4.3.3",
     "globals": "^15.11.0",
+    "typescript": "^6.0.2",
     "vite": "^5.4.10"
   }
 }

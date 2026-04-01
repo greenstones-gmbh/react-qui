@@ -6,7 +6,7 @@ import { renderToString } from "react-dom/server";
 export function convertToCsv<Type>(columns: Column<Type>[], data: Type[]) {
   console.log("convertToCsv", columns);
   const separator = ";";
-  const lines = [];
+  const lines: string[] = [];
   const header = columns
     .map((c: Column<Type>) => sanitize(c.header))
     .join(separator);
@@ -38,14 +38,14 @@ export function writeCsv(fileName: string, csv: any) {
 
   FileSaver.saveAs(
     blob,
-    `${fileName}_${format(new Date(), "yyyyMMdd-HHmm")}.csv`
+    `${fileName}_${format(new Date(), "yyyyMMdd-HHmm")}.csv`,
   );
 }
 
 export function exportToCsv<Type>(
   columns: Column<Type>[],
   data: Type[],
-  fileName: string
+  fileName: string,
 ) {
   const csv = convertToCsv(columns, data);
   writeCsv(fileName, csv);

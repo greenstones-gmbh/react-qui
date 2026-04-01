@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import type { Widgets } from "../chat";
 
-export const BootstrapStylesComponents = {
+export const BootstrapStylesComponents: Widgets = {
   h1: ({ children }) => <h1 className="">{children}</h1>,
   h2: ({ children }) => <h2 className="">{children}</h2>,
   h3: ({ children }) => <h3 className="h3 mt-4 mb-3">{children}</h3>,

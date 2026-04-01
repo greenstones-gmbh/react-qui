@@ -38,7 +38,7 @@ export function Page({
   containerWidth,
   containerClassName,
 }: PageOptions) {
-  let h = undefined;
+  let h: ReactNode = undefined;
 
   if (loading) return <LoadingPage />;
 

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ArrowUp, Loader, Trash, WandSparkles } from "lucide-react";
 import { useRef, type ReactNode, type Ref } from "react";
 import { Button, ButtonToolbar, Dropdown, Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import type { Chat } from "./use-chat";
 import "./ChatForm.css";
 
@@ -29,7 +29,7 @@ export function ChatForm({
   });
 
   const field = register("message", { required: true });
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     const msg = data.message;
     if (msg) {
       chat.callChat(msg, {
