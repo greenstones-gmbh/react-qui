@@ -1,7 +1,13 @@
 {
   "name": "@greenstones/qui-bootstrap",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.1.7",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenstones-gmbh/react-qui.git",
+    "directory": "packages/qui-bootstrap"
+  },
   "type": "module",
   "module": "index.ts",
   "scripts": {

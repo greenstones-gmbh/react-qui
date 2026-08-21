@@ -1,7 +1,13 @@
 {
   "name": "@greenstones/qui-ai",
   "private": false,
-  "version": "0.1.8",
+  "version": "0.1.9",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenstones-gmbh/react-qui.git",
+    "directory": "packages/qui-ai"
+  },
   "type": "module",
   "module": "index.ts",
   "scripts": {
